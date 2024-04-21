@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce8bkw7m5yo5k"]
+
+[ext_resource type="Script" path="res://Scripts/RequestHandler.gd" id="1_2akbc"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Root" type="Node" parent="."]
+script = ExtResource("1_2akbc")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Root"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Root"]
+
+[node name="ColorRect" type="ColorRect" parent="Root/CanvasLayer"]
+offset_right = 1156.0
+offset_bottom = 651.0
+color = Color(0.172549, 0.192157, 0.231373, 1)
+
+[node name="LineEdit" type="LineEdit" parent="Root/CanvasLayer/ColorRect"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 581.0
+offset_right = 1140.0
+offset_bottom = 636.0
+clear_button_enabled = true
