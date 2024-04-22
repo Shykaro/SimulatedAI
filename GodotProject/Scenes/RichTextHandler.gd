@@ -15,10 +15,10 @@ func update_user_text(new_text: String):
 	self.newline()
 	#self.text. += "You > "+new_text
 	is_waiting = true
-	
+
 func _process(delta):
 	count += 1
 	if is_waiting:
 		if(count%100==0):
 			self.append_text(".")
-	
+

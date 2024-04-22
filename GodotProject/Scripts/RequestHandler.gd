@@ -4,15 +4,16 @@ var model = "phi" #"starling-lm"
 var headers = [] #["Content-Type: application/json"]
 var prompt: String = "Hello, world!"
 #var body: String = JSON.stringify({"model": model, "prompt": prompt, "stream": false})
-signal on_request_processed(text: Dictionary)
+signal request_processed(dict: Dictionary)
+
 #for chatting:
 #var messages = [{"role": "user", "content": "Hello, world!"}]
 #var body:String = JSON.stringify({"model": model, "messages": messages})
-	
+
 func _get_body():
 	var body: String = JSON.stringify({"model": model, "prompt": prompt, "stream": false})
 	return body
-	
+
 func send(new_text):
 	#self.request_completed.connect(_on_request_completed)
 	prompt = new_text
@@ -22,12 +23,11 @@ func send(new_text):
 
 func _on_request_completed(result: int, response_code: int, headers, body):
 	print("request completed with response code "+str(response_code)+" and result "+str(result))
-	var json = JSON.parse_string(body.get_string_from_utf8())	
+	var json: Dictionary = JSON.parse_string(body.get_string_from_utf8())	
 	if(json!=null):
-		on_request_processed.emit(json)
+		request_processed.emit(json)
 	else:
 		print("JSON was empty!")
-	return
 
 # def chat(messages):
 #     r = requests.post("http://localhost:11434/api/chat", json={"model": model, "messages": messages, "stream": True})
