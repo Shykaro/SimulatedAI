@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ce8bkw7m5yo5k"]
+[gd_scene load_steps=3 format=3 uid="uid://ce8bkw7m5yo5k"]
 
-[ext_resource type="Script" path="res://Scripts/RequestHandler.gd" id="1_2akbc"]
+[ext_resource type="Script" path="res://Scripts/TextInputHandler.gd" id="1_2akbc"]
+[ext_resource type="Script" path="res://Scenes/RequestHandler.gd" id="2_57ruj"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -9,6 +10,7 @@ script = ExtResource("1_2akbc")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="Root"]
 use_threads = true
+script = ExtResource("2_57ruj")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Root"]
 
@@ -24,3 +26,5 @@ offset_top = 581.0
 offset_right = 1140.0
 offset_bottom = 636.0
 clear_button_enabled = true
+
+[connection signal="text_submitted" from="Root/CanvasLayer/ColorRect/LineEdit" to="Root" method="send"]
