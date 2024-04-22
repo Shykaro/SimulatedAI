@@ -1,9 +1,12 @@
 extends Node
 
 @onready var line_edit: LineEdit = get_node("CanvasLayer/ColorRect/LineEdit")
-var messages = []
+var messages = [{"role": "user", "content": "Hello, world!"}]
+var model = "starling-lm"
 var headers = []
-var body:String = JSON.stringify({"model": "starling-lm", "messages":[{"role": "user", "content": "Hello, world!"}]})
+#var body:String = JSON.stringify({"model": model, "messages": messages})
+var prompt:String = "Hello, world!"
+var body:String = JSON.stringify({"model": model, "prompt": prompt, "stream": false})
 #{
 #     "model": "starling-lm",
 #     "messages": [{
@@ -11,12 +14,11 @@ var body:String = JSON.stringify({"model": "starling-lm", "messages":[{"role": "
 #         "content": "Hey Robert, how are you today?"
 #     }]
 # }
-var model: String = "starling-lm"
 
 func _ready():
 	line_edit.grab_focus()
 	
-func _process(delta):
+func _process(_delta):
 	return
 	#var user_input = 
 #         if not user_input:
@@ -29,7 +31,6 @@ func _process(delta):
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_ENTER:
-			print(line_edit.text)
 			send(line_edit.text)
 			line_edit.clear()
 			
@@ -37,10 +38,14 @@ func _input(event):
 func send(message):
 	$HTTPRequest.request_completed.connect(_on_request_completed)
 	#var string_array: PackedStringArray = ["model: model", "messages: {}"]
-	$HTTPRequest.request("http://localhost:11434/api/chat", headers, HTTPClient.METHOD_POST, body)
+	prompt = message
+	$HTTPRequest.request("http://localhost:11434/api/generate", headers, HTTPClient.METHOD_POST, body) #JSON.parse_string(body))
+	#$HTTPRequest.request("https://swapi.dev/api/people/1")
+	print("message: '"+line_edit.text+"' sent!")
 
 func _on_request_completed(result, response_code, headers, body):
-	print("test")
+	print("request completed!")
+	#print(body)
 	var json = JSON.parse_string(body.get_string_from_utf8())
 	print(json)
 	return
