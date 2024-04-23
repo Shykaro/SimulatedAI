@@ -5,7 +5,8 @@ var is_waiting: bool = false
 
 func update_llm_text(json: Dictionary):
 	self.newline()
-	self.append_text("LLM > "+str(json["response"]))
+	#self.append_text("LLM > "+str(json["response"]))
+	self.append_text("LLM > "+str(json["message"]["content"]))
 	self.newline()
 	print(json)
 	is_waiting = false

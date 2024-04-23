@@ -3,6 +3,7 @@ extends HTTPRequest
 var model = "phi" #"starling-lm"
 var headers = [] #["Content-Type: application/json"]
 var prompt: String = "Hello, world!"
+var messages: Array = []
 #var body: String = JSON.stringify({"model": model, "prompt": prompt, "stream": false})
 signal request_processed(dict: Dictionary)
 
@@ -17,22 +18,24 @@ func _get_body():
 func send(new_text):
 	#self.request_completed.connect(_on_request_completed)
 	prompt = new_text
-	var body: String = _get_body()
-	self.request("http://localhost:11434/api/generate", headers, HTTPClient.METHOD_POST, body)
-	print(body)
+	self.request("http://localhost:11434/api/generate", headers, HTTPClient.METHOD_POST, _get_body())
+	#print(body)
 
 func _on_request_completed(result: int, response_code: int, headers, body):
 	print("request completed with response code "+str(response_code)+" and result "+str(result))
 	var json: Dictionary = JSON.parse_string(body.get_string_from_utf8())	
 	if(json!=null):
+		messages.append(json["message"])
+		print(messages)
 		request_processed.emit(json)
 	else:
 		print("JSON was empty!")
 
-# def chat(messages):
-#     r = requests.post("http://localhost:11434/api/chat", json={"model": model, "messages": messages, "stream": True})
-#     r.raise_for_status()
-#     output = ""
+func chat(message: String):
+	messages.append({"role": "user", "content": message})
+	self.request("http://localhost:11434/api/chat", [], HTTPClient.METHOD_POST, JSON.stringify({"model": model, "messages": messages, "stream": false}))
+	
+
 
 #     for line in r.iter_lines():
 #         body = json.loads(line)
