@@ -3,3 +3,8 @@ extends LineEdit
 
 func _ready():
 	self.grab_focus()
+
+
+func _on_text_submitted(new_text):
+	OS.delay_msec(200)
+	self.clear()

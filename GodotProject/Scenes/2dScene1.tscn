@@ -47,4 +47,5 @@ script = ExtResource("3_yg4ny")
 [connection signal="request_completed" from="Root/HTTPRequest" to="Root/HTTPRequest" method="_on_request_completed"]
 [connection signal="request_processed" from="Root/HTTPRequest" to="Root/CanvasLayer/ColorRect/ColorRect/RichTextLabel" method="update_llm_text"]
 [connection signal="text_submitted" from="Root/CanvasLayer/ColorRect/LineEdit" to="Root/HTTPRequest" method="chat"]
+[connection signal="text_submitted" from="Root/CanvasLayer/ColorRect/LineEdit" to="Root/CanvasLayer/ColorRect/LineEdit" method="_on_text_submitted"]
 [connection signal="text_submitted" from="Root/CanvasLayer/ColorRect/LineEdit" to="Root/CanvasLayer/ColorRect/ColorRect/RichTextLabel" method="update_user_text"]
