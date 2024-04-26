@@ -34,7 +34,7 @@ func _on_request_completed(result: int, response_code: int, headers, body):
 func chat(message: String):
 	messages.append({"role": "user", "content": message})
 	self.request("http://localhost:11434/api/chat", [], HTTPClient.METHOD_POST, JSON.stringify({"model": model, "messages": messages, "stream": false}))
-	
+
 
 
 #     for line in r.iter_lines():

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ce8bkw7m5yo5k"]
+[gd_scene load_steps=5 format=3 uid="uid://ce8bkw7m5yo5k"]
 
 [ext_resource type="Script" path="res://Scripts/TextInputHandler.gd" id="1_2akbc"]
 [ext_resource type="Script" path="res://Scripts/RequestHandler.gd" id="2_57ruj"]
-[ext_resource type="Script" path="res://Scenes/RichTextHandler.gd" id="3_yg4ny"]
+[ext_resource type="Script" path="res://Scripts/RichTextHandler.gd" id="3_yg4ny"]
+[ext_resource type="Script" path="res://Scripts/NPCManager.gd" id="4_5a08b"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -43,6 +44,9 @@ offset_top = 40.0
 offset_right = 1073.0
 offset_bottom = 500.0
 script = ExtResource("3_yg4ny")
+
+[node name="NPCManager" type="Node" parent="Root"]
+script = ExtResource("4_5a08b")
 
 [connection signal="request_completed" from="Root/HTTPRequest" to="Root/HTTPRequest" method="_on_request_completed"]
 [connection signal="request_processed" from="Root/HTTPRequest" to="Root/CanvasLayer/ColorRect/ColorRect/RichTextLabel" method="update_llm_text"]
