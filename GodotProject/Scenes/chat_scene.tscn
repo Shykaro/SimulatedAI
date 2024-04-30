@@ -8,3 +8,7 @@
 
 [node name="NPCManager" type="Node" parent="Root"]
 script = ExtResource("4_5a08b")
+
+[node name="Timer" type="Timer" parent="Root/NPCManager"]
+
+[connection signal="timeout" from="Root/NPCManager/Timer" to="Root/NPCManager" method="_on_timer_timeout"]
