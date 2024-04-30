@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bb6we2j6f7u3q"]
-
-[ext_resource type="Texture2D" uid="uid://dv8qiiepldchx" path="res://icon.svg" id="1_bcdf0"]
-[ext_resource type="Script" path="res://Scripts/NPC.gd" id="1_exix7"]
-
-[node name="NPC1" type="Sprite2D"]
-position = Vector2(119, 127)
-texture = ExtResource("1_bcdf0")
-script = ExtResource("1_exix7")

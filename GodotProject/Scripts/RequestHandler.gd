@@ -1,5 +1,7 @@
 extends HTTPRequest
 
+class_name RequestHandler
+
 var model = "phi" #"starling-lm"
 var headers = [] #["Content-Type: application/json"]
 var prompt: String = "Hello, world!"
@@ -32,6 +34,7 @@ func _on_request_completed(result: int, response_code: int, headers, body):
 		print("JSON was empty!")
 
 func chat(message: String):
+	#print("Chat sent!")
 	messages.append({"role": "user", "content": message})
 	self.request("http://localhost:11434/api/chat", [], HTTPClient.METHOD_POST, JSON.stringify({"model": model, "messages": messages, "stream": false}))
 
