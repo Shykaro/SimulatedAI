@@ -27,6 +27,7 @@ func _on_request_completed(result: int, response_code: int, headers, body):
 	print("request completed with response code "+str(response_code)+" and result "+str(result))
 	var json: Dictionary = JSON.parse_string(body.get_string_from_utf8())	
 	if(json!=null):
+		print(json)
 		messages.append(json["message"])
 		print(messages)
 		request_processed.emit(json)

@@ -3,7 +3,7 @@ extends Node
 class_name NPCManager
 
 static var npc_list: Array = []
-static var npc_tree_scene: PackedScene
+static var npc_scene: PackedScene
 
 static func get_npc_by_id(_id: int):
 	for i in range(npc_list.size()):
@@ -11,7 +11,7 @@ static func get_npc_by_id(_id: int):
 			return npc_list[i]
 
 func create_npc(_given_name: String, _given_llm: String, _given_chat_interval: int, _given_position: Vector2):
-	var _npc: NPC = npc_tree_scene.instantiate()
+	var _npc: NPC = npc_scene.instantiate()
 	_npc.name = _given_name
 	_npc.associated_llm = _given_llm
 	_npc.chat_interval = _given_chat_interval
@@ -22,7 +22,7 @@ func create_npc(_given_name: String, _given_llm: String, _given_chat_interval: i
 
 func _ready():
 	print("DEBUG: instantiating NPCs...")
-	npc_tree_scene = preload("res://Scenes/npc_scene.tscn")
+	npc_scene = load("res://Scenes/npc.tscn")
 	create_npc("Elong Ma", "phi",10, Vector2(200,200))
 	create_npc("Jeff", "phi", 6,  Vector2(800,200))
 	create_npc("Lara", "phi", 8,  Vector2(200,400))
