@@ -12,7 +12,9 @@ signal request_processed(dict: Dictionary)
 #for chatting:
 #var messages = [{"role": "user", "content": "Hello, world!"}]
 #var body:String = JSON.stringify({"model": model, "messages": messages})
-
+func _ready():
+	self.request_completed.connect(_on_request_completed)
+	
 func _get_body():
 	var body: String = JSON.stringify({"model": model, "prompt": prompt, "stream": false})
 	return body

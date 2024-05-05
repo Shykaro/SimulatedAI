@@ -8,7 +8,8 @@ var chat_interval: int
 var is_talking: bool = false
 var communication_line: Line2D = Line2D.new()
 var timer = Timer.new()
-var timeout_interval: int = 10
+var conversation_partner: NPC
+#var timeout_interval: int = 10
 # Called when the node enters the scene tree for the first time.
 func start():
 	#assert(id != null, "WARNING: NPC instance has no id!") this can be used to debug (basically, if then print)
@@ -28,20 +29,23 @@ func _on_timer_timeout():
 				if(!NPCManager.npc_list[i].is_talking):
 					_establish_communication(NPCManager.npc_list[i])
 					break
-	else:
-		print(self.name+"'s chat timed out")
-		timer.stop()
-		_on_conversation_over()
-		timer.start(chat_interval)
+	#else:
+		#print(self.name+"'s chat timed out")
+		#timer.stop()
+		#var dict: Dictionary
+		#_on_conversation_over(dict)
+		#timer.start(chat_interval)
 	
 #func _process(delta):
 #	if(is_talking): timer.stop()
 
 func _establish_communication(_npc: NPC):
-	timer.start(timeout_interval)
-	_npc.is_talking = true
-	#_npc.timer.stop()
+	#timer.start(timeout_interval)
+	conversation_partner = _npc
+	conversation_partner.is_talking = true
+	conversation_partner.timer.stop()
 	is_talking = true
+	timer.stop()
 	communication_line.add_point(Vector2.ZERO)
 	communication_line.add_point(_npc.position-self.position)
 	print(self.name+" is talking to "+_npc.name)
@@ -50,8 +54,12 @@ func _establish_communication(_npc: NPC):
 	request_handler.request_processed.connect(_on_conversation_over)
 	request_handler.chat("Hello, I am "+name)
 	
-func _on_conversation_over():
+func _on_conversation_over(json: Dictionary):
+	conversation_partner.is_talking = false
+	conversation_partner.timer.stop()
 	is_talking = false
+	timer.start(chat_interval)
+	conversation_partner = null
 	communication_line.clear_points()
 	print("bye!")
 	

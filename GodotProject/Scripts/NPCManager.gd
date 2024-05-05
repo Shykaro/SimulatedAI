@@ -24,8 +24,8 @@ func _ready():
 	print("DEBUG: instantiating NPCs...")
 	npc_scene = load("res://Scenes/npc.tscn")
 	create_npc("Elong Ma", "phi",10, Vector2(200,200))
-	create_npc("Jeff", "phi", 6,  Vector2(800,200))
-	create_npc("Lara", "phi", 8,  Vector2(200,400))
+	#create_npc("Jeff", "phi", 6,  Vector2(800,200))
+	#create_npc("Lara", "phi", 8,  Vector2(200,400))
 	create_npc("Marie", "phi", 3,  Vector2(800,400))
 	print(npc_list)
 
