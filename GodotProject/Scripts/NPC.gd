@@ -51,9 +51,12 @@ func _establish_communication(_npc: NPC):
 	print(self.name+" is talking to "+_npc.name)
 	var request_handler: RequestHandler = RequestHandler.new()
 	self.add_child(request_handler)
-	request_handler.request_processed.connect(_on_conversation_over)
+	request_handler.request_processed.connect(_on_reply_received) #to be placed into "the other" npc
 	request_handler.chat("Hello, I am "+name)
-	
+
+func _on_reply_received(json: Dictionary):
+	pass
+
 func _on_conversation_over(json: Dictionary):
 	conversation_partner.is_talking = false
 	conversation_partner.timer.stop()
