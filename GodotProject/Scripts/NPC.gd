@@ -9,6 +9,7 @@ var is_talking: bool = false
 var communication_line: Line2D = Line2D.new()
 var timer = Timer.new()
 var conversation_partner: NPC
+var request_handler: RequestHandler
 #var timeout_interval: int = 10
 # Called when the node enters the scene tree for the first time.
 func start():
@@ -48,14 +49,19 @@ func _establish_communication(_npc: NPC):
 	timer.stop()
 	communication_line.add_point(Vector2.ZERO)
 	communication_line.add_point(_npc.position-self.position)
-	print(self.name+" is talking to "+_npc.name)
-	var request_handler: RequestHandler = RequestHandler.new()
+	#print(self.name+" is talking to "+_npc.name)
+	request_handler = RequestHandler.new()
 	self.add_child(request_handler)
 	request_handler.request_processed.connect(_on_reply_received) #to be placed into "the other" npc
-	request_handler.chat("Hello, I am "+name)
+	var init_message = "You meet "+_npc.name+". You are "+name+". What do you say? One sentence"
+	print(init_message)
+	request_handler.chat(init_message, associated_llm) #to LLM 1
 
 func _on_reply_received(json: Dictionary):
-	pass
+	var reply_string: String = json["message"]["content"]
+	var model_used: String = json["model"]
+	print(model_used+": "+reply_string)
+	request_handler.chat(reply_string, conversation_partner.associated_llm) #to LLM 2
 
 func _on_conversation_over(json: Dictionary):
 	conversation_partner.is_talking = false

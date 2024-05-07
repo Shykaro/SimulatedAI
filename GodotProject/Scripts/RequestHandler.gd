@@ -14,20 +14,22 @@ signal request_processed(dict: Dictionary)
 #var body:String = JSON.stringify({"model": model, "messages": messages})
 func _ready():
 	self.request_completed.connect(_on_request_completed)
+	pass
 
 func _on_request_completed(result: int, response_code: int, headers, body):
 	print("request completed with response code "+str(response_code)+" and result "+str(result))
 	var json: Dictionary = JSON.parse_string(body.get_string_from_utf8())	
 	if(json!=null):
-		print(json)
+		#print(json)
 		messages.append(json["message"])
-		print(messages)
+		#print(messages)
 		request_processed.emit(json)
 	else:
 		print("JSON was empty!")
 
-func chat(message: String):
+func chat(message: String, _model: String):
 	#print("Chat sent!")
+	if(_model==null): _model = model 
 	messages.append({"role": "user", "content": message})
-	self.request("http://localhost:11434/api/chat", [], HTTPClient.METHOD_POST, JSON.stringify({"model": model, "messages": messages, "stream": false}))
-
+	self.request("http://localhost:11434/api/chat", [], HTTPClient.METHOD_POST, JSON.stringify({"model": _model, "messages": messages,})) #"options": {"num_predict": 30}}))
+#num_predict: max number of tokens: 30 is equivalent to 1-2 sentences
