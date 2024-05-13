@@ -4,10 +4,6 @@ class_name NPC
 
 @export var id: int
 var associated_llm: String
-var chat_interval: int
-var is_talking: bool = false
-var communication_line: Line2D = Line2D.new()
-var timer = Timer.new()
 var conversation_partner: NPC
 var request_handler: RequestHandler
 #var timeout_interval: int = 10
@@ -15,41 +11,19 @@ var request_handler: RequestHandler
 func start():
 	#assert(id != null, "WARNING: NPC instance has no id!") this can be used to debug (basically, if then print)
 	id = NPCManager.npc_list.size()
-	self.add_child(communication_line)
-	communication_line.default_color = Color("red")
-	timer.timeout.connect(_on_timer_timeout)
-	self.add_child(timer)
-	timer.start(chat_interval)
 
 func _on_timer_timeout():
-	#print("id "+str(id)+" timeout!")
 	#try to establish communication with another NPC
-	if(!self.is_talking):
-		for i in range(NPCManager.npc_list.size()):
-			if(NPCManager.npc_list[i].id != self.id):
-				if(!NPCManager.npc_list[i].is_talking):
+	if(conversation_partner == null): #if not talking
+		for i in range(NPCManager.npc_list.size()): #Goes through all npcs
+			if(NPCManager.npc_list[i].id != self.id): #if the other npc it not self
+				if(!NPCManager.npc_list[i].is_talking): # and the other is not talking
 					_establish_communication(NPCManager.npc_list[i])
 					break
-	#else:
-		#print(self.name+"'s chat timed out")
-		#timer.stop()
-		#var dict: Dictionary
-		#_on_conversation_over(dict)
-		#timer.start(chat_interval)
-	
-#func _process(delta):
-#	if(is_talking): timer.stop()
 
 func _establish_communication(_npc: NPC):
-	#timer.start(timeout_interval)
 	conversation_partner = _npc
-	conversation_partner.is_talking = true
-	conversation_partner.timer.stop()
-	is_talking = true
-	timer.stop()
-	communication_line.add_point(Vector2.ZERO)
-	communication_line.add_point(_npc.position-self.position)
-	#print(self.name+" is talking to "+_npc.name)
+	_add_line2D() #adds line from self to conversation partner
 	request_handler = RequestHandler.new()
 	self.add_child(request_handler)
 	request_handler.request_processed.connect(_on_reply_received) #to be placed into "the other" npc
@@ -64,12 +38,22 @@ func _on_reply_received(json: Dictionary):
 	request_handler.chat(reply_string, conversation_partner.associated_llm) #to LLM 2
 
 func _on_conversation_over(json: Dictionary):
-	conversation_partner.is_talking = false
-	conversation_partner.timer.stop()
-	is_talking = false
-	timer.start(chat_interval)
+	_remove_line2D()
+	print("Conversation between "+self.name+" and "+conversation_partner.name+" terminated.")
 	conversation_partner = null
-	communication_line.clear_points()
-	print("bye!")
+	
+func _add_line2D():
+	var _line: Line2D = Line2D.new()
+	_line.add_point(Vector2.ZERO)
+	_line.add_point(conversation_partner.position-self.position)
+	_line.name = "Communication Line between "+self.name+" and "+conversation_partner.name
+	self.add_child(_line)
+	_line.default_color = Color("red")
+	
+func _remove_line2D():
+	var _line = self.get_node("Communication Line between "+self.name+" and "+conversation_partner.name)
+	self.remove_child(_line)
+	
+	
 	
 	

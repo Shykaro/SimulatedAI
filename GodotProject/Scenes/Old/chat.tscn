@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://crbpg7rcaev67"]
 
 [ext_resource type="Script" path="res://Scripts/RequestHandler.gd" id="1_0o7bc"]
-[ext_resource type="Script" path="res://Scripts/TextInputHandler.gd" id="2_b4y7y"]
-[ext_resource type="Script" path="res://Scripts/RichTextHandler.gd" id="3_ltixx"]
+[ext_resource type="Script" path="res://Scripts/Old/TextInputHandler.gd" id="2_b4y7y"]
+[ext_resource type="Script" path="res://Scripts/Old/RichTextHandler.gd" id="3_ltixx"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -44,7 +44,6 @@ offset_right = 1073.0
 offset_bottom = 500.0
 script = ExtResource("3_ltixx")
 
-[connection signal="request_processed" from="Root/HTTPRequest" to="Root/CanvasLayer/ColorRect/ColorRect/RichTextLabel" method="update_llm_text"]
 [connection signal="text_submitted" from="Root/CanvasLayer/ColorRect/LineEdit" to="Root/HTTPRequest" method="chat"]
 [connection signal="text_submitted" from="Root/CanvasLayer/ColorRect/LineEdit" to="Root/CanvasLayer/ColorRect/LineEdit" method="_on_text_submitted"]
 [connection signal="text_submitted" from="Root/CanvasLayer/ColorRect/LineEdit" to="Root/CanvasLayer/ColorRect/ColorRect/RichTextLabel" method="update_user_text"]

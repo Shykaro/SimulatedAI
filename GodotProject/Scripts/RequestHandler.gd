@@ -17,10 +17,10 @@ func _ready():
 	pass
 
 func _on_request_completed(result: int, response_code: int, headers, body):
-	print("request completed with response code "+str(response_code)+" and result "+str(result))
-	print(body)
+	#print("request completed with response code "+str(response_code)+" and result "+str(result))
+	#print(body)
 	var json_string = body.get_string_from_utf8()
-	print(json_string)
+	#print(json_string)
 	var json: Dictionary = JSON.parse_string(json_string)
 	if(json!=null):
 		#print(json)

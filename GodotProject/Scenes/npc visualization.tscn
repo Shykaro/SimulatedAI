@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/NPCManager.gd" id="4_5a08b"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Game" type="Node2D"]
 
-[node name="Root" type="Node" parent="."]
-
-[node name="NPCManager" type="Node" parent="Root"]
+[node name="NPCManager" type="Node" parent="."]
 script = ExtResource("4_5a08b")
