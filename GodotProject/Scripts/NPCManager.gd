@@ -8,15 +8,17 @@ static var npc_scene: PackedScene
 func _ready():
 	print("DEBUG: instantiating NPCs...")
 	npc_scene = load("res://Scenes/npc.tscn")
-	create_npc("Elong Ma", "phi", Vector2(200,200))
+	create_npc("Elong Ma", "starling-lm", Vector2(200,200))
 	#create_npc("Jeff", "phi", 6,  Vector2(800,200))
 	#create_npc("Lara", "phi", 8,  Vector2(200,400))
-	create_npc("Marie", "starling-lm", Vector2(800,400))
-	print(npc_list)
+	var _npc: NPC = create_npc("Marie", "starling-lm", Vector2(800,400))
+	_npc.check_for_npc_available()
+	
 
 static func get_npc_by_id(_id: int):
 	for i in range(npc_list.size()):
 		if(npc_list[i].id == _id):
+			print(npc_list[i].name)
 			return npc_list[i]
 
 func create_npc(_given_name: String, _given_llm: String, _given_position: Vector2):
@@ -27,6 +29,6 @@ func create_npc(_given_name: String, _given_llm: String, _given_position: Vector
 	_npc.position = _given_position
 	self.add_child(_npc)
 	_npc.start()
-
+	return _npc
 
 
