@@ -16,10 +16,10 @@ func _ready():
 	self.request_completed.connect(_on_request_completed)
 	pass
 
-func _on_request_completed(result: int, response_code: int, headers, body):
+func _on_request_completed(_result: int, _response_code: int, _headers, _body):
 	#print("request completed with response code "+str(response_code)+" and result "+str(result))
 	#print(body)
-	var json_string = body.get_string_from_utf8()
+	var json_string = _body.get_string_from_utf8()
 	#print(json_string)
 	var json: Dictionary = JSON.parse_string(json_string)
 	if(json!=null):

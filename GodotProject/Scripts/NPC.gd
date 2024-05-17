@@ -30,8 +30,8 @@ func _establish_communication(_npc: NPC):
 	var init_message = "You meet "+conversation_partner.name+". You are "+name+". You have apples on your mind. What do you say? One sentence"
 	request_answer(init_message)
 
-func _on_reply_received(json: Dictionary):
-	var reply_string: String = json["message"]["content"]
+func _on_reply_received(_json: Dictionary):
+	var reply_string: String = _json["message"]["content"]
 	print(self.name+":")
 	print(reply_string)
 	print()
@@ -43,7 +43,7 @@ func request_answer(_message: String):
 func _chat_with(_message: String, _npc: NPC):
 	_npc.request_answer(_message)
 
-func _on_conversation_over(json: Dictionary):
+func _on_conversation_over(_json: Dictionary):
 	_remove_line2D()
 	print("Conversation between "+self.name+" and "+conversation_partner.name+" terminated.")
 	conversation_partner = null

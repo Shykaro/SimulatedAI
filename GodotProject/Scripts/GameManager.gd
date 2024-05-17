@@ -14,7 +14,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	time_count += 1
 	if(time_count==150000000): time_count = 0 #so that int doesnt overflow
 	if(time_count%500==0):
