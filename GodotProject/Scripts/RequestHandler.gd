@@ -1,13 +1,12 @@
 extends HTTPRequest
 
 class_name RequestHandler
-
 var model = "phi" #"starling-lm"
 var headers = [] #["Content-Type: application/json"]
 var prompt: String = "Hello, world!"
 var messages: Array = []
 #var body: String = JSON.stringify({"model": model, "prompt": prompt, "stream": false})
-signal request_processed(dict: Dictionary)
+signal request_processed(request_handler: RequestHandler, dict: Dictionary)
 
 #for chatting:
 #var messages = [{"role": "user", "content": "Hello, world!"}]
@@ -26,7 +25,7 @@ func _on_request_completed(_result: int, _response_code: int, _headers, _body):
 		#print(json)
 		messages.append(json["message"])
 		#print(messages)
-		request_processed.emit(json)
+		request_processed.emit(self, json)
 	else:
 		print("JSON was empty!")
 

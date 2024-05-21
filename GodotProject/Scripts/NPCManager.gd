@@ -24,4 +24,10 @@ static func create_npc(_given_name: String, _given_llm: String, _given_position:
 	_npc.start()
 	return _npc
 
+static func get_npc_list_as_string():
+	var list_as_string: String = ""
+	for _npc: NPC in NPCManager.npc_list:
+		if(list_as_string==""): list_as_string+=_npc.name
+		list_as_string+=", "+_npc.name
+	return list_as_string
 
