@@ -5,7 +5,7 @@ class_name NPC
 @export var id: int
 var associated_llm: String
 var conversation_partner: NPC
-
+var mind: Mind = Mind.new()
 var is_thinking: bool = false
 var is_choosing: bool = false
 #var timeout_interval: int = 10

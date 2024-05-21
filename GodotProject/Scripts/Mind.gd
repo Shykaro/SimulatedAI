@@ -1,13 +1,14 @@
+extends Node
+
+class_name Mind
+
 var json = JSON.new()
 var path = "user://data.JSON"
-
-var mind_name : String = ""
-var conversations:Array[Array]
+var conversations: Array[Array]
 var overall_summary : String
 var associated_llm: String
 
-func _init(name):
-	self.mind_name = name
+
 
 func save_conversation_with(_conversation, _npc):
 	var _npc_id: int = conversations.find(_npc)
