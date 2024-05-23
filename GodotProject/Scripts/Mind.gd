@@ -14,10 +14,10 @@ func save_conversation_with(_conversation, _npc):
 	var _npc_id: int = conversations.find(_npc)
 	conversations[_npc_id].append(_conversation)
 	var file = FileAccess.open(path, FileAccess.WRITE)
-	file.store_string(json.stringify(_conversation))
+	file.store_string(JSON.stringify(_conversation))
 	file.close()
 
-func summarize_conversation(conversation):
+func summarize_conversation(_conversation):
 	# Zusammenfassungslogik hierher
 	var summary = "" 
 	return summary

@@ -2,10 +2,12 @@ extends Node
 
 class_name NPCManager
 
+static var instance: NPCManager
 static var npc_list: Array = []
 static var npc_scene: PackedScene
 
 func _ready():
+	instance = self
 	print("DEBUG: instantiating NPCs...")
 	npc_scene = load("res://Scenes/npc.tscn")
 
@@ -17,6 +19,7 @@ static func get_npc_by_id(_id: int):
 
 static func create_npc(_given_name: String, _given_llm: String, _given_position: Vector2):
 	var _npc: NPC = npc_scene.instantiate()
+	instance.add_child(_npc)
 	_npc.name = _given_name
 	_npc.associated_llm = _given_llm
 	npc_list.append(_npc)
@@ -26,8 +29,20 @@ static func create_npc(_given_name: String, _given_llm: String, _given_position:
 
 static func get_npc_list_as_string():
 	var list_as_string: String = ""
-	for _npc: NPC in NPCManager.npc_list:
-		if(list_as_string==""): list_as_string+=_npc.name
-		list_as_string+=", "+_npc.name
+	var shuffled_npc_list: Array = npc_list.duplicate()
+	shuffled_npc_list.shuffle()
+	for _npc_in_list: NPC in shuffled_npc_list:
+		if(list_as_string==""): list_as_string+=_npc_in_list.name
+		list_as_string+=", "+_npc_in_list.name
+	return list_as_string
+	
+static func get_npc_list_as_string_without_self(_npc):
+	var list_as_string: String = ""
+	var shuffled_npc_list: Array = npc_list.duplicate()
+	shuffled_npc_list.shuffle()
+	for _npc_in_list: NPC in shuffled_npc_list:
+		if(_npc_in_list!=_npc):
+			if(list_as_string==""): list_as_string+=_npc_in_list.name
+			else: list_as_string+=", "+_npc_in_list.name
 	return list_as_string
 
