@@ -1,12 +1,12 @@
 extends Node
 
 var time_count: int = 0
-var hour: int = 8
-var time_of_day: String = " pm"
+var hour: int = 4
+var time_of_day: String = " am"
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var _npc0: NPC = NPCManager.create_npc("Elong Ma", "llama3", Vector2(200,200))
-	var _npc1: NPC = NPCManager.create_npc("Marie", "llama3", Vector2(800,400))
+	var _npc0: NPC = NPCManager.create_npc("Maike Klein", "Maike", Vector2(200,200))
+	var _npc1: NPC = NPCManager.create_npc("Gustavo Silva", "Gustavo", Vector2(800,400))
 	get_tree().get_root().get_node("/root/Game/NPCManager").add_child(_npc0)
 	get_tree().get_root().get_node("/root/Game/NPCManager").add_child(_npc1)
 	#create_npc("Jeff", "phi", 6,  Vector2(800,200))
