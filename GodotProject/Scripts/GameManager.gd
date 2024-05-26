@@ -3,7 +3,7 @@ extends Node
 class_name GameManager
 
 var time_count: int = 0
-static var hour: int = 8
+static var hour: int = 6
 static var time_of_day: String = " pm"
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -27,6 +27,7 @@ func _establish_communication(_npc: NPC): #To use for npc to npc conversation
 	if(conversation_partner == null):#if not talking
 		if(_npc.id != self.id): #may not call self
 			if(_npc.conversation_partner == null): # and the other is not talking
+				print(self.name+" initiated conversation with "+_npc.name)
 				conversation_partner = _npc
 				conversation_partner.conversation_partner = self
 				_add_line2D() #adds line from self to conversation partner
