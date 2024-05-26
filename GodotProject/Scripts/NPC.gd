@@ -14,6 +14,8 @@ var is_choosing: bool = false
 func start():
 	#assert(id != null, "WARNING: NPC instance has no id!") this can be used to debug (basically, if then print)
 	id = NPCManager.npc_list.size()
+	var label: Label = get_child(0)
+	label.text = self.name
 
 func check_for_npc_available(): 
 	#try to establish communication with another NPC
@@ -74,10 +76,11 @@ func _on_conversation_over(_json: Dictionary):
 func _add_line2D():
 	var _line: Line2D = Line2D.new()
 	_line.add_point(Vector2.ZERO)
-	_line.add_point(conversation_partner.position-self.position)
+	_line.add_point((conversation_partner.position-self.position)*2)
 	_line.name = "Communication Line between "+self.name+" and "+conversation_partner.name
 	self.add_child(_line)
-	_line.default_color = Color("red")
+	_line.default_color = Color("green")
+	_line.z_as_relative = false
 
 func _remove_line2D():
 	var _line = self.get_node("Communication Line between "+self.name+" and "+conversation_partner.name)

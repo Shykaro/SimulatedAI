@@ -7,17 +7,12 @@ static var hour: int = 8
 static var time_of_day: String = " pm"
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	NPCManager.create_npc("Maike Klein", "Maike", Vector2(200,200))
-	NPCManager.create_npc("Gustavo Silva", "Gustavo", Vector2(800,400))
-	NPCManager.create_npc("Maike Groß", "Maike", Vector2(400,200))
-	NPCManager.create_npc("Gustavo Golda", "Gustavo", Vector2(600,400))
-	NPCManager.create_npc("Maike Medium", "Maike", Vector2(200,400))
-	NPCManager.create_npc("Gustavo Platina", "Gustavo", Vector2(800,600))
-	NPCManager.create_npc("Maike Winzig", "Maike", Vector2(400,400))
-	NPCManager.create_npc("Gustavo Bonza", "Gustavo", Vector2(600,600))
-	#create_npc("Jeff", "phi", 6,  Vector2(800,200))
-	#create_npc("Lara", "phi", 8,  Vector2(200,400))
-	#_npc0.check_for_npc_available() #starts test run of conversation
+	NPCManager.create_npc("Maike Klein", "Maike", Vector2(500,200))
+	NPCManager.create_npc("Gustavo Silva", "Gustavo", Vector2(500,800))
+	NPCManager.create_npc("Maike Groß", "Maike", Vector2(200,350))
+	NPCManager.create_npc("Gustavo Golda", "Gustavo", Vector2(200,650))
+	NPCManager.create_npc("Maike Medium", "Maike", Vector2(800,350))
+	NPCManager.create_npc("Gustavo Platina", "Gustavo", Vector2(800,650))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

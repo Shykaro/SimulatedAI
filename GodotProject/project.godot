@@ -18,4 +18,9 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/initial_position=Vector2i(576, 324)
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.0745098, 0.0745098, 0.0745098, 1)
