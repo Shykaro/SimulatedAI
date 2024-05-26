@@ -35,7 +35,7 @@ static func get_npc_list_as_string():
 		if(list_as_string==""): list_as_string+=_npc_in_list.name
 		list_as_string+=", "+_npc_in_list.name
 	return list_as_string
-	
+
 static func get_npc_list_as_string_without_self(_npc):
 	var list_as_string: String = ""
 	var shuffled_npc_list: Array = npc_list.duplicate()

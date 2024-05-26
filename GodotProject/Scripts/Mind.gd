@@ -15,7 +15,7 @@ func reflect_on_day():
 
 func add_to_dialogue_context(_message: String):
 	dialogue_context.append({"role": "user", "content": _message})
-	
+
 func clear():
 	dialogue_context.clear()
 

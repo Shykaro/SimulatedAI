@@ -30,7 +30,7 @@ func _establish_communication(_npc: NPC): #To use for npc to npc conversation
 				conversation_partner = _npc
 				conversation_partner.conversation_partner = self
 				_add_line2D() #adds line from self to conversation partner
-				var init_message = "You are talking to "+conversation_partner.name+" on the phone. What do you say?"
+				var init_message = "You have chosen to call "+conversation_partner.name+". You are now on the phone. What do you say?"
 				request_answer(init_message)
 				is_choosing = false
 
@@ -46,7 +46,7 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 	else: mind.activity_context.append(_dict["message"]["content"])
 	if(is_choosing): #while choosing who to call
 		for _npc: NPC in NPCManager.npc_list:
-			if(_npc.name == reply_string): 
+			if(_npc.name == reply_string or (_npc.name.split(" ")[0] == reply_string.split(" ")[0])): 
 				_establish_communication(_npc)
 		if(conversation_partner==null): 
 			print("No NPC was chosen")

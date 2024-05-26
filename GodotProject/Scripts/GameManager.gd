@@ -9,17 +9,17 @@ static var time_of_day: String = " pm"
 func _ready():
 	#NPCManager.create_npc("Maike Klein", "Maike", Vector2(500,200))
 	#NPCManager.create_npc("Gustavo Silva", "Gustavo", Vector2(500,800))
-	#NPCManager.create_npc("Maike Groß", "Maike", Vector2(200,350))
-	#NPCManager.create_npc("Gustavo Golda", "Gustavo", Vector2(200,650))
-	NPCManager.create_npc("Maike Medium", "Maike", Vector2(800,350))
-	NPCManager.create_npc("Gustavo Platina", "Gustavo", Vector2(800,650))
+	#NPCManager.create_npc("Maique Groß", "Maike", Vector2(200,350))
+	#NPCManager.create_npc("Gustavi Golda", "Gustavo", Vector2(200,650))
+	NPCManager.create_npc("Maicke Medium", "Maike", Vector2(800,350))
+	NPCManager.create_npc("Gustawo Platina", "Gustavo", Vector2(800,650))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	time_count += 1
 	if(time_count==150000000): time_count = 0 #so that int doesnt overflow
-	if(time_count%500==0):
+	if(time_count%100==0):
 		if(check_npcs_thinking()):
 			time_count -=1
 		else:
