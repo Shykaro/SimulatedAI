@@ -40,7 +40,10 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 	print(self.name+":")
 	print(reply_string)
 	print()
-	if(conversation_partner!=null): _chat_with(reply_string, conversation_partner) #respond to other
+	if(conversation_partner!=null): 
+		_chat_with(reply_string, conversation_partner) #respond to other
+		mind.dialogue_context.append(_dict["message"])
+	else: mind.activity_context.append(_dict["message"]["content"])
 	if(is_choosing): #while choosing who to call
 		for _npc: NPC in NPCManager.npc_list:
 			if(_npc.name == reply_string): 
@@ -54,6 +57,8 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 	
 func request_answer(_message: String): #sends a request to own LLM
 	is_thinking = true
+	if(conversation_partner != null):
+		mind.dialogue_context.append({"role": "user", "content": _message})
 	RequestHandlerManager.start_request(self, _message)
 
 func request_choice():
