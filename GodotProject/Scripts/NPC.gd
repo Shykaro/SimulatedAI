@@ -44,7 +44,7 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 	if(conversation_partner!=null): 
 		_chat_with(reply_string, conversation_partner) #respond to other
 		mind.dialogue_context.append(_dict["message"])
-	else: mind.activity_context.append(_dict["message"]["content"])
+	else: if(is_choosing==false): mind.activity_context.append(_dict["message"]["content"])
 	if(is_choosing): #while choosing who to call
 		for _npc: NPC in NPCManager.npc_list:
 			if(_npc.name == reply_string or (_npc.name.split(" ")[0] == reply_string.split(" ")[0])): 

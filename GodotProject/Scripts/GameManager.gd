@@ -3,14 +3,14 @@ extends Node
 class_name GameManager
 
 var time_count: int = 0
-static var hour: int = 6
+static var hour: int = 8
 static var time_of_day: String = " pm"
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#NPCManager.create_npc("Maike Klein", "Maike", Vector2(500,200))
-	#NPCManager.create_npc("Gustavo Silva", "Gustavo", Vector2(500,800))
-	#NPCManager.create_npc("Maique Groß", "Maike", Vector2(200,350))
-	#NPCManager.create_npc("Gustavi Golda", "Gustavo", Vector2(200,650))
+	NPCManager.create_npc("Maike Klein", "Maike", Vector2(500,200))
+	NPCManager.create_npc("Gustavo Silva", "Gustavo", Vector2(500,800))
+	NPCManager.create_npc("Maique Groß", "Maike", Vector2(200,350))
+	NPCManager.create_npc("Gustavi Golda", "Gustavo", Vector2(200,650))
 	NPCManager.create_npc("Maicke Medium", "Maike", Vector2(800,350))
 	NPCManager.create_npc("Gustawo Platina", "Gustavo", Vector2(800,650))
 
@@ -37,7 +37,6 @@ func _hourly_event():
 			update_npc_minds()
 	else:
 		request_npc_activities()
-	
 	increment_time()
 
 func update_npc_minds():
