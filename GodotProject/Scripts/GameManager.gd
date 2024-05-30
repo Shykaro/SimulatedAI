@@ -2,7 +2,7 @@ extends Node
 
 class_name GameManager
 
-var time_count: int = 0
+var count: int = 0
 static var hour: int = 6
 static var time_of_day: String = " pm"
 # Called when the node enters the scene tree for the first time.
@@ -17,15 +17,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	time_count += 1
-	if(time_count==150000000): time_count = 0 #so that int doesnt overflow
-	if(time_count%100==0):
+	count += 1
+	if(count==150000000): count = 0 #so that int doesnt overflow
+	if(count%100==0):
 		if(check_npcs_thinking()):
-			time_count -=1
+			count -=5
 		else:
 			_hourly_event()
 		#print(".")
-		
 
 func _hourly_event():
 	#do something
@@ -37,7 +36,6 @@ func _hourly_event():
 			update_npc_minds()
 	else:
 		request_npc_activities()
-	
 	increment_time()
 
 func update_npc_minds():

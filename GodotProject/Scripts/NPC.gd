@@ -41,7 +41,7 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 	print(self.name+":")
 	print(reply_string)
 	print()
-	if(conversation_partner!=null): 
+	if(conversation_partner!=null): #If talking to someone
 		_chat_with(reply_string, conversation_partner) #respond to other
 		mind.dialogue_context.append(_dict["message"])
 	else: mind.activity_context.append(_dict["message"]["content"])
