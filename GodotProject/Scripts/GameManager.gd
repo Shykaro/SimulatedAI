@@ -3,16 +3,28 @@ extends Node
 class_name GameManager
 
 var count: int = 0
-static var hour: int = 6
+static var hour: int = 5
 static var time_of_day: String = " pm"
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	NPCManager.create_npc("Maike Klein", "Maike", Vector2(500,200))
-	NPCManager.create_npc("Gustavo Silva", "Gustavo", Vector2(500,800))
-	NPCManager.create_npc("Maique Groß", "Maike", Vector2(200,350))
-	NPCManager.create_npc("Gustavi Golda", "Gustavo", Vector2(200,650))
-	NPCManager.create_npc("Maicke Medium", "Maike", Vector2(800,350))
-	NPCManager.create_npc("Gustawo Platina", "Gustavo", Vector2(800,650))
+	NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(500,200))
+	NPCManager.create_npc("Hanna Strittmatter", "02_Hanna", Vector2(500,800))
+	NPCManager.create_npc("Gustavo Silva", "03_Gustavo", Vector2(200,350))
+	NPCManager.create_npc("Maike Klein", "04_Maike", Vector2(200,650))
+	NPCManager.create_npc("Alexander Gassner", "05_Alexander", Vector2(800,350))
+	NPCManager.create_npc("Sophia Matthies", "06_Sophia", Vector2(800,650))	
+	
+	
+	#NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(200,350))
+	#NPCManager.create_npc("Hanna Strittmatter", "02_Hanna", Vector2(200,650))
+	#NPCManager.create_npc("Gustavo Silva", "03_Gustavo", Vector2(500,800))
+	#NPCManager.create_npc("Maike Klein", "04_Maike", Vector2(500,200))
+	#NPCManager.create_npc("Alexander Gassner", "05_Alexander", Vector2(500,200))
+	#NPCManager.create_npc("Sophia Matthies", "06_Sophia", Vector2(500,800))
+	#NPCManager.create_npc("Lisa Steiger", "07_Lisa", Vector2(200,350))
+	#NPCManager.create_npc("Antonio Bartel", "08_Antonio", Vector2(200,650))
+	#NPCManager.create_npc("Emily Stier", "09_Emily", Vector2(800,350))
+	#NPCManager.create_npc("Miguel Berger", "10_Miguel", Vector2(800,350))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -47,13 +59,13 @@ func request_npc_choices():
 		_npc.request_choice() #starts process of choosing, calling and talking to another npc
 func request_npc_activities():
 	for _npc: NPC in NPCManager.npc_list:
-			_npc.request_answer("It's "+str(hour)+time_of_day+". What are you doing right now? Are you sleeping, working or doing something else?")
+			_npc.request_answer("It's "+str(hour)+time_of_day+". What are you doing right now? Are you sleeping, working or doing something else? (Answer as monologue)")
 func check_npcs_thinking():
 	var is_anyone_thinking: bool = false
 	for _npc: NPC in NPCManager.npc_list:
 		if(_npc.is_thinking): is_anyone_thinking = true
 	return is_anyone_thinking
-	
+
 func increment_time():
 	hour += 1
 	if(hour==12): 

@@ -53,9 +53,9 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 			print("No NPC was chosen")
 			#if(choice_attempts<=3):
 			#	request_choice()
-			#	print("Attempting anew...")
+			#	print("Attempting anew...") #this is trash
 			#else: print("Aborting attempt!")
-	
+
 func request_answer(_message: String): #sends a request to own LLM
 	is_thinking = true
 	if(conversation_partner != null):
@@ -78,7 +78,7 @@ func _on_conversation_over(_json: Dictionary):
 	_remove_line2D()
 	print("Conversation between "+self.name+" and "+conversation_partner.name+" terminated.")
 	conversation_partner = null
-	
+
 func _add_line2D():
 	var _line: Line2D = Line2D.new()
 	_line.add_point(Vector2.ZERO)
