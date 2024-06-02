@@ -1,7 +1,7 @@
 extends Node
 
 class_name NPCManager
-
+#Manages all npcs... I think the functions are self-explanatory
 static var instance: NPCManager
 static var npc_list: Array = []
 static var npc_scene: PackedScene

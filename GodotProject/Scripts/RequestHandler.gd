@@ -29,13 +29,13 @@ func _on_request_completed(_result: int, _response_code: int, _headers, _body):
 	else:
 		print("JSON was empty!")
 
-func chat(_messages: Array, _model = null):
+func chat(_messages: Array, _model = null): #chat api uses context and is passed an array
 	#print("Chat sent!")
 	if(_model==null): _model = model 
 	#messages.append({"role": "user", "content": message})
 	self.request("http://localhost:11434/api/chat", [], HTTPClient.METHOD_POST, JSON.stringify({"model": _model, "messages": _messages, "stream": false})) #"options": {"num_predict": 30}}))
 #num_predict: max number of tokens: 30 is equivalent to 1-2 sentences
 
-func generate(_message: String, _model = null):
+func generate(_message: String, _model = null): #generate api doesnt use context
 	if(_model==null): _model = model 
 	self.request("http://localhost:11434/api/generate", [], HTTPClient.METHOD_POST, JSON.stringify({"model": _model,"prompt": _message, "stream": false})) #"options": {"num_predict": 30}}))

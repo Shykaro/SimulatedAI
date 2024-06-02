@@ -28,7 +28,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _process(_delta): #If noone is generating anymore, increment time and start event
 	count += 1
 	if(count==150000000): count = 0 #so that int doesnt overflow
 	if(count%100==0):
@@ -38,17 +38,17 @@ func _process(_delta):
 			_hourly_event()
 		#print(".")
 
-func _hourly_event():
+func _hourly_event(): #checks and increments time, starts event fitting time
 	#do something
 	print("---------------- "+"It is "+str(hour)+time_of_day+". -------------")
 	if((hour==8&&time_of_day==" pm") or (hour==12&&time_of_day==" am")):
 		if(hour==8&&time_of_day==" pm"):
-			request_npc_choices()
+			request_npc_choices() #basically initiates calls
 		if(hour==12&&time_of_day==" am"):
-			update_npc_minds()
+			update_npc_minds() #will be used for reflecting on the day
 	else:
-		request_npc_activities()
-	increment_time()
+		request_npc_activities() #well, requests npc activities
+	increment_time() #basically hour = hour + 1
 
 func update_npc_minds():
 	for _npc: NPC in NPCManager.npc_list:

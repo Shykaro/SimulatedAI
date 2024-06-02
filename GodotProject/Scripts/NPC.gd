@@ -17,13 +17,7 @@ func start():
 	var label: Label = get_child(0)
 	label.text = self.name
 
-func check_for_npc_available(): 
-	#try to establish communication with another NPC
-		for i in range(NPCManager.npc_list.size()): #Goes through all npcs
-			_establish_communication(NPCManager.npc_list[i])
-			break
-
-func _establish_communication(_npc: NPC): #To use for npc to npc conversation
+func _establish_communication(_npc: NPC): #Initiates npc to npc conversation
 	if(conversation_partner == null):#if not talking
 		if(_npc.id != self.id): #may not call self
 			if(_npc.conversation_partner == null): # and the other is not talking
@@ -35,7 +29,7 @@ func _establish_communication(_npc: NPC): #To use for npc to npc conversation
 				request_answer(init_message)
 				is_choosing = false
 
-func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
+func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary): #is called every time a ollama request "comes back"
 	is_thinking = false
 	print(self.name+":")
 	if(conversation_partner!=null && is_choosing==false): #If talking to someone
@@ -60,18 +54,18 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 			print("No NPC was chosen")
 		is_choosing = false
 
-func request_answer(_message: String): #sends a request to own LLM
+func request_answer(_message: String): #used for chatting (npc to npc)(with dialogue context)
 	is_thinking = true
 	if(conversation_partner != null):
 		mind.dialogue_context.append({"role": "user", "content": _message})
 	RequestHandlerManager.request_chat_api(self, mind.dialogue_context)
 
-func request_activity():
+func request_activity(): #used for asking for current activity
 	is_thinking = true
 	var _message: String = "It's "+str(GameManager.hour)+GameManager.time_of_day+". What are you doing right now? Are you sleeping, working or doing something else? (Answer as monologue)"
 	RequestHandlerManager.request_generate_api(self, _message)
 
-func request_choice():
+func request_choice(): #used for getting a name for who they want to call on the phone (npc2npc)
 	is_thinking = true
 	is_choosing = true
 	var _message: String = "It's "+str(GameManager.hour)+GameManager.time_of_day+". You may call one of your neighbors. You know "+NPCManager.get_npc_list_as_string_without_self(self)+". Who would you like to call? You may not call youself. Answer with just the name of the person you would like to call or just no if you want to call nobody. Example:<Their Name> <Their Surname> (without the brackets)"
@@ -83,7 +77,7 @@ func _chat_with(_message: String, _npc: NPC):
 	#print(_message)
 	_npc.request_answer(_message)
 
-func _on_conversation_over(_json: Dictionary):
+func _on_conversation_over(_json: Dictionary): #not used, will be called when convo is over => Mind will handle that
 	_remove_line2D()
 	print("Conversation between "+self.name+" and "+conversation_partner.name+" terminated.")
 	conversation_partner = null
