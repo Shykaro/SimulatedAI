@@ -3,16 +3,16 @@ extends Node
 class_name GameManager
 
 var count: int = 0
-static var hour: int = 5
+static var hour: int = 7
 static var time_of_day: String = " pm"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(500,200))
 	NPCManager.create_npc("Hanna Strittmatter", "02_Hanna", Vector2(500,800))
-	NPCManager.create_npc("Gustavo Silva", "03_Gustavo", Vector2(200,350))
-	NPCManager.create_npc("Maike Klein", "04_Maike", Vector2(200,650))
-	NPCManager.create_npc("Alexander Gassner", "05_Alexander", Vector2(800,350))
-	NPCManager.create_npc("Sophia Matthies", "06_Sophia", Vector2(800,650))	
+	#NPCManager.create_npc("Gustavo Silva", "03_Gustavo", Vector2(200,350))
+	#NPCManager.create_npc("Maike Klein", "04_Maike", Vector2(200,650))
+	#NPCManager.create_npc("Alexander Gassner", "05_Alexander", Vector2(800,350))
+	#NPCManager.create_npc("Sophia Matthies", "06_Sophia", Vector2(800,650))
 	
 	
 	#NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(200,350))
@@ -59,7 +59,7 @@ func request_npc_choices():
 		_npc.request_choice() #starts process of choosing, calling and talking to another npc
 func request_npc_activities():
 	for _npc: NPC in NPCManager.npc_list:
-			_npc.request_answer("It's "+str(hour)+time_of_day+". What are you doing right now? Are you sleeping, working or doing something else? (Answer as monologue)")
+			_npc.request_activity()
 func check_npcs_thinking():
 	var is_anyone_thinking: bool = false
 	for _npc: NPC in NPCManager.npc_list:

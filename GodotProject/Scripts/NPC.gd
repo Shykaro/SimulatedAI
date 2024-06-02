@@ -37,37 +37,46 @@ func _establish_communication(_npc: NPC): #To use for npc to npc conversation
 
 func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 	is_thinking = false
-	var reply_string: String = _dict["message"]["content"]
 	print(self.name+":")
-	print(reply_string)
-	print()
-	if(conversation_partner!=null): #If talking to someone
+	if(conversation_partner!=null && is_choosing==false): #If talking to someone
+		var reply_string: String = _dict["message"]["content"]
+		print(reply_string)
+		print()
 		_chat_with(reply_string, conversation_partner) #respond to other
 		mind.dialogue_context.append(_dict["message"])
-	else: if(is_choosing==false): mind.activity_context.append(_dict["message"]["content"])
+	else: if(is_choosing==false): 
+		var reply_string: String = _dict["response"]
+		print(reply_string)
+		print()
+		mind.activity_context.append(_dict["response"])
 	if(is_choosing): #while choosing who to call
+		var reply_string: String = _dict["response"]
+		print(reply_string)
+		print()
 		for _npc: NPC in NPCManager.npc_list:
 			if(_npc.name == reply_string or (_npc.name.split(" ")[0] == reply_string.split(" ")[0])): 
 				_establish_communication(_npc)
 		if(conversation_partner==null): 
 			print("No NPC was chosen")
-			#if(choice_attempts<=3):
-			#	request_choice()
-			#	print("Attempting anew...") #this is trash
-			#else: print("Aborting attempt!")
+		is_choosing = false
 
 func request_answer(_message: String): #sends a request to own LLM
 	is_thinking = true
 	if(conversation_partner != null):
 		mind.dialogue_context.append({"role": "user", "content": _message})
-	RequestHandlerManager.start_request(self, _message)
+	RequestHandlerManager.request_chat_api(self, mind.dialogue_context)
+
+func request_activity():
+	is_thinking = true
+	var _message: String = "It's "+str(GameManager.hour)+GameManager.time_of_day+". What are you doing right now? Are you sleeping, working or doing something else? (Answer as monologue)"
+	RequestHandlerManager.request_generate_api(self, _message)
 
 func request_choice():
 	is_thinking = true
 	is_choosing = true
 	var _message: String = "It's "+str(GameManager.hour)+GameManager.time_of_day+". You may call one of your neighbors. You know "+NPCManager.get_npc_list_as_string_without_self(self)+". Who would you like to call? You may not call youself. Answer with just the name of the person you would like to call or just no if you want to call nobody. Example:<Their Name> <Their Surname> (without the brackets)"
 	#print(_message)
-	RequestHandlerManager.start_request(self, _message)
+	RequestHandlerManager.request_generate_api(self, _message)
 	#choice_attempts+=1
 
 func _chat_with(_message: String, _npc: NPC):
