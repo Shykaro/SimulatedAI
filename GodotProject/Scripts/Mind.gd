@@ -8,13 +8,29 @@ class_name Mind
 #var overall_summary : String
 var associated_llm: String
 var activity_context: Array[String]
-var dialogue_context: Array
+var dialogue_context: Array[Dictionary]
 
 func reflect_on_day():
 	pass
 
+func check_conversation_over():
+	var dialogue_context_string_array = get_dialogue_context_as_string_array()
+	var _message: String = "You are having this conversation: \n"
+	_message += "\n"+"\n".join(dialogue_context_string_array) #adds every entry in dialogue to string
+	_message += "\n\n Do you think it's over? If yes, just answer yes. If no, answer with no only"
+	print(_message) #seems to work, now must be actually sent to ollama and response gotten. (generate api)
+	
+	
+	
+
 func add_to_dialogue_context(_message: String):
 	dialogue_context.append({"role": "user", "content": _message})
+
+func get_dialogue_context_as_string_array():
+	var dialogue_context_string_array: Array[String]
+	for entry:Dictionary in dialogue_context:
+		dialogue_context_string_array.append(entry["content"])
+	return dialogue_context_string_array
 
 func clear():
 	dialogue_context.clear()

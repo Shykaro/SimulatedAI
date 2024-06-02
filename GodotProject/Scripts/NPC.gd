@@ -56,6 +56,7 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 
 func request_answer(_message: String): #used for chatting (npc to npc)(with dialogue context)
 	is_thinking = true
+	mind.check_conversation_over()
 	if(conversation_partner != null):
 		mind.dialogue_context.append({"role": "user", "content": _message})
 	RequestHandlerManager.request_chat_api(self, mind.dialogue_context)
