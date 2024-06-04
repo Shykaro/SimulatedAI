@@ -24,9 +24,9 @@ func check_conversation_over():
 
 func _on_request_conversation_over_completed(_request_handler: RequestHandler, _dict: Dictionary):
 	var reply_string: String = _dict["response"]
+	print(reply_string)
 	if(reply_string == "yes" or reply_string == "Yes"):
 		associated_npc.is_conversation_over = true
-	pass
 
 func add_to_dialogue_context(_message: String):
 	dialogue_context.append({"role": "user", "content": _message})
