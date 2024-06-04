@@ -9,6 +9,7 @@ class_name Mind
 var associated_llm: String
 var activity_context: Array[String]
 var dialogue_context: Array[Dictionary]
+var emotional_state: String = "content"
 var associated_npc: NPC
 
 func reflect_on_day():
@@ -28,8 +29,13 @@ func _on_request_conversation_over_completed(_request_handler: RequestHandler, _
 	if(reply_string == "yes" or reply_string == "Yes"):
 		associated_npc.is_conversation_over = true
 
-func add_to_dialogue_context(_message: String):
-	dialogue_context.append({"role": "user", "content": _message})
+func update_emotional_state(_what_just_happened: String):
+	var _message: String = "Before doing "+_what_just_happened+"you felt like this: "+emotional_state+". How do you feel now? Describe your emotional state in one word only."
+	RequestHandlerManager.request_emotional_state_update(associated_npc, _message)
+
+func _on_request_emotional_state_complete(_request_handler: RequestHandler, _dict: Dictionary):
+	var reply_string: String = _dict["response"]
+	emotional_state = reply_string
 
 func get_dialogue_context_as_string_array():
 	var dialogue_context_string_array: Array[String] = []

@@ -54,6 +54,7 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 		print(reply_string)
 		print()
 		mind.activity_context.append(_dict["response"])
+		mind.update_emotional_state(reply_string)
 	if(is_choosing): #while choosing who to call
 		var reply_string: String = _dict["response"]
 		print(reply_string)

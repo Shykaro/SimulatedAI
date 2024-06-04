@@ -4,7 +4,7 @@ class_name GameManager
 
 var count: int = 0
 static var hour: int = 8
-static var time_of_day: String = " pm"
+static var time_of_day: String = " am"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(500,200))
