@@ -8,6 +8,7 @@ var conversation_partner: NPC
 var mind: Mind = Mind.new()
 var is_thinking: bool = false
 var is_choosing: bool = false
+var is_conversation_over = false
 #var choice_attempts: int = 0
 #var timeout_interval: int = 10
 # Called when the node enters the scene tree for the first time.
@@ -16,6 +17,7 @@ func start():
 	id = NPCManager.npc_list.size()
 	var label: Label = get_child(0)
 	label.text = self.name
+	mind.associated_npc = self
 
 func _establish_communication(_npc: NPC): #Initiates npc to npc conversation
 	if(conversation_partner == null):#if not talking
@@ -25,14 +27,20 @@ func _establish_communication(_npc: NPC): #Initiates npc to npc conversation
 				conversation_partner = _npc
 				conversation_partner.conversation_partner = self
 				_add_line2D() #adds line from self to conversation partner
+				is_choosing = false
+				is_conversation_over = false
 				var init_message = "You have chosen to call "+conversation_partner.name+". You are now on the phone. What do you say?"
 				request_answer(init_message)
-				is_choosing = false
 
 func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary): #is called every time a ollama request "comes back"
 	is_thinking = false
 	print(self.name+":")
 	if(conversation_partner!=null && is_choosing==false): #If talking to someone
+		#mind.check_conversation_over() #disabled for debugging reasons (doesnt quite work yet)
+		if(is_conversation_over): 
+			print("conversation over!")
+			_on_conversation_over(_dict)
+			return
 		var reply_string: String = _dict["message"]["content"]
 		print(reply_string)
 		print()
@@ -56,7 +64,6 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 
 func request_answer(_message: String): #used for chatting (npc to npc)(with dialogue context)
 	is_thinking = true
-	mind.check_conversation_over()
 	if(conversation_partner != null):
 		mind.dialogue_context.append({"role": "user", "content": _message})
 	RequestHandlerManager.request_chat_api(self, mind.dialogue_context)
@@ -79,6 +86,7 @@ func _chat_with(_message: String, _npc: NPC):
 	_npc.request_answer(_message)
 
 func _on_conversation_over(_json: Dictionary): #not used, will be called when convo is over => Mind will handle that
+	is_thinking = false
 	_remove_line2D()
 	print("Conversation between "+self.name+" and "+conversation_partner.name+" terminated.")
 	conversation_partner = null

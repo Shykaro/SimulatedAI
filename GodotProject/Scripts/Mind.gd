@@ -9,6 +9,7 @@ class_name Mind
 var associated_llm: String
 var activity_context: Array[String]
 var dialogue_context: Array[Dictionary]
+var associated_npc: NPC
 
 func reflect_on_day():
 	pass
@@ -17,17 +18,21 @@ func check_conversation_over():
 	var dialogue_context_string_array = get_dialogue_context_as_string_array()
 	var _message: String = "You are having this conversation: \n"
 	_message += "\n"+"\n".join(dialogue_context_string_array) #adds every entry in dialogue to string
-	_message += "\n\n Do you think it's over? If yes, just answer yes. If no, answer with no only"
-	print(_message) #seems to work, now must be actually sent to ollama and response gotten. (generate api)
-	
-	
-	
+	_message += "\n\n Do you think it's over? Have both said their farewells? If yes, just answer yes. If no, answer with no only"
+	#print(_message) #includes all conversation and instructions to choose yes or no
+	RequestHandlerManager.request_check_conversation_over(associated_npc, _message)
+
+func _on_request_conversation_over_completed(_request_handler: RequestHandler, _dict: Dictionary):
+	var reply_string: String = _dict["response"]
+	if(reply_string == "yes" or reply_string == "Yes"):
+		associated_npc.is_conversation_over = true
+	pass
 
 func add_to_dialogue_context(_message: String):
 	dialogue_context.append({"role": "user", "content": _message})
 
 func get_dialogue_context_as_string_array():
-	var dialogue_context_string_array: Array[String]
+	var dialogue_context_string_array: Array[String] = []
 	for entry:Dictionary in dialogue_context:
 		dialogue_context_string_array.append(entry["content"])
 	return dialogue_context_string_array
