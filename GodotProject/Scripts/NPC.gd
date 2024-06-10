@@ -74,7 +74,11 @@ func request_answer(_message: String): #used for chatting (npc to npc)(with dial
 
 func request_activity(): #used for asking for current activity
 	is_thinking = true
-	var _message: String = "It's "+str(GameManager.hour)+GameManager.time_of_day+". What are you doing right now? Are you sleeping, working or doing something else? (Answer as monologue)"
+	var _message: String = ""
+	if(!mind.activity_context.is_empty()):
+		_message += "These are the things you were doing previously today:\n"
+		_message += "\n" + "\n".join(mind.activity_context)+"\n\n"
+	_message += "It's "+str(GameManager.hour)+GameManager.time_of_day+". What are you doing right now? Are you sleeping, working or doing something else? (Answer as monologue)"
 	RequestHandlerManager.request_generate_api(self, _message)
 
 func request_choice(): #used for getting a name for who they want to call on the phone (npc2npc)
