@@ -71,6 +71,24 @@ func get_dialogue_context_as_string_array():
 func clear():
 	dialogue_context.clear()
 
+func update_relation_during_conversation(npc: NPC, message: String):
+	var _message: String = "Based on the following message:\n"
+	_message += message
+	_message += "\n\n How do you feel about your emotional connection with " + npc.name + " right now? Please describe it in one sentence."
+	RequestHandlerManager.request_update_relation(npc, _message)
+	
+func _on_request_update_relation_completed(_request_handler: RequestHandler, _dict: Dictionary):
+	var reply_string: String = _dict["response"]
+	set_emotional_relation(associated_npc.name, reply_string)
+	print("Updated relation with " + associated_npc.name + ": " + reply_string)
+	
+#func _ready():
+	#set_emotional_relation("Maike", "I am feeling confident in my relationship to Maike, since she told me that she liked me")
+	#set_emotional_relation("Gustavo", "For some reason, I feel anger towards Gustavo")
+	#print(get_emotional_relation("Maike")) # Erwartete Ausgabe: I am feeling confident in my relationship to Maike, since she told me that she liked me
+	#print(get_emotional_relation("Gustavo")) # Erwartete Ausgabe: For some reason, I feel anger towards Gustavo
+	#print(get_emotional_relation("Unknown")) # Erwartete Ausgabe: No emotional context found for Unknown
+	
 
 #func save_conversation_with(_conversation, _npc):
 	#var _npc_id: int = conversations.find(_npc)
