@@ -40,12 +40,25 @@ func _on_request_emotional_state_complete(_request_handler: RequestHandler, _dic
 	var reply_string: String = _dict["response"]
 	emotional_state = reply_string
 
-func decide_relation(npc: NPC):
+func decide_relation(npc: NPC): #Will cause bugs
 	var dialogue_context_string_array = get_dialogue_context_as_string_array()
 	var _message: String = "Based on the following conversation:\n"
 	_message += "\n" + "\n".join(dialogue_context_string_array)
 	_message += "\n\n How do you feel about your relationship with " + npc.name + " now? Please describe it in one sentence."
-	RequestHandlerManager.request_decide_relation(npc, _message)
+	RequestHandlerManager.request_decide_relation(npc, _message) #the npc passed here should be associated_npc
+
+func condense_activity():
+	var _message: String = ""
+	if(!activity_context.is_empty()):
+		_message += "These are the things you were doing previously today:\n"
+		_message += "\n" + "\n".join(activity_context)+"\n\n"
+	_message += "Condense your day down into two sentences total."
+	RequestHandlerManager.request_condense_activity(associated_npc, _message)
+	
+func _on_request_condense_activity_completed(_request_handler: RequestHandler, _dict: Dictionary):
+	var reply_string: String = _dict["response"]
+	activity_context.clear()
+	activity_context.append(reply_string)
 
 func _on_request_decide_relation_completed(_request_handler: RequestHandler, _dict: Dictionary):
 	var reply_string: String = _dict["response"]
@@ -88,50 +101,3 @@ func _on_request_update_relation_completed(_request_handler: RequestHandler, _di
 	#print(get_emotional_relation("Maike")) # Erwartete Ausgabe: I am feeling confident in my relationship to Maike, since she told me that she liked me
 	#print(get_emotional_relation("Gustavo")) # Erwartete Ausgabe: For some reason, I feel anger towards Gustavo
 	#print(get_emotional_relation("Unknown")) # Erwartete Ausgabe: No emotional context found for Unknown
-	
-
-#func save_conversation_with(_conversation, _npc):
-	#var _npc_id: int = conversations.find(_npc)
-	#conversations[_npc_id].append(_conversation)
-	#var file = FileAccess.open(path, FileAccess.WRITE)
-	#file.store_string(JSON.stringify(_conversation))
-	#file.close()
-
-#func summarize_conversation(_conversation):
-	## Zusammenfassungslogik hierher
-	#var summary = "" 
-	#return summary
-
-#func summarize_all_conversations_with(_npc):
-	#var _npc_id: int = conversations.find(_npc)
-	#for conv in conversations[_npc_id]:
-		#overall_summary += summarize_conversation(conv) + "\n"
-
-
-#var conversation_A1 = "Dies ist das erste Gespräch mit A."
-#var conversation_A2 = "Dies ist das zweite Gespräch mit A."
-#var conversation_B1 = "Dies ist das erste Gespräch mit B."
-
-
-
-#func save_conversation_with(_conversation, _npc):
-	#var _npc_id: int = conversations.find(_npc)
-	#conversations[_npc_id].append(_conversation)
-	#var file = FileAccess.open(path, FileAccess.WRITE)
-	#file.store_string(JSON.stringify(_conversation))
-	#file.close()
-
-#func summarize_conversation(_conversation):
-	## Zusammenfassungslogik hierher
-	#var summary = "" 
-	#return summary
-
-#func summarize_all_conversations_with(_npc):
-	#var _npc_id: int = conversations.find(_npc)
-	#for conv in conversations[_npc_id]:
-		#overall_summary += summarize_conversation(conv) + "\n"
-
-
-#var conversation_A1 = "Dies ist das erste Gespräch mit A."
-#var conversation_A2 = "Dies ist das zweite Gespräch mit A."
-#var conversation_B1 = "Dies ist das erste Gespräch mit B."

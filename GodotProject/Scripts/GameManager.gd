@@ -3,8 +3,8 @@ extends Node
 class_name GameManager
 
 var count: int = 0
-static var hour: int = 8
-static var time_of_day: String = " am"
+static var hour: int = 3
+static var time_of_day: String = " pm"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(500,200))
@@ -43,12 +43,17 @@ func _hourly_event(): #checks and increments time, starts event fitting time
 	print("---------------- "+"It is "+str(hour)+time_of_day+". -------------")
 	if((hour==8&&time_of_day==" pm") or (hour==12&&time_of_day==" am")):
 		if(hour==8&&time_of_day==" pm"):
+			condense_activity_contexts()
 			request_npc_choices() #basically initiates calls
 		if(hour==12&&time_of_day==" am"):
 			update_npc_minds() #will be used for reflecting on the day
 	else:
 		request_npc_activities() #well, requests npc activities
 	increment_time() #basically hour = hour + 1
+
+func condense_activity_contexts():
+	for _npc: NPC in NPCManager.npc_list:
+		_npc.mind.condense_activity()
 
 func update_npc_minds():
 	for _npc: NPC in NPCManager.npc_list:

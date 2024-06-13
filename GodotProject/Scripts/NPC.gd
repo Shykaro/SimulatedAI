@@ -36,7 +36,7 @@ func _establish_communication(_npc: NPC): #Initiates npc to npc conversation
 
 func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary): #is called every time a ollama request "comes back"
 	is_thinking = false
-	print(self.name+":")
+	print("\n"+self.name+":")
 	if(conversation_partner!=null && is_choosing==false): #If talking to someone
 		if(is_initiator): 
 			mind.check_conversation_over()
@@ -45,8 +45,7 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 				_on_conversation_over(_dict) #stops and cleans up conversation
 				return
 		var reply_string: String = _dict["message"]["content"]
-		print(reply_string)
-		print()
+		print(reply_string+"\n")
 		_chat_with(reply_string, conversation_partner) #respond to other
 		mind.dialogue_context.append(_dict["message"])
 	else: if(is_choosing==false): 
@@ -68,6 +67,7 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 
 func request_answer(_message: String): #used for chatting (npc to npc)(with dialogue context)
 	is_thinking = true
+	_message += "\n\n Remember: this is what you did today: "+mind.activity_context[0]
 	if(conversation_partner != null):
 		mind.dialogue_context.append({"role": "user", "content": _message})
 	RequestHandlerManager.request_chat_api(self, mind.dialogue_context)
