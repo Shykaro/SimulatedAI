@@ -26,7 +26,7 @@ static func request_emotional_state_update(_npc: NPC, _message: String):
 	_request_handler.generate(_message, associated_llm)
 	request_handler_list.append(_request_handler)
 
-static func request_update_relation(_npc: NPC, _message: String):
+static func request_update_relation(_npc: NPC, _message: String): #3 von mind.gd
 	var associated_llm = _npc.associated_llm
 	var _request_handler: RequestHandler = RequestHandler.new()
 	instance.add_child(_request_handler)

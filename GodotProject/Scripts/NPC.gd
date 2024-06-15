@@ -4,7 +4,7 @@ class_name NPC
 
 @export var id: int
 var associated_llm: String
-var conversation_partner: NPC
+@export var conversation_partner: NPC
 var mind: Mind = Mind.new()
 var is_thinking: bool = false #is generating response
 var is_choosing: bool = false #is generating who to call
@@ -21,11 +21,13 @@ func start():
 	mind.associated_npc = self
 
 func _establish_communication(_npc: NPC): #Initiates npc to npc conversation
+	
 	if(conversation_partner == null):#if not talking
 		if(_npc.id != self.id): #may not call self
 			if(_npc.conversation_partner == null): # and the other is not talking
 				print(self.name+" initiated conversation with "+_npc.name)
 				conversation_partner = _npc
+				#mind.update_conversation_partner(_npc) #updates conversation partner for mind
 				conversation_partner.conversation_partner = self
 				_add_line2D() #adds line from self to conversation partner
 				is_choosing = false
@@ -65,12 +67,17 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 			print("No NPC was chosen")
 		is_choosing = false
 
-func request_answer(_message: String): #used for chatting (npc to npc)(with dialogue context)
+func request_answer(_message: String):
 	is_thinking = true
-	_message += "\n\n Remember: this is what you did today: "+mind.activity_context[0]
-	if(conversation_partner != null):
+	mind.update_relation_during_conversation(conversation_partner, _message) #0 updated emotional relation MIGHT HAVE TO BE MOVED TO END OF MESSAGE OF OPPOSING NPC?  !!! -> Bug might be in this logic?
+	_message += "\n\n Remember: this is what you did today: " + mind.activity_context[0]
+	var emotional_relation = mind.get_emotional_relation(conversation_partner.name) #0.1 getted emotional relation
+	#print("\n" + "\n" + "Current emotional relation with " + conversation_partner.name + ": " + emotional_relation + "\n")
+	_message += "\n\n Take into account your current emotional feelings towards your conversation partner, they are as follows: " + emotional_relation
+	if (conversation_partner != null):
 		mind.dialogue_context.append({"role": "user", "content": _message})
 	RequestHandlerManager.request_chat_api(self, mind.dialogue_context)
+
 
 func request_activity(): #used for asking for current activity
 	is_thinking = true
