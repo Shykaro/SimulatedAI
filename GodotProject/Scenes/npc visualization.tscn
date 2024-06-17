@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ce8bkw7m5yo5k"]
+[gd_scene load_steps=7 format=3 uid="uid://ce8bkw7m5yo5k"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="2_eeqxv"]
 [ext_resource type="Script" path="res://Scripts/RequestHandlerManager.gd" id="3_px0po"]
 [ext_resource type="Script" path="res://Scripts/NPCManager.gd" id="4_5a08b"]
 [ext_resource type="Theme" uid="uid://css8tuxqpntj3" path="res://Assets/theme.tres" id="4_d0tik"]
 [ext_resource type="Script" path="res://Scripts/TimeText.gd" id="4_vqs3l"]
+[ext_resource type="Texture2D" uid="uid://kuyrvvy1urcn" path="res://Assets/long_green_arrow.png" id="6_ngvmr"]
 
 [node name="Game" type="Node2D"]
 
@@ -27,3 +28,7 @@ theme = ExtResource("4_d0tik")
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("4_vqs3l")
+
+[node name="LongGreenArrow" type="Sprite2D" parent="."]
+position = Vector2(382, 573)
+texture = ExtResource("6_ngvmr")
