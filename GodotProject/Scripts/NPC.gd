@@ -29,7 +29,8 @@ func _establish_communication(_npc: NPC): #Initiates npc to npc conversation
 				conversation_partner = _npc
 				#mind.update_conversation_partner(_npc) #updates conversation partner for mind
 				conversation_partner.conversation_partner = self
-				_add_line2D() #adds line from self to conversation partner
+				#_add_line2D() #adds line from self to conversation partner
+				_add_arrow()
 				is_choosing = false
 				is_conversation_over = false
 				is_initiator = true
@@ -70,7 +71,7 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 func request_answer(_message: String):
 	is_thinking = true
 	mind.update_relation_during_conversation(conversation_partner, _message) #0 updated emotional relation MIGHT HAVE TO BE MOVED TO END OF MESSAGE OF OPPOSING NPC?  !!! -> Bug might be in this logic?
-	_message += "\n\n Remember: this is what you did today: " + mind.activity_context[0]
+	if(mind.activity_context!=[]): _message += "\n\n Remember: this is what you did today: " + mind.activity_context[0]
 	var emotional_relation = mind.get_emotional_relation(conversation_partner.name) #0.1 getted emotional relation
 	#print("\n" + "\n" + "Current emotional relation with " + conversation_partner.name + ": " + emotional_relation + "\n")
 	_message += "\n\n Take into account your current emotional feelings towards your conversation partner, they are as follows: " + emotional_relation
@@ -101,7 +102,8 @@ func _chat_with(_message: String, _npc: NPC):
 	_npc.request_answer(_message)
 
 func _on_conversation_over(_json: Dictionary): #is called in the initiator, handles all cleanup after conversation
-	if(is_initiator): _remove_line2D()
+	if(is_initiator): #_remove_line2D()
+		_remove_arrow()
 	is_initiator = false
 	print("Conversation between "+self.name+" and "+conversation_partner.name+" terminated.")
 	conversation_partner.conversation_partner = null
@@ -120,3 +122,17 @@ func _add_line2D():
 func _remove_line2D():
 	var _line = self.get_node("Communication Line between "+self.name+" and "+conversation_partner.name)
 	self.remove_child(_line)
+	
+func _add_arrow():
+	var _texture = load("res://Assets/long_green_arrow.png") 
+	var _arrow: Sprite2D = Sprite2D.new()
+	_arrow.texture = _texture
+	_arrow.position = conversation_partner.position-self.position
+	_arrow.look_at(conversation_partner.position)
+	_arrow.scale = Vector2(0.5,0.5)
+	_arrow.name = "Communication Arrow from "+self.name+" to "+conversation_partner.name
+	self.add_child(_arrow)
+	
+func _remove_arrow():
+	var _arrow = self.get_node("Communication Arrow from "+self.name+" to "+conversation_partner.name)
+	self.remove_child(_arrow)

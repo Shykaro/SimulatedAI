@@ -24,6 +24,11 @@ func reflect_on_day():
 	pass
 
 func check_conversation_over():
+	var cutoff_threshold = 20
+	if(dialogue_context.size()>cutoff_threshold):
+		print("---------SYSTEM-------- Conversation was cut, cutoff threshold surpassed")
+		associated_npc.is_conversation_over = true
+		return
 	var dialogue_context_string_array = get_dialogue_context_as_string_array()
 	var _message: String = "You are having this conversation: \n"
 	_message += "\n"+"\n".join(dialogue_context_string_array) #adds every entry in dialogue to string
