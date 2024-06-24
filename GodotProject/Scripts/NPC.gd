@@ -131,6 +131,8 @@ func _add_arrow():
 	_arrow.look_at(conversation_partner.position)
 	_arrow.scale = Vector2(0.5,0.5)
 	_arrow.name = "Communication Arrow from "+self.name+" to "+conversation_partner.name
+	var _script = load("res://HUD/ArrowScript.gd")
+	_arrow.set_script(_script)
 	self.add_child(_arrow)
 	
 func _remove_arrow():
