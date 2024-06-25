@@ -20,7 +20,8 @@ var emotional_relations: Dictionary = {}
 	#conversation_partner = ConversationpartnerNPC
 	#print("Current conversation partner for " + associated_npc.name + " is: " + conversation_partner.name)
 
-func reflect_on_day():
+func reflect_on_day(): #this is where the long term memories are stored (Happens while they "sleep" (dont mind the humanitization))
+	
 	pass
 
 func check_conversation_over():
@@ -34,7 +35,7 @@ func check_conversation_over():
 	_message += "\n"+"\n".join(dialogue_context_string_array) #adds every entry in dialogue to string
 	_message += "\n\n Has your counterpart said their farewells just now and would you like to end the conversation? If yes, ONLY answer yes. If no, answer with ONLY no"
 	#print(_message) #includes all conversation and instructions to choose yes or no
-	RequestHandlerManager.request_check_conversation_over(associated_npc, _message)
+	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_conversation_over_completed)
 
 func _on_request_conversation_over_completed(_request_handler: RequestHandler, _dict: Dictionary):
 	var reply_string: String = _dict["response"]
@@ -44,7 +45,7 @@ func _on_request_conversation_over_completed(_request_handler: RequestHandler, _
 
 func update_emotional_state(_what_just_happened: String):
 	var _message: String = "Before doing "+_what_just_happened+"you felt like this: "+emotional_state+". How do you feel now? Describe your emotional state in one word only."
-	RequestHandlerManager.request_emotional_state_update(associated_npc, _message)
+	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_emotional_state_complete)
 
 func _on_request_emotional_state_complete(_request_handler: RequestHandler, _dict: Dictionary):
 	var reply_string: String = _dict["response"]
@@ -56,7 +57,7 @@ func condense_activity():
 		_message += "These are the things you were doing previously today:\n"
 		_message += "\n" + "\n".join(activity_context)+"\n\n"
 	_message += "Condense your day down into two sentences total."
-	RequestHandlerManager.request_condense_activity(associated_npc, _message)
+	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_condense_activity_completed)
 	
 func _on_request_condense_activity_completed(_request_handler: RequestHandler, _dict: Dictionary):
 	var reply_string: String = _dict["response"]
@@ -82,7 +83,7 @@ func update_or_decide_relation(npc: NPC, message: String, context: String = ""):
 		_message = "Based on the following conversation:\n" + context + "\n" + message
 
 	_message += "\n\n How do you (" + associated_npc.name + ") feel about your relationship with " + associated_npc.conversation_partner.name + " now? Please describe it in one sentence."
-	RequestHandlerManager.request_update_relation(npc, _message)
+	RequestHandlerManager.generate_request(npc, _message, _on_request_update_relation_completed)
 	
 func _on_request_update_relation_completed(_request_handler: RequestHandler, _dict: Dictionary): #4 wartet auf requesthandlerManagerLLM answer
 	var reply_string: String = _dict["response"]

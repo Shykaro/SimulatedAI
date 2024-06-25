@@ -77,7 +77,7 @@ func request_answer(_message: String):
 	_message += "\n\n Take into account your current emotional feelings towards your conversation partner, they are as follows: " + emotional_relation
 	if (conversation_partner != null):
 		mind.dialogue_context.append({"role": "user", "content": _message})
-	RequestHandlerManager.request_chat_api(self, mind.dialogue_context)
+	RequestHandlerManager.chat_request(self, mind.dialogue_context, _on_request_completed)
 
 
 func request_activity(): #used for asking for current activity
@@ -87,14 +87,14 @@ func request_activity(): #used for asking for current activity
 		_message += "These are the things you were doing previously today:\n"
 		_message += "\n" + "\n".join(mind.activity_context)+"\n\n"
 	_message += "It's "+str(GameManager.hour)+GameManager.time_of_day+". What are you doing right now? Are you sleeping, working or doing something else? (Answer as monologue)"
-	RequestHandlerManager.request_generate_api(self, _message)
+	RequestHandlerManager.generate_request(self, _message, _on_request_completed)
 
 func request_choice(): #used for getting a name for who they want to call on the phone (npc2npc)
 	is_thinking = true
 	is_choosing = true
 	var _message: String = "It's "+str(GameManager.hour)+GameManager.time_of_day+". You may call one of your neighbors. You know "+NPCManager.get_npc_list_as_string_without_self(self)+". Who would you like to call? You may not call youself. Answer with just the name of the person you would like to call or just no if you want to call nobody. Example:<Their Name> <Their Surname> (without the brackets)"
 	#print(_message)
-	RequestHandlerManager.request_generate_api(self, _message)
+	RequestHandlerManager.generate_request(self, _message, _on_request_completed)
 	#choice_attempts+=1
 
 func _chat_with(_message: String, _npc: NPC):
