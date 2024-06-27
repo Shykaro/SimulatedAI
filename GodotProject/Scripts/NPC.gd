@@ -58,7 +58,7 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 		mind.update_emotional_state(reply_string)
 	if(is_choosing): #while choosing who to call
 		var reply_string: String = _dict["response"]
-		print("---------SYSTEM-------- "+self.name+"chose to call "+reply_string+"\n")
+		print("---------SYSTEM-------- "+self.name+" chose to call "+reply_string+"\n")
 		for _npc: NPC in NPCManager.npc_list:
 			if(_npc.name == reply_string or (_npc.name.split(" ")[0] == reply_string.split(" ")[0])): 
 				_establish_communication(_npc)

@@ -92,7 +92,7 @@ func update_or_decide_relation(npc: NPC, message: String, context: String = ""):
 func _on_request_update_relation_completed(_request_handler: RequestHandler, _dict: Dictionary): #4 wartet auf requesthandlerManagerLLM answer
 	var reply_string: String = _dict["response"]
 	set_emotional_relation(associated_npc.conversation_partner.name, reply_string)
-	save_to_relation_file(associated_npc.name+"->"+associated_npc.conversation_partner.name+": reply_string")
+	update_relation_file(associated_npc.name+"->"+associated_npc.conversation_partner.name+": "+reply_string)
 	#print("\n" + "\n" + "Updated relation with " + associated_npc.conversation_partner.name + ": " + reply_string )
 	
 #set_emotional_relation("Gustavo", "For some reason, I feel anger towards Gustavo")
@@ -109,10 +109,19 @@ func get_dialogue_context_as_string_array():
 		dialogue_context_string_array.append(entry["content"])
 	return dialogue_context_string_array
 
-func save_to_relation_file(content):
-	var file = FileAccess.open("res://Assets/relation.txt", FileAccess.WRITE)
-	file.store_string("\n\n"+content)
+func update_relation_file(content: String):
+	var previous_content: String = get_from_relation_file()
+	#print("PREVIOUSLY: "+previous_content)
+	save_to_relation_file(previous_content+"\n\n"+content)
 
+func save_to_relation_file(content: String):
+	var fileWrite = FileAccess.open("res://Assets/relation.txt", FileAccess.WRITE)
+	fileWrite.store_string(content)
+
+func get_from_relation_file() -> String:
+	var file = FileAccess.open("res://Assets/relation.txt", FileAccess.READ)
+	var content: String = file.get_as_text()
+	return content
 
 #func _ready(): #@ALEX: brauchst du das noch? Wenn nicht, bitte löschen
 	#set_emotional_relation("Maike", "I am feeling confident in my relationship to Maike, since she told me that she liked me")
