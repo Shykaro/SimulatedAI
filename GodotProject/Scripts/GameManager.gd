@@ -7,11 +7,11 @@ static var hour: int = 8
 static var time_of_day: String = " pm"
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(500,200))
+	#NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(500,200))
 	NPCManager.create_npc("Hanna Strittmatter", "02_Hanna", Vector2(500,800))
 	#NPCManager.create_npc("Gustavo Silva", "03_Gustavo", Vector2(200,350))
 	#NPCManager.create_npc("Maike Klein", "04_Maike", Vector2(200,650))
-	#NPCManager.create_npc("Alexander Gassner", "05_Alexander", Vector2(800,350))
+	NPCManager.create_npc("Alexander Gassner", "05_Alexander", Vector2(800,350))
 	#NPCManager.create_npc("Sophia Matthies", "06_Sophia", Vector2(800,650))
 	
 	
@@ -40,7 +40,7 @@ func _process(_delta): #If noone is generating anymore, increment time and start
 
 func _hourly_event(): #checks and increments time, starts event fitting time
 	#do something
-	print("---------------- "+"It is "+str(hour)+time_of_day+". -------------")
+	print("---------------- "+"It is "+str(hour)+time_of_day+". ----------------")
 	if((hour==8&&time_of_day==" pm") or (hour==12&&time_of_day==" am")):
 		if(hour==8&&time_of_day==" pm"):
 			condense_activity_contexts()

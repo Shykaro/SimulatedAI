@@ -26,8 +26,10 @@ func reflect_on_day(): #this is where the long term memories are stored (Happens
 
 func check_conversation_over():
 	var cutoff_threshold = 20
+	var start_checking_threshold = 4
+	if(dialogue_context.size()<start_checking_threshold): return
 	if(dialogue_context.size()>cutoff_threshold):
-		print("---------SYSTEM-------- Conversation was cut, cutoff threshold surpassed")
+		print("---------SYSTEM-------- Conversation was cut, cutoff threshold surpassed (It is 9 pm)")
 		associated_npc.is_conversation_over = true
 		return
 	var dialogue_context_string_array = get_dialogue_context_as_string_array()
@@ -39,7 +41,7 @@ func check_conversation_over():
 
 func _on_request_conversation_over_completed(_request_handler: RequestHandler, _dict: Dictionary):
 	var reply_string: String = _dict["response"]
-	print(reply_string)
+	#print(reply_string)
 	if(reply_string == "yes" or reply_string == "Yes"):
 		associated_npc.is_conversation_over = true
 
@@ -67,12 +69,14 @@ func _on_request_condense_activity_completed(_request_handler: RequestHandler, _
 # ////////////////////////////// Emotional Relation Stuff Anfang //////////////////////////////
 
 #get_emotional_relation muss noch einen Punkt zum einfügen finden? Bevor ein Anruf getätigt wird, wenn ein Anruf getätigt wird??...
-func get_emotional_relation(conversation_partner_npc_name: String) -> String: #1.1 get line
+func get_emotional_relation(conversation_partner_npc_name: String): #1.1 get line
 	if conversation_partner_npc_name in emotional_relations:
 		return emotional_relations[conversation_partner_npc_name]
-	return "No emotional context found for " + conversation_partner_npc_name
+	return #returns null if none is found
 
 func update_relation_during_conversation(npc: NPC, message: String): #1 von NPC
+	var start_checking_threshold = 4
+	if(dialogue_context.size()<start_checking_threshold): return
 	update_or_decide_relation(npc, message)
 
 func update_or_decide_relation(npc: NPC, message: String, context: String = ""): #2 von update_relation_during_conversation !!! -> npc parameter kann vlt neglected werden, wurde durch associated_npc.conversation_partner.name ersetzt
@@ -88,11 +92,13 @@ func update_or_decide_relation(npc: NPC, message: String, context: String = ""):
 func _on_request_update_relation_completed(_request_handler: RequestHandler, _dict: Dictionary): #4 wartet auf requesthandlerManagerLLM answer
 	var reply_string: String = _dict["response"]
 	set_emotional_relation(associated_npc.conversation_partner.name, reply_string)
-	print("\n" + "\n" + "Updated relation with " + associated_npc.conversation_partner.name + ": " + reply_string )
+	save_to_relation_file(associated_npc.name+"->"+associated_npc.conversation_partner.name+": reply_string")
+	#print("\n" + "\n" + "Updated relation with " + associated_npc.conversation_partner.name + ": " + reply_string )
 	
 #set_emotional_relation("Gustavo", "For some reason, I feel anger towards Gustavo")
 #Missing the possibility to change relation according to the relation it had before (is that already considered in the initail prompt?)
 func set_emotional_relation(npc_name: String, relation: String): #5 wird gesetzt von _on_request_update_relation_completed
+	#print(relation)
 	emotional_relations[npc_name] = relation
 
 # ////////////////////////////// Emotional Relation Stuff ENDE //////////////////////////////
@@ -103,10 +109,12 @@ func get_dialogue_context_as_string_array():
 		dialogue_context_string_array.append(entry["content"])
 	return dialogue_context_string_array
 
-func clear():
-	dialogue_context.clear()
+func save_to_relation_file(content):
+	var file = FileAccess.open("res://Assets/relation.txt", FileAccess.WRITE)
+	file.store_string("\n\n"+content)
 
-#func _ready():
+
+#func _ready(): #@ALEX: brauchst du das noch? Wenn nicht, bitte löschen
 	#set_emotional_relation("Maike", "I am feeling confident in my relationship to Maike, since she told me that she liked me")
 	#set_emotional_relation("Gustavo", "For some reason, I feel anger towards Gustavo")
 	#print(get_emotional_relation("Maike")) # Erwartete Ausgabe: I am feeling confident in my relationship to Maike, since she told me that she liked me

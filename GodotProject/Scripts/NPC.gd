@@ -25,7 +25,7 @@ func _establish_communication(_npc: NPC): #Initiates npc to npc conversation
 	if(conversation_partner == null):#if not talking
 		if(_npc.id != self.id): #may not call self
 			if(_npc.conversation_partner == null): # and the other is not talking
-				print(self.name+" initiated conversation with "+_npc.name)
+				print("---------SYSTEM-------- "+self.name+" initiated conversation with "+_npc.name)
 				conversation_partner = _npc
 				#mind.update_conversation_partner(_npc) #updates conversation partner for mind
 				conversation_partner.conversation_partner = self
@@ -39,44 +39,43 @@ func _establish_communication(_npc: NPC): #Initiates npc to npc conversation
 
 func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary): #is called every time a ollama request "comes back"
 	is_thinking = false
-	print("\n"+self.name+":")
 	if(conversation_partner!=null && is_choosing==false): #If talking to someone
 		if(is_initiator): 
 			mind.check_conversation_over()
 			if(is_conversation_over): 
-				print("conversation over!")
 				_on_conversation_over(_dict) #stops and cleans up conversation
 				return
 		var reply_string: String = _dict["message"]["content"]
+		print("\n"+self.name+":")
 		print(reply_string+"\n")
 		_chat_with(reply_string, conversation_partner) #respond to other
 		mind.dialogue_context.append(_dict["message"])
 	else: if(is_choosing==false): 
 		var reply_string: String = _dict["response"]
-		print(reply_string)
-		print()
+		print("\n"+self.name+":")
+		print(reply_string+"\n")
 		mind.activity_context.append(_dict["response"])
 		mind.update_emotional_state(reply_string)
 	if(is_choosing): #while choosing who to call
 		var reply_string: String = _dict["response"]
-		print(reply_string)
-		print()
+		print("---------SYSTEM-------- "+self.name+"chose to call "+reply_string+"\n")
 		for _npc: NPC in NPCManager.npc_list:
 			if(_npc.name == reply_string or (_npc.name.split(" ")[0] == reply_string.split(" ")[0])): 
 				_establish_communication(_npc)
 		if(conversation_partner==null): 
-			print("No NPC was chosen")
+			print("---------SYSTEM-------- "+"No NPC was chosen")
 		is_choosing = false
 
 func request_answer(_message: String):
 	is_thinking = true
-	mind.update_relation_during_conversation(conversation_partner, _message) #0 updated emotional relation MIGHT HAVE TO BE MOVED TO END OF MESSAGE OF OPPOSING NPC?  !!! -> Bug might be in this logic?
-	if(mind.activity_context!=[]): _message += "\n\n Remember: this is what you did today: " + mind.activity_context[0]
-	var emotional_relation = mind.get_emotional_relation(conversation_partner.name) #0.1 getted emotional relation
-	#print("\n" + "\n" + "Current emotional relation with " + conversation_partner.name + ": " + emotional_relation + "\n")
-	_message += "\n\n Take into account your current emotional feelings towards your conversation partner, they are as follows: " + emotional_relation
 	if (conversation_partner != null):
 		mind.dialogue_context.append({"role": "user", "content": _message})
+	if(mind.activity_context!=[]): _message += "\n\n Remember: this is what you did today: " + mind.activity_context[0]
+	mind.update_relation_during_conversation(conversation_partner, _message) #0 updated emotional relation MIGHT HAVE TO BE MOVED TO END OF MESSAGE OF OPPOSING NPC?  !!! -> Bug might be in this logic?
+	var emotional_relation = mind.get_emotional_relation(conversation_partner.name) #0.1 getted emotional relation
+	#print("---------SYSTEM-------- "+"\n" + "\n" + "Current emotional relation with " + conversation_partner.name + ": " + emotional_relation + "\n")
+	if(emotional_relation!=null): _message += "\n\n Take into account your current emotional feelings towards your conversation partner, they are as follows: " + emotional_relation
+	# ^^^ changed it so it only starts updating emotional relation after a threshold has been reached (4 atm). We get more reliable output this way, they hallucinate less. (is changed in Mind.update_or_decide_relation)
 	RequestHandlerManager.chat_request(self, mind.dialogue_context, _on_request_completed)
 
 
@@ -105,7 +104,7 @@ func _on_conversation_over(_json: Dictionary): #is called in the initiator, hand
 	if(is_initiator): #_remove_line2D()
 		_remove_arrow()
 	is_initiator = false
-	print("Conversation between "+self.name+" and "+conversation_partner.name+" terminated.")
+	print("---------SYSTEM-------- Conversation between "+self.name+" and "+conversation_partner.name+" was identified to be over")
 	conversation_partner.conversation_partner = null
 	conversation_partner = null
 	is_conversation_over = false
