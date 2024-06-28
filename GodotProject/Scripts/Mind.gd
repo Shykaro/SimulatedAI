@@ -21,7 +21,11 @@ var emotional_relations: Dictionary = {}
 	#print("Current conversation partner for " + associated_npc.name + " is: " + conversation_partner.name)
 
 func reflect_on_day(): #this is where the long term memories are stored (Happens while they "sleep" (dont mind the humanitization))
-	
+	#CT (condensed activity, condensed dialogue, emotional state, emotional context (for each npc))
+	#var _message: String
+	#_message = "This is what you did today: "
+	#_message += "\n\n How do you (" + associated_npc.name + ") feel about your relationship with " + associated_npc.conversation_partner.name + " now? Please describe it in one sentence."
+	#RequestHandlerManager.generate_request(npc, _message, _on_request_update_relation_completed)
 	pass
 
 func check_conversation_over():
@@ -52,6 +56,20 @@ func update_emotional_state(_what_just_happened: String):
 func _on_request_emotional_state_complete(_request_handler: RequestHandler, _dict: Dictionary):
 	var reply_string: String = _dict["response"]
 	emotional_state = reply_string
+
+func condense_dialogue():
+	var _message: String = ""
+	var dialogue_context_as_string_array: Array[String] = get_dialogue_context_as_string_array()
+	_message += "This is how your conversation of the day went:\n"
+	_message += "\n" + "\n".join(dialogue_context_as_string_array)+"\n\n"
+	_message += "What are the most important pieces of informations that you should remember for the coming days? Condense it down intro two sentences total."
+	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_condense_dialogue_completed)
+
+func _on_request_condense_dialogue_completed(_request_handler: RequestHandler, _dict: Dictionary): # for some reason never happens
+	var reply_string: String = _dict["response"]
+	dialogue_context.clear()
+	dialogue_context.append(reply_string)
+	print("---------SYSTEM-------- Condensed conversation for someone!") #lol
 
 func condense_activity():
 	var _message: String = ""
@@ -85,7 +103,6 @@ func update_or_decide_relation(npc: NPC, message: String, context: String = ""):
 		_message = "Based on the following message:\n" + message
 	else:
 		_message = "Based on the following conversation:\n" + context + "\n" + message
-
 	_message += "\n\n How do you (" + associated_npc.name + ") feel about your relationship with " + associated_npc.conversation_partner.name + " now? Please describe it in one sentence."
 	RequestHandlerManager.generate_request(npc, _message, _on_request_update_relation_completed)
 	
@@ -106,7 +123,11 @@ func set_emotional_relation(npc_name: String, relation: String): #5 wird gesetzt
 func get_dialogue_context_as_string_array():
 	var dialogue_context_string_array: Array[String] = []
 	for entry:Dictionary in dialogue_context:
-		dialogue_context_string_array.append(entry["content"])
+		var labled_entry: String
+		if(entry["role"]=="assistant"):labled_entry = "You: "
+		else: labled_entry = associated_npc.last_conversation_partner.name+": "
+		labled_entry += entry["content"]
+		dialogue_context_string_array.append(labled_entry)
 	return dialogue_context_string_array
 
 func update_relation_file(content: String):

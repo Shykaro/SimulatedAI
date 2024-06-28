@@ -4,7 +4,7 @@ class_name GameManager
 
 var count: int = 0
 static var hour: int = 8
-static var time_of_day: String = " am"
+static var time_of_day: String = " pm"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(500,200))
@@ -45,6 +45,8 @@ func _hourly_event(): #checks and increments time, starts event fitting time
 		if(hour==8&&time_of_day==" pm"):
 			condense_activity_contexts()
 			request_npc_choices() #basically initiates calls
+		if(hour==9&&time_of_day==" pm"):
+			condense_dialogue_contexts()
 		if(hour==12&&time_of_day==" am"):
 			update_npc_minds() #will be used for reflecting on the day
 	else:
@@ -54,7 +56,10 @@ func _hourly_event(): #checks and increments time, starts event fitting time
 func condense_activity_contexts():
 	for _npc: NPC in NPCManager.npc_list:
 		_npc.mind.condense_activity()
-
+func condense_dialogue_contexts():
+	for _npc: NPC in NPCManager.npc_list:
+		_npc.mind.condense_dialogue()
+		
 func update_npc_minds():
 	for _npc: NPC in NPCManager.npc_list:
 		_npc.mind.reflect_on_day()
@@ -76,4 +81,6 @@ func increment_time():
 	if(hour==12): 
 		if(time_of_day == " am"): time_of_day = " pm"
 		else: time_of_day = " am"
-	if(hour==13): hour=1
+	if(hour==13): 
+		if(time_of_day == " am"): hour = 8
+		else: hour = 1
