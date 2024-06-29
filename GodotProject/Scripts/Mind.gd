@@ -64,7 +64,7 @@ func _on_request_conversation_over_completed(_request_handler: RequestHandler, _
 		associated_npc.is_conversation_over = true
 
 func update_emotional_state(_what_just_happened: String):
-	var _message: String = "Before doing "+_what_just_happened+"you felt like this: "+emotional_state+". How do you feel now? Describe your emotional state in one word only."
+	var _message: String = "Before doing "+_what_just_happened+"you felt like this: "+emotional_state+". How do you feel now? Describe your emotional state in one very short sentence only."
 	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_emotional_state_complete)
 
 func _on_request_emotional_state_complete(_request_handler: RequestHandler, _dict: Dictionary):
