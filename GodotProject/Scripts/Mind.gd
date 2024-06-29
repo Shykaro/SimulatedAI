@@ -15,7 +15,8 @@ var associated_npc: NPC
 #var conversation_partner_npc: NPC #current_or_last
 var long_term_storage: Array[String]
 var emotional_relations: Dictionary = {}
-
+var pic_scale_values: Dictionary
+var pic_scale_possibilities: Array[String] = ["distant","neither close nor distant","a little bit close","moderately close","very close","fully close"]
 #func update_conversation_partner(ConversationpartnerNPC): #last or current
 	#conversation_partner = ConversationpartnerNPC
 	#print("Current conversation partner for " + associated_npc.name + " is: " + conversation_partner.name)
@@ -117,15 +118,34 @@ func update_or_decide_relation(npc: NPC, message: String, context: String = ""):
 		_message = "Based on the following message:\n" + message
 	else:
 		_message = "Based on the following conversation:\n" + context + "\n" + message
-	_message += "\n\n How do you (" + associated_npc.name + ") feel about your relationship with " + associated_npc.conversation_partner.name + " now? Please describe it in one sentence."
-	RequestHandlerManager.generate_request(npc, _message, _on_request_update_relation_completed)
-	
+	_message += "\n\n How do you (" + associated_npc.name + ") feel about your relationship with " + npc.name + " now? Please describe it in one sentence."
+	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_update_relation_completed) #changed to associated, because if npc is passed, the relation will be written in the storage of the conversation partner
+
 func _on_request_update_relation_completed(_request_handler: RequestHandler, _dict: Dictionary): #4 wartet auf requesthandlerManagerLLM answer
 	var reply_string: String = _dict["response"]
 	set_emotional_relation(associated_npc.conversation_partner.name, reply_string)
+	update_pic_scale_value(associated_npc.conversation_partner.name, reply_string)
 	update_relation_file(associated_npc.name+"->"+associated_npc.conversation_partner.name+": "+reply_string)
 	#print("\n" + "\n" + "Updated relation with " + associated_npc.conversation_partner.name + ": " + reply_string )
-	
+
+func update_pic_scale_value(_npc_name: String, _relation: String):
+	if(emotional_relations[_npc_name]==null): return
+	var _message: String = ""
+	_message += "This is your current relation to "+ _npc_name+": "+emotional_relations[_npc_name]
+	_message += "\n\n"+"Feeling close refers to being listened to, understood by, able to share feelings and to talk openly with another person. Rate the persons after each talk into one of the listed categories down below. Imagine it like an Onion or multiple circles lying inside each other. You are in the middle, represented by “yourself”, then follows “fully close”, “very close” and so on, the furthest layer is “distant”. The “distant” category includes people with whom you have never interacted or from whom you have not received additional information from a third party."
+	_message += "\n\n"+"ONLY answer with one of the following words depending on your relationship (and nothing else):"
+	_message += "\n".join(pic_scale_possibilities)
+	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_update_pic_scale_value_completed)
+
+func _on_request_update_pic_scale_value_completed(_request_handler: RequestHandler, _dict: Dictionary): #4 wartet auf requesthandlerManagerLLM answer
+	var reply_string: String = _dict["response"]
+	var _answer: String
+	for possibility: String in pic_scale_possibilities:
+		if(reply_string.contains(possibility)): _answer = possibility
+	if(_answer!=null): pic_scale_values[associated_npc.last_conversation_partner.name] = _answer
+	else: print("---------WARNING-------- "+ associated_npc.name+" gave no valid pic scale answer for "+associated_npc.last_conversation_partner.name)
+	#print("\n" + "\n" + "Updated relation with " + associated_npc.conversation_partner.name + ": " + reply_string )
+
 #set_emotional_relation("Gustavo", "For some reason, I feel anger towards Gustavo")
 #Missing the possibility to change relation according to the relation it had before (is that already considered in the initail prompt?)
 func set_emotional_relation(npc_name: String, relation: String): #5 wird gesetzt von _on_request_update_relation_completed
