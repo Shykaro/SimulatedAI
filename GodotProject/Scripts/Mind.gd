@@ -13,7 +13,7 @@ var emotional_state: String = "content"
 var associated_npc: NPC
 #var conversation_partner: NPC
 #var conversation_partner_npc: NPC #current_or_last
-
+var long_term_storage: Array[String]
 var emotional_relations: Dictionary = {}
 
 #func update_conversation_partner(ConversationpartnerNPC): #last or current
@@ -21,12 +21,26 @@ var emotional_relations: Dictionary = {}
 	#print("Current conversation partner for " + associated_npc.name + " is: " + conversation_partner.name)
 
 func reflect_on_day(): #this is where the long term memories are stored (Happens while they "sleep" (dont mind the humanitization))
-	#CT (condensed activity, condensed dialogue, emotional state, emotional context (for each npc))
-	#var _message: String
-	#_message = "This is what you did today: "
-	#_message += "\n\n How do you (" + associated_npc.name + ") feel about your relationship with " + associated_npc.conversation_partner.name + " now? Please describe it in one sentence."
-	#RequestHandlerManager.generate_request(npc, _message, _on_request_update_relation_completed)
-	pass
+	#TODO for another day/project: Make the requests asynchronous and await them. This way, we have less code and no tasks are done before the prerequisites
+	#LT = (condensed activity, condensed dialogue, emotional state, emotional context (for each npc))
+	var _message: String
+	_message = "This is what you did today: \n"
+	_message += "\n".join(activity_context)+"\n\n"
+	_message += "This is how your conversation of the day went: \n"
+	_message += "\n".join(dialogue_context)+"\n\n"
+	_message += "This is how youre feeling right now: \n"
+	_message += emotional_state+"\n\n"
+	_message += "This is how youre feeling about every other neighbor: \n"
+	_message += "\n".join(get_labled_emotional_relations_string_array())+"\n\n"
+	_message += "Out of all these experiences, choose the ones that were the most memorable and important. Make a bullet list with a couple entries."
+	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_reflect_on_day)
+	activity_context.clear()
+	dialogue_context.clear()
+
+func _on_request_reflect_on_day(_request_handler: RequestHandler, _dict: Dictionary):
+	var reply_string: String = _dict["response"]
+	print("---------SYSTEM-------- STORED LONG TERM MEMORY "+associated_npc.name+": "+reply_string)
+
 
 func check_conversation_over():
 	var cutoff_threshold = 20
@@ -118,6 +132,13 @@ func set_emotional_relation(npc_name: String, relation: String): #5 wird gesetzt
 	#print(relation)
 	emotional_relations[npc_name] = relation
 
+func get_labled_emotional_relations_string_array():
+	var labled_emotional_relations_string_array: Array[String] = []
+	for _npc in NPCManager.npc_list:
+		if(_npc.name!=associated_npc.name):
+			if(emotional_relations[_npc.name]!=null):
+				labled_emotional_relations_string_array.append(_npc.name+": "+emotional_relations[_npc.name])
+	return labled_emotional_relations_string_array
 # ////////////////////////////// Emotional Relation Stuff ENDE //////////////////////////////
 
 func get_dialogue_context_as_string_array():
