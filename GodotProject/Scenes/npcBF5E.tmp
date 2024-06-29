@@ -6,13 +6,10 @@
 
 [node name="Node2D" type="Node2D"]
 z_index = 3
+scale = Vector2(0.5, 0.5)
 script = ExtResource("2_1kcwo")
 
-[node name="Node2D" type="Node2D" parent="."]
-z_index = 3
-scale = Vector2(0.5, 0.5)
-
-[node name="Label" type="Label" parent="Node2D"]
+[node name="Label" type="Label" parent="."]
 offset_left = -156.0
 offset_top = 188.0
 offset_right = 99.0
@@ -20,6 +17,6 @@ offset_bottom = 251.0
 theme_override_font_sizes/font_size = 45
 horizontal_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_vs87j")
 script = ExtResource("3_fsing")

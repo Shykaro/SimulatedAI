@@ -11,15 +11,31 @@ var is_thinking: bool = false #is generating response
 var is_choosing: bool = false #is generating who to call
 var is_conversation_over: bool = false
 var is_initiator: bool = false #is the one that initiated the converstaion
+var chatbox
 #var choice_attempts: int = 0
 #var timeout_interval: int = 10
 # Called when the node enters the scene tree for the first time.
+
 func start():
 	#assert(id != null, "WARNING: NPC instance has no id!") this can be used to debug (basically, if then print)
 	id = NPCManager.npc_list.size()
-	var label: Label = get_child(0)
+	var label: Label = get_child(0).get_child(0)
 	label.text = self.name
 	mind.associated_npc = self
+	#Instance chatbox for every NPC
+	var chatbox_scene = load("res://HUD/Scenes/Chatbox.tscn")
+	chatbox = chatbox_scene.instantiate()
+	#npc_scene.instantiate()
+	#instance.add_child(_npc)
+	add_child(chatbox)
+	chatbox.visible = false
+
+func show_chatbox():
+	chatbox.visible = true
+	#chatbox.update_info(text)
+
+func hide_chatbox():
+	chatbox.visible = false
 
 func _establish_communication(_npc: NPC): #Initiates npc to npc conversation
 	if(conversation_partner == null):#if not talking
@@ -33,6 +49,7 @@ func _establish_communication(_npc: NPC): #Initiates npc to npc conversation
 				conversation_partner.last_conversation_partner = self
 				#_add_line2D() #adds line from self to conversation partner
 				_add_arrow()
+				chatbox.get_child(0).updateChat(conversation_partner.name)
 				is_choosing = false
 				is_conversation_over = false
 				is_initiator = true
@@ -127,8 +144,8 @@ func _add_arrow():
 	var _texture = load("res://Assets/long_green_arrow.png") 
 	var _arrow: Sprite2D = Sprite2D.new()
 	_arrow.texture = _texture
-	_arrow.position = conversation_partner.position-self.position
-	_arrow.look_at(conversation_partner.position)
+	_arrow.position = conversation_partner.get_child(0).position-self.position #habe hier schon get_child(0) probiert, funktioniert leider nicht :(
+	_arrow.look_at(conversation_partner.get_child(0).position) #momentan für veranschauung mal get child 0 auf conversation partner, das funktioniert "fast" so wie es soll? Kann ich nicht beurteilen
 	_arrow.scale = Vector2(0.5,0.5)
 	_arrow.name = "Communication Arrow from "+self.name+" to "+conversation_partner.name
 	var _script = load("res://HUD/ArrowScript.gd")
