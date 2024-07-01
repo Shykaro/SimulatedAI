@@ -46,3 +46,5 @@ position = Vector2(708, 474.5)
 scale = Vector2(0.0416667, 0.0754011)
 texture = ExtResource("6_4f3mh")
 script = ExtResource("7_ip2oq")
+
+[connection signal="mouse_exited" from="Control/Time/Label" to="Control/Time/Label" method="_on_mouse_exited"]

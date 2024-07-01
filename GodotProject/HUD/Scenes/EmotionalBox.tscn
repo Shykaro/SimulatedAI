@@ -1,7 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwloqkca0ev0k"]
-
-[ext_resource type="Script" path="res://HUD/Chatbox.gd" id="1_yagq3"]
-[ext_resource type="PackedScene" uid="uid://imhollc6lpir" path="res://HUD/Scenes/MessageBox.tscn" id="2_fuu3m"]
+[gd_scene format=3 uid="uid://bsb40wo6ef5rh"]
 
 [node name="Chatbox" type="Node2D"]
 
@@ -11,27 +8,26 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
-script = ExtResource("1_yagq3")
 
 [node name="Panel" type="Panel" parent="Control"]
 layout_mode = 0
-offset_left = 1068.0
+offset_left = 1490.0
 offset_top = 5.0
-offset_right = 1482.0
+offset_right = 1904.0
 offset_bottom = 1081.0
 
-[node name="Persons in Coversation" type="RichTextLabel" parent="Control/Panel"]
+[node name="SelectedPerson" type="RichTextLabel" parent="Control/Panel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.076
-offset_left = 43.0
-offset_top = 56.0
-offset_right = -38.0
-offset_bottom = 0.223991
+offset_left = 119.0
+offset_top = 9.0
+offset_right = -29.0
+offset_bottom = -46.776
 text = "Placeholder"
 
-[node name="SelectedChatText" type="RichTextLabel" parent="Control/Panel"]
+[node name="MemoryText" type="RichTextLabel" parent="Control/Panel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -40,7 +36,7 @@ offset_left = 40.0
 offset_top = 9.0
 offset_right = -116.0
 offset_bottom = -32.776
-text = "Selected Chat"
+text = "Memory: "
 fit_content = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control/Panel"]
@@ -60,5 +56,26 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MessageBox" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("2_fuu3m")]
-layout_mode = 2
+[node name="CharacterTraitsText" type="RichTextLabel" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.076
+offset_left = 43.0
+offset_top = 43.0
+offset_right = -113.0
+offset_bottom = 1.224
+text = "Character Traits:"
+fit_content = true
+
+[node name="CharacterTraitsList" type="RichTextLabel" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.076
+offset_left = 46.0
+offset_top = 71.0
+offset_right = -110.0
+offset_bottom = 29.224
+text = "Character Traits:"
+fit_content = true
