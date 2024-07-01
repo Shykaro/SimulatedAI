@@ -144,9 +144,10 @@ func _add_arrow():
 	var _texture = load("res://Assets/long_green_arrow.png") 
 	var _arrow: Sprite2D = Sprite2D.new()
 	_arrow.texture = _texture
-	_arrow.position = conversation_partner.get_child(0).position-self.position #habe hier schon get_child(0) probiert, funktioniert leider nicht :(
+	_arrow.scale = Vector2(0.2,0.2)
+	_arrow.position = self.get_child(0).position+(conversation_partner.get_child(0).position - self.get_child(0).position)/2 #habe hier schon get_child(0) probiert, funktioniert leider nicht :(
 	_arrow.look_at(conversation_partner.get_child(0).position) #momentan für veranschauung mal get child 0 auf conversation partner, das funktioniert "fast" so wie es soll? Kann ich nicht beurteilen
-	_arrow.scale = Vector2(0.5,0.5)
+	_arrow.rotate(PI/2)
 	_arrow.name = "Communication Arrow from "+self.name+" to "+conversation_partner.name
 	var _script = load("res://HUD/ArrowScript.gd")
 	_arrow.set_script(_script)
