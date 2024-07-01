@@ -154,8 +154,8 @@ func _on_request_update_pic_scale_value_completed(_request_handler: RequestHandl
 		if(reply_string.contains(possibility)): _answer = possibility
 	if(_answer!=null): 
 		pic_scale_values[associated_npc.last_conversation_partner.name] = _answer
-		_set_pic_scale_values_history(_answer)
 		number_of_pic_scale_values_on_day += 1
+		_set_pic_scale_values_history(_answer)
 	else: print("---------WARNING-------- "+ associated_npc.name+" gave no valid pic scale answer for "+associated_npc.last_conversation_partner.name)
 	#print("\n" + "\n" + "Updated relation with " + associated_npc.conversation_partner.name + ": " + reply_string )
 
