@@ -5,6 +5,7 @@ class_name GameManager
 var count: int = 0
 static var hour: int = 8
 static var time_of_day: String = " pm"
+static var day_number: int = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(500,200))
@@ -13,8 +14,6 @@ func _ready():
 	#NPCManager.create_npc("Maike Klein", "04_Maike", Vector2(200,650))
 	NPCManager.create_npc("Alexander Gassner", "05_Alexander", Vector2(800,350))
 	#NPCManager.create_npc("Sophia Matthies", "06_Sophia", Vector2(800,650))
-	
-	
 	#NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(200,350))
 	#NPCManager.create_npc("Hanna Strittmatter", "02_Hanna", Vector2(200,650))
 	#NPCManager.create_npc("Gustavo Silva", "03_Gustavo", Vector2(500,800))
@@ -25,6 +24,7 @@ func _ready():
 	#NPCManager.create_npc("Antonio Bartel", "08_Antonio", Vector2(200,650))
 	#NPCManager.create_npc("Emily Stier", "09_Emily", Vector2(800,350))
 	#NPCManager.create_npc("Miguel Berger", "10_Miguel", Vector2(800,350))
+	init_npc_minds()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,6 +52,9 @@ func _hourly_event(): #checks and increments time, starts event fitting time
 	else:
 		request_npc_activities() #well, requests npc activities
 	increment_time() #basically hour = hour + 1
+func init_npc_minds():
+	for _npc: NPC in NPCManager.npc_list:
+		_npc.mind.init_pic_scale_values()
 
 func condense_activity_contexts():
 	for _npc: NPC in NPCManager.npc_list:
@@ -82,5 +85,7 @@ func increment_time():
 		if(time_of_day == " am"): time_of_day = " pm"
 		else: time_of_day = " am"
 	if(hour==13): 
-		if(time_of_day == " am"): hour = 8
+		if(time_of_day == " am"): 
+			day_number+=1
+			hour = 8
 		else: hour = 1

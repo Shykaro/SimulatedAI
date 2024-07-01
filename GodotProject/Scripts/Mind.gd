@@ -14,12 +14,21 @@ var associated_npc: NPC
 #var conversation_partner: NPC
 #var conversation_partner_npc: NPC #current_or_last
 var long_term_storage: Array[String]
-var emotional_relations: Dictionary = {}
+var emotional_relations: Dictionary = {} # possibility (String) saved under emotional_relations[npcname]
 var pic_scale_values: Dictionary
 var pic_scale_possibilities: Array[String] = ["distant","neither close nor distant","a little bit close","moderately close","very close","fully close"]
+var pic_scale_values_history: Dictionary # npcname->day->index example: pic_scale_values_history["Alexander Gassner"][2][10] (The tenth update to Alexander Gassners relation value on the second day )
+var number_of_pic_scale_values_on_day: int = 0
 #func update_conversation_partner(ConversationpartnerNPC): #last or current
 	#conversation_partner = ConversationpartnerNPC
 	#print("Current conversation partner for " + associated_npc.name + " is: " + conversation_partner.name)
+
+func init_pic_scale_values():
+	for _npc in NPCManager.npc_list:
+		pic_scale_values[_npc.name] = "distant" #initializes all other npcs as distant
+		pic_scale_values_history[_npc.name] = {}#array within array to house index in noOfDay
+		#print("CREATED ARRAYS")
+	pic_scale_values[associated_npc.name] = "yourself"
 
 func reflect_on_day(): #this is where the long term memories are stored (Happens while they "sleep" (dont mind the humanitization))
 	#TODO for another day/project: Make the requests asynchronous and await them. This way, we have less code and no tasks are done before the prerequisites
@@ -37,6 +46,7 @@ func reflect_on_day(): #this is where the long term memories are stored (Happens
 	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_reflect_on_day)
 	activity_context.clear()
 	dialogue_context.clear()
+	number_of_pic_scale_values_on_day = 0
 
 func _on_request_reflect_on_day(_request_handler: RequestHandler, _dict: Dictionary):
 	var reply_string: String = _dict["response"]
@@ -142,9 +152,24 @@ func _on_request_update_pic_scale_value_completed(_request_handler: RequestHandl
 	var _answer: String
 	for possibility: String in pic_scale_possibilities:
 		if(reply_string.contains(possibility)): _answer = possibility
-	if(_answer!=null): pic_scale_values[associated_npc.last_conversation_partner.name] = _answer
+	if(_answer!=null): 
+		pic_scale_values[associated_npc.last_conversation_partner.name] = _answer
+		_set_pic_scale_values_history(_answer)
+		number_of_pic_scale_values_on_day += 1
 	else: print("---------WARNING-------- "+ associated_npc.name+" gave no valid pic scale answer for "+associated_npc.last_conversation_partner.name)
 	#print("\n" + "\n" + "Updated relation with " + associated_npc.conversation_partner.name + ": " + reply_string )
+
+func _set_pic_scale_values_history(_answer:String):
+	#var my_dict = {
+	#	"Alex": {1:{1:"distant",2:"close"},2:{1:"close",2:"relatively close"}},
+	#	"Maike": {} #same
+	#	}
+	var personal_dict: Dictionary = pic_scale_values_history[associated_npc.last_conversation_partner.name]
+	if(!personal_dict.keys().has(GameManager.day_number)):
+		personal_dict[GameManager.day_number] = {number_of_pic_scale_values_on_day: _answer}
+	else:
+		personal_dict[GameManager.day_number][number_of_pic_scale_values_on_day] = _answer
+
 
 #set_emotional_relation("Gustavo", "For some reason, I feel anger towards Gustavo")
 #Missing the possibility to change relation according to the relation it had before (is that already considered in the initail prompt?)
