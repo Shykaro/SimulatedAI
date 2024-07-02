@@ -85,7 +85,7 @@ func _on_request_emotional_state_complete(_request_handler: RequestHandler, _dic
 func condense_dialogue():
 	var _message: String = ""
 	var dialogue_context_as_string_array: Array[String] = get_dialogue_context_as_string_array()
-	_message += "This is how your conversation of the day went:\n"
+	_message += "This is hoxw your conversation of the day went:\n"
 	_message += "\n" + "\n".join(dialogue_context_as_string_array)+"\n\n"
 	_message += "What are the most important pieces of informations that you should remember for the coming days? Condense it down intro two sentences total."
 	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_condense_dialogue_completed)
@@ -118,7 +118,7 @@ func get_emotional_relation(conversation_partner_npc_name: String): #1.1 get lin
 	return #returns null if none is found
 
 func update_relation_during_conversation(npc: NPC, message: String): #1 von NPC
-	var start_checking_threshold = 4
+	var start_checking_threshold = 1
 	if(dialogue_context.size()<start_checking_threshold): return
 	update_or_decide_relation(npc, message)
 
@@ -169,7 +169,12 @@ func _set_pic_scale_values_history(_answer:String):
 		personal_dict[GameManager.day_number] = {number_of_pic_scale_values_on_day: _answer}
 	else:
 		personal_dict[GameManager.day_number][number_of_pic_scale_values_on_day] = _answer
+	print_current_pic_scale()
 
+func print_current_pic_scale():
+	print("Current PIC Scale Value:")
+	for npc_name in pic_scale_values.keys():
+		print(npc_name + ": " + pic_scale_values[npc_name])
 
 #set_emotional_relation("Gustavo", "For some reason, I feel anger towards Gustavo")
 #Missing the possibility to change relation according to the relation it had before (is that already considered in the initail prompt?)
