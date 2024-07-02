@@ -25,6 +25,7 @@ static func create_npc(_given_name: String, _given_llm: String, _given_position:
 	npc_list.append(_npc)
 	_npc.get_child(0).position = _given_position #changed this to an inbetween node, so root doesnt get played with transformwise
 	_npc.start()
+	#print(_npc.get_children()) to check NPC hierarchy
 	return _npc
 
 static func get_npc_list_as_string():

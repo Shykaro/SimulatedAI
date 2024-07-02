@@ -12,6 +12,7 @@ var is_choosing: bool = false #is generating who to call
 var is_conversation_over: bool = false
 var is_initiator: bool = false #is the one that initiated the converstaion
 var chatbox
+var associatedChatBox # this is the ScrollContainer node of the associated Chatbox
 #var choice_attempts: int = 0
 #var timeout_interval: int = 10
 # Called when the node enters the scene tree for the first time.
@@ -29,6 +30,9 @@ func start():
 	#instance.add_child(_npc)
 	add_child(chatbox)
 	chatbox.visible = false
+	#print(get_children()) #check NPC Structure
+	associatedChatBox = get_child(1).get_child(0).get_child(0).get_child(2) #Sets reference for future message updates
+	#print(associatedChatBox)
 
 func show_chatbox():
 	chatbox.visible = true
@@ -67,6 +71,7 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 		var reply_string: String = _dict["message"]["content"]
 		print("\n"+self.name+":")
 		print(reply_string+"\n")
+		associatedChatBox.createMessage(self, reply_string)
 		_chat_with(reply_string, conversation_partner) #respond to other
 		mind.dialogue_context.append(_dict["message"])
 	else: if(is_choosing==false): 
@@ -87,6 +92,7 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 
 func request_answer(_message: String):
 	is_thinking = true
+	associatedChatBox.createMessage(conversation_partner, _message)
 	if (conversation_partner != null):
 		mind.dialogue_context.append({"role": "user", "content": _message})
 	if(mind.activity_context!=[]): _message += "\n\n Remember: this is what you did today: " + mind.activity_context[0]
