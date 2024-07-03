@@ -23,4 +23,4 @@ func _input(event):
 					NPCManagerRef.isNPCselected = true
 					material.set_shader_parameter("line_thickness", 8)
 					get_parent().get_parent().show_emotionalbox()
-			print("This is the House of " + AssociatedNPC.name)
+			#print("This is the House of " + AssociatedNPC.name)
