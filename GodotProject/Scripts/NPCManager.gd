@@ -5,11 +5,14 @@ class_name NPCManager
 static var instance: NPCManager
 static var npc_list: Array = []
 static var npc_scene: PackedScene
+var isNPCselected = false
+var isConversationSelected = false
 
 func _ready():
 	instance = self
 	print("DEBUG: instantiating NPCs...")
 	npc_scene = load("res://Scenes/npc.tscn")
+	#print(get_children())
 
 static func get_npc_by_id(_id: int):
 	for i in range(npc_list.size()):
@@ -25,6 +28,7 @@ static func create_npc(_given_name: String, _given_llm: String, _given_position:
 	npc_list.append(_npc)
 	_npc.get_child(0).position = _given_position #changed this to an inbetween node, so root doesnt get played with transformwise
 	_npc.start()
+	#print(_npc.get_children()) to check NPC hierarchy
 	return _npc
 
 static func get_npc_list_as_string():

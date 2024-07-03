@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://b82yfya3l2ame"]
+
+[node name="MessageBox" type="HBoxContainer"]
+layout_direction = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1890.0
+offset_right = -1570.0
+offset_bottom = 49.0
+grow_horizontal = 0
+
+[node name="Background" type="PanelContainer" parent="."]
+self_modulate = Color(0.00392157, 0.576471, 1, 1)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Background"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+text = "PlaceholderMessager ahhhhhhhhhhh ahhhhhhhhhhh ahhhhhhhhh"
+autowrap_mode = 3

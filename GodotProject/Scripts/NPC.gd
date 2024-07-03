@@ -12,6 +12,8 @@ var is_choosing: bool = false #is generating who to call
 var is_conversation_over: bool = false
 var is_initiator: bool = false #is the one that initiated the converstaion
 var chatbox
+var associatedChatBox # this is the ScrollContainer node of the associated Chatbox
+var emotionalbox
 #var choice_attempts: int = 0
 #var timeout_interval: int = 10
 # Called when the node enters the scene tree for the first time.
@@ -25,10 +27,19 @@ func start():
 	#Instance chatbox for every NPC
 	var chatbox_scene = load("res://HUD/Scenes/Chatbox.tscn")
 	chatbox = chatbox_scene.instantiate()
+	var emotionalbox_scene = load("res://HUD/Scenes/EmotionalBox.tscn")
+	emotionalbox = emotionalbox_scene.instantiate()
 	#npc_scene.instantiate()
 	#instance.add_child(_npc)
 	add_child(chatbox)
+	add_child(emotionalbox)
 	chatbox.visible = false
+	emotionalbox.visible = false
+	#print(get_children()) #check NPC Structure
+	associatedChatBox = get_child(1).get_child(0).get_child(0).get_child(2) #Sets reference for future message updates
+	#print(associatedChatBox)
+	
+
 
 func show_chatbox():
 	chatbox.visible = true
@@ -36,6 +47,13 @@ func show_chatbox():
 
 func hide_chatbox():
 	chatbox.visible = false
+
+func show_emotionalbox():
+	emotionalbox.visible = true
+	#chatbox.update_info(text)
+
+func hide_emotionalbox():
+	emotionalbox.visible = false
 
 func _establish_communication(_npc: NPC): #Initiates npc to npc conversation
 	if(conversation_partner == null):#if not talking
@@ -67,6 +85,7 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 		var reply_string: String = _dict["message"]["content"]
 		print("\n"+self.name+":")
 		print(reply_string+"\n")
+		associatedChatBox.createMessage(self, reply_string)
 		_chat_with(reply_string, conversation_partner) #respond to other
 		mind.dialogue_context.append(_dict["message"])
 	else: if(is_choosing==false): 
@@ -87,6 +106,7 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 
 func request_answer(_message: String):
 	is_thinking = true
+	associatedChatBox.createMessage(conversation_partner, _message)
 	if (conversation_partner != null):
 		mind.dialogue_context.append({"role": "user", "content": _message})
 	if(mind.activity_context!=[]): _message += "\n\n Remember: this is what you did today: " + mind.activity_context[0]
@@ -149,6 +169,9 @@ func _add_arrow():
 	_arrow.look_at(conversation_partner.get_child(0).position) #momentan für veranschauung mal get child 0 auf conversation partner, das funktioniert "fast" so wie es soll? Kann ich nicht beurteilen
 	_arrow.rotate(PI/2)
 	_arrow.name = "Communication Arrow from "+self.name+" to "+conversation_partner.name
+	_arrow.material = ShaderMaterial.new()
+	var shader = load("res://Scenes/arrows.gdshader")
+	_arrow.material.shader = shader
 	var _script = load("res://HUD/ArrowScript.gd")
 	_arrow.set_script(_script)
 	self.add_child(_arrow)
