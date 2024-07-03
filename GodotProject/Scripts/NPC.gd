@@ -38,6 +38,7 @@ func start():
 	#print(get_children()) #check NPC Structure
 	associatedChatBox = get_child(1).get_child(0).get_child(0).get_child(2) #Sets reference for future message updates
 	#print(associatedChatBox)
+	#print(get_parent())
 	
 
 
@@ -146,6 +147,10 @@ func _on_conversation_over(_json: Dictionary): #is called in the initiator, hand
 	conversation_partner.conversation_partner = null
 	conversation_partner = null
 	is_conversation_over = false
+	#if get_parent().isConversationSelected:
+	hide_chatbox()
+	get_parent().isConversationSelected = false
+	
 
 func _add_line2D():
 	var _line: Line2D = Line2D.new()

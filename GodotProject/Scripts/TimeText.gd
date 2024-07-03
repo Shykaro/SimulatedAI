@@ -8,4 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	self.text = str(GameManager.hour-1)+GameManager.time_of_day
+	var show_time: int = GameManager.hour
+	if(show_time==1): show_time = 2
+	self.text = str(show_time-1)+GameManager.time_of_day
+	

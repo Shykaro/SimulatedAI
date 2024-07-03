@@ -22,6 +22,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
 
 [node name="Camera2D" type="Camera2D" parent="Control"]
 anchor_mode = 0
@@ -38,4 +39,27 @@ vertical_alignment = 1
 script = ExtResource("4_vqs3l")
 metadata/_edit_use_anchors_ = true
 
+[node name="Control2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="Camera2D" type="Camera2D" parent="Control2"]
+anchor_mode = 0
+
+[node name="Time" type="Node2D" parent="Control2"]
+position = Vector2(517, 512)
+
+[node name="Label" type="Label" parent="Control2/Time"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme = ExtResource("4_d0tik")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_vqs3l")
+metadata/_edit_use_anchors_ = true
+
 [connection signal="mouse_exited" from="Control/Time/Label" to="Control/Time/Label" method="_on_mouse_exited"]
+[connection signal="mouse_exited" from="Control2/Time/Label" to="Control2/Time/Label" method="_on_mouse_exited"]

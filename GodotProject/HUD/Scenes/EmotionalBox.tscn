@@ -11,6 +11,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
 script = ExtResource("1_uxmfl")
 
 [node name="Panel" type="Panel" parent="Control"]
@@ -19,6 +20,7 @@ offset_left = 1490.0
 offset_top = 5.0
 offset_right = 1904.0
 offset_bottom = 1081.0
+mouse_filter = 2
 
 [node name="SelectedPerson" type="RichTextLabel" parent="Control/Panel"]
 layout_mode = 1

@@ -12,6 +12,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
 script = ExtResource("1_yagq3")
 
 [node name="Panel" type="Panel" parent="Control"]
@@ -20,6 +21,7 @@ offset_left = 1068.0
 offset_top = 5.0
 offset_right = 1482.0
 offset_bottom = 1081.0
+mouse_filter = 2
 
 [node name="Persons in Coversation" type="RichTextLabel" parent="Control/Panel"]
 layout_mode = 1
@@ -55,7 +57,6 @@ offset_left = -0.152002
 offset_top = 0.171989
 offset_right = -0.160034
 offset_bottom = 0.280029
-follow_focus = true
 vertical_scroll_mode = 2
 script = ExtResource("2_jhs8f")
 
