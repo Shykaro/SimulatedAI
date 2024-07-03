@@ -3,17 +3,17 @@ extends Node
 class_name GameManager
 
 var count: int = 0
-static var hour: int = 8
+static var hour: int = 11
 static var time_of_day: String = " pm"
 static var day_number: int = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(500,200))
+	NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(500,200))
 	NPCManager.create_npc("Hanna Strittmatter", "02_Hanna", Vector2(500,800))
-	#NPCManager.create_npc("Gustavo Silva", "03_Gustavo", Vector2(200,350))
-	#NPCManager.create_npc("Maike Klein", "04_Maike", Vector2(200,650))
+	NPCManager.create_npc("Gustavo Silva", "03_Gustavo", Vector2(200,350))
+	NPCManager.create_npc("Maike Klein", "04_Maike", Vector2(200,650))
 	NPCManager.create_npc("Alexander Gassner", "05_Alexander", Vector2(800,350))
-	#NPCManager.create_npc("Sophia Matthies", "06_Sophia", Vector2(800,650))
+	NPCManager.create_npc("Sophia Matthies", "06_Sophia", Vector2(800,650))
 	#NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(200,350))
 	#NPCManager.create_npc("Hanna Strittmatter", "02_Hanna", Vector2(200,650))
 	#NPCManager.create_npc("Gustavo Silva", "03_Gustavo", Vector2(500,800))

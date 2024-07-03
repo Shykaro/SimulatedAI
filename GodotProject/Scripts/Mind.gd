@@ -172,9 +172,9 @@ func _set_pic_scale_values_history(_answer:String):
 	print_current_pic_scale()
 
 func print_current_pic_scale():
-	print("Current PIC Scale Value:")
+	print("---------SYSTEM-------- Current PIC Scale Values of "+associated_npc.name+":")
 	for npc_name in pic_scale_values.keys():
-		print(npc_name + ": " + pic_scale_values[npc_name])
+		print("---------SYSTEM-------- "+npc_name + ": " + pic_scale_values[npc_name])
 
 #set_emotional_relation("Gustavo", "For some reason, I feel anger towards Gustavo")
 #Missing the possibility to change relation according to the relation it had before (is that already considered in the initail prompt?)
@@ -186,7 +186,7 @@ func get_labled_emotional_relations_string_array():
 	var labled_emotional_relations_string_array: Array[String] = []
 	for _npc in NPCManager.npc_list:
 		if(_npc.name!=associated_npc.name):
-			if(emotional_relations[_npc.name]!=null):
+			if(emotional_relations.has(_npc.name)):
 				labled_emotional_relations_string_array.append(_npc.name+": "+emotional_relations[_npc.name])
 	return labled_emotional_relations_string_array
 # ////////////////////////////// Emotional Relation Stuff ENDE //////////////////////////////
