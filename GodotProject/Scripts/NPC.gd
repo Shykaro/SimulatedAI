@@ -169,6 +169,9 @@ func _add_arrow():
 	_arrow.look_at(conversation_partner.get_child(0).position) #momentan für veranschauung mal get child 0 auf conversation partner, das funktioniert "fast" so wie es soll? Kann ich nicht beurteilen
 	_arrow.rotate(PI/2)
 	_arrow.name = "Communication Arrow from "+self.name+" to "+conversation_partner.name
+	_arrow.material = ShaderMaterial.new()
+	var shader = load("res://Scenes/arrows.gdshader")
+	_arrow.material.shader = shader
 	var _script = load("res://HUD/ArrowScript.gd")
 	_arrow.set_script(_script)
 	self.add_child(_arrow)
