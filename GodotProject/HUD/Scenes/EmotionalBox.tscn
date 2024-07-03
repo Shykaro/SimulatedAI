@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsb40wo6ef5rh"]
+[gd_scene load_steps=3 format=3 uid="uid://bsb40wo6ef5rh"]
 
 [ext_resource type="Script" path="res://HUD/EmotionalBox.gd" id="1_uxmfl"]
+[ext_resource type="Script" path="res://HUD/MemoryManager.gd" id="2_l55ir"]
 
 [node name="EmotionalBox" type="Node2D"]
 
@@ -53,6 +54,7 @@ offset_left = -0.152002
 offset_top = 0.171989
 offset_right = -0.160034
 offset_bottom = 0.280029
+script = ExtResource("2_l55ir")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/ScrollContainer"]
 layout_mode = 2
