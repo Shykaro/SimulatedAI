@@ -5,11 +5,14 @@ class_name NPCManager
 static var instance: NPCManager
 static var npc_list: Array = []
 static var npc_scene: PackedScene
+var isNPCselected = false
+var isConversationSelected = false
 
 func _ready():
 	instance = self
 	print("DEBUG: instantiating NPCs...")
 	npc_scene = load("res://Scenes/npc.tscn")
+	#print(get_children())
 
 static func get_npc_by_id(_id: int):
 	for i in range(npc_list.size()):

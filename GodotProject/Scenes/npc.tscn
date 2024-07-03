@@ -1,11 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://db6lkojr8yqr3"]
+[gd_scene load_steps=6 format=3 uid="uid://db6lkojr8yqr3"]
 
 [ext_resource type="Texture2D" uid="uid://ncu2p5dg8i0v" path="res://Assets/Sprites/house.png" id="1_vs87j"]
 [ext_resource type="Script" path="res://Scripts/NPC.gd" id="2_1kcwo"]
+[ext_resource type="Shader" path="res://Scenes/houses.gdshader" id="2_eiron"]
 [ext_resource type="Script" path="res://HUD/HouseScript.gd" id="3_fsing"]
 
-[node name="Node2D" type="Node2D"]
-z_index = 3
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_as1o1"]
+shader = ExtResource("2_eiron")
+shader_parameter/line_color = Color(0, 1, 0, 1)
+shader_parameter/line_thickness = 0.0
+
+[node name="Node2D" type="Node"]
 script = ExtResource("2_1kcwo")
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -21,5 +26,6 @@ theme_override_font_sizes/font_size = 45
 horizontal_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+material = SubResource("ShaderMaterial_as1o1")
 texture = ExtResource("1_vs87j")
 script = ExtResource("3_fsing")

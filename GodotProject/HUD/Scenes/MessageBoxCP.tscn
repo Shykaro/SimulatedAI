@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://ckhrarilohf7r"]
 
 [node name="MessageBox" type="HBoxContainer"]
-offset_right = 27.0
-offset_bottom = 23.0
+offset_top = 10.0
+offset_right = 320.0
+offset_bottom = 59.0
 
 [node name="Background" type="PanelContainer" parent="."]
 self_modulate = Color(4.33177e-07, 0.776148, 0.327543, 1)

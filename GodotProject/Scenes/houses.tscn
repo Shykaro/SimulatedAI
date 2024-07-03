@@ -1,11 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://3srfmykvb1yy"]
+[gd_scene load_steps=4 format=3 uid="uid://3srfmykvb1yy"]
 
 [ext_resource type="Texture2D" uid="uid://ncu2p5dg8i0v" path="res://Assets/Sprites/house.png" id="1_en1r7"]
+[ext_resource type="Shader" path="res://Scenes/houses.gdshader" id="1_vb1f6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4diq8"]
+shader = ExtResource("1_vb1f6")
+shader_parameter/line_color = Color(0, 1, 0, 1)
+shader_parameter/line_thickness = 0.0
 
 [node name="Houses" type="Node2D"]
 texture_filter = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_4diq8")
 position = Vector2(327.5, 173)
 scale = Vector2(0.6725, 0.62)
 texture = ExtResource("1_en1r7")

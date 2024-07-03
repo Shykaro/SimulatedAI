@@ -6,7 +6,7 @@ var MessageBoxCP #MessageBox Prefab for the current conversation partner of chos
 func _ready():
 	MessageBoxOG = load("res://HUD/Scenes/MessageBoxOG.tscn")
 	MessageBoxCP = load("res://HUD/Scenes/MessageBoxCP.tscn")
-	print(get_parent_control().get_parent_control().get_parent().get_parent())
+	#print(get_parent_control().get_parent_control().get_parent().get_parent())
 
 func createMessage(_npc: NPC, MessageText: String):
 	if _npc == get_parent_control().get_parent_control().get_parent().get_parent(): #checks with NPC node, if sent NPC is self

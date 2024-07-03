@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://imhollc6lpir"]
 
 [node name="MessageBox" type="HBoxContainer"]
+layout_direction = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -320.0
+offset_left = -1890.0
+offset_right = -1570.0
 offset_bottom = 49.0
 grow_horizontal = 0
 
@@ -16,5 +18,4 @@ layout_mode = 2
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 text = "PlaceholderMessager ahhhhhhhhhhh ahhhhhhhhhhh ahhhhhhhhh"
-horizontal_alignment = 2
 autowrap_mode = 3

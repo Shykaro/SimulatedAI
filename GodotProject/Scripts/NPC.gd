@@ -13,6 +13,7 @@ var is_conversation_over: bool = false
 var is_initiator: bool = false #is the one that initiated the converstaion
 var chatbox
 var associatedChatBox # this is the ScrollContainer node of the associated Chatbox
+var emotionalbox
 #var choice_attempts: int = 0
 #var timeout_interval: int = 10
 # Called when the node enters the scene tree for the first time.
@@ -26,13 +27,19 @@ func start():
 	#Instance chatbox for every NPC
 	var chatbox_scene = load("res://HUD/Scenes/Chatbox.tscn")
 	chatbox = chatbox_scene.instantiate()
+	var emotionalbox_scene = load("res://HUD/Scenes/EmotionalBox.tscn")
+	emotionalbox = emotionalbox_scene.instantiate()
 	#npc_scene.instantiate()
 	#instance.add_child(_npc)
 	add_child(chatbox)
+	add_child(emotionalbox)
 	chatbox.visible = false
+	emotionalbox.visible = false
 	#print(get_children()) #check NPC Structure
 	associatedChatBox = get_child(1).get_child(0).get_child(0).get_child(2) #Sets reference for future message updates
 	#print(associatedChatBox)
+	
+
 
 func show_chatbox():
 	chatbox.visible = true
@@ -40,6 +47,13 @@ func show_chatbox():
 
 func hide_chatbox():
 	chatbox.visible = false
+
+func show_emotionalbox():
+	emotionalbox.visible = true
+	#chatbox.update_info(text)
+
+func hide_emotionalbox():
+	emotionalbox.visible = false
 
 func _establish_communication(_npc: NPC): #Initiates npc to npc conversation
 	if(conversation_partner == null):#if not talking

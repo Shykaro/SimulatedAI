@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ce8bkw7m5yo5k"]
+[gd_scene load_steps=6 format=3 uid="uid://ce8bkw7m5yo5k"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="2_eeqxv"]
 [ext_resource type="Script" path="res://Scripts/RequestHandlerManager.gd" id="3_px0po"]
 [ext_resource type="Script" path="res://Scripts/NPCManager.gd" id="4_5a08b"]
 [ext_resource type="Theme" uid="uid://css8tuxqpntj3" path="res://Assets/theme.tres" id="4_d0tik"]
 [ext_resource type="Script" path="res://Scripts/TimeText.gd" id="4_vqs3l"]
-[ext_resource type="Texture2D" uid="uid://cmwuy8xsqvmjc" path="res://Assets/green_arrow.png" id="6_4f3mh"]
-[ext_resource type="Script" path="res://HUD/ArrowScript.gd" id="7_ip2oq"]
 
 [node name="Game" type="Node2D"]
 
@@ -39,12 +37,5 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("4_vqs3l")
 metadata/_edit_use_anchors_ = true
-
-[node name="TestClickArrow" type="Sprite2D" parent="Control"]
-visible = false
-position = Vector2(708, 474.5)
-scale = Vector2(0.0416667, 0.0754011)
-texture = ExtResource("6_4f3mh")
-script = ExtResource("7_ip2oq")
 
 [connection signal="mouse_exited" from="Control/Time/Label" to="Control/Time/Label" method="_on_mouse_exited"]

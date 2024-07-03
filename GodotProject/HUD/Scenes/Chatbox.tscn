@@ -64,4 +64,5 @@ size_flags_vertical = 3
 alignment = 2
 
 [node name="MessageBox" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("2_fuu3m")]
+visible = false
 layout_mode = 2
