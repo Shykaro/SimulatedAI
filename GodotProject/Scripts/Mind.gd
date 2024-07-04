@@ -19,6 +19,16 @@ var pic_scale_values: Dictionary
 var pic_scale_possibilities: Array[String] = ["distant","neither close nor distant","a little bit close","moderately close","very close","fully close"]
 var pic_scale_values_history: Dictionary # npcname->day->index example: pic_scale_values_history["Alexander Gassner"][2][10] (The tenth update to Alexander Gassners relation value on the second day )
 var number_of_pic_scale_values_on_day: int = 0
+
+#var Json_data = ["a", "b", "c"]
+#var json_string = JSON.stringify(Json_data)
+#var json = JSON.new()
+var path = "res://Jsons/data_"
+var json_data: Dictionary = {}
+var index_json_data: int
+var combined_json_data: String
+
+
 #func update_conversation_partner(ConversationpartnerNPC): #last or current
 	#conversation_partner = ConversationpartnerNPC
 	#print("Current conversation partner for " + associated_npc.name + " is: " + conversation_partner.name)
@@ -29,6 +39,7 @@ func init_pic_scale_values():
 		pic_scale_values_history[_npc.name] = {}#array within array to house index in noOfDay
 		#print("CREATED ARRAYS")
 	pic_scale_values[associated_npc.name] = "yourself"
+
 
 func reflect_on_day(): #this is where the long term memories are stored (Happens while they "sleep" (dont mind the humanitization))
 	#TODO for another day/project: Make the requests asynchronous and await them. This way, we have less code and no tasks are done before the prerequisites
@@ -172,6 +183,15 @@ func _set_pic_scale_values_history(_answer:String):
 	else:
 		personal_dict[GameManager.day_number][number_of_pic_scale_values_on_day] = _answer
 	print_current_pic_scale()
+	print(_answer)
+	json_data[index_json_data] = str(index_json_data) + ": " + "Pic_scale from view of " + associated_npc.name + " towards " + associated_npc.last_conversation_partner.name + ": " + _answer
+	var file = FileAccess.open(path + associated_npc.name + ".txt", FileAccess.WRITE)
+	#for i in range(json_data.length):
+	combined_json_data = combined_json_data + "\n" + json_data[index_json_data]
+	file.store_string(combined_json_data)
+	file.close()
+	file = null
+	index_json_data += 1
 
 func print_current_pic_scale():
 	print("---------SYSTEM-------- Current PIC Scale Values of "+associated_npc.name+":")

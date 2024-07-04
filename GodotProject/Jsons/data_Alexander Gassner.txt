@@ -1,0 +1,5 @@
+
+0: Pic_scale from view of Alexander Gassner towards Gustavo Silva: neither close nor distant
+1: Pic_scale from view of Alexander Gassner towards Gustavo Silva: fully close
+2: Pic_scale from view of Alexander Gassner towards Gustavo Silva: moderately close
+3: Pic_scale from view of Alexander Gassner towards Gustavo Silva: fully close
