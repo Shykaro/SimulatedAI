@@ -72,7 +72,7 @@ func _establish_communication(_npc: NPC): #Initiates npc to npc conversation
 				is_choosing = false
 				is_conversation_over = false
 				is_initiator = true
-				var init_message = "You have chosen to call "+conversation_partner.name+". You are now on the phone. What do you say?"
+				var init_message = "You have chosen to call "+conversation_partner.name+". You are now on the phone. What do you say to start the conversation?"
 				request_answer(init_message)
 
 func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary): #is called every time a ollama request "comes back"
@@ -110,11 +110,11 @@ func request_answer(_message: String):
 	associatedChatBox.createMessage(conversation_partner, _message)
 	if (conversation_partner != null):
 		mind.dialogue_context.append({"role": "user", "content": _message})
-	if(mind.activity_context!=[]): _message += "\n\n Remember: this is what you did today: " + mind.activity_context[0]
+	if(mind.activity_context!=[]): _message += "\n\n REMEMBER, you may use information from your day for the conversation, this is what you did today: " + mind.activity_context[0]
 	mind.update_relation_during_conversation(conversation_partner, _message) #0 updated emotional relation MIGHT HAVE TO BE MOVED TO END OF MESSAGE OF OPPOSING NPC?  !!! -> Bug might be in this logic?
 	var emotional_relation = mind.get_emotional_relation(conversation_partner.name) #0.1 getted emotional relation
 	#print("---------SYSTEM-------- "+"\n" + "\n" + "Current emotional relation with " + conversation_partner.name + ": " + emotional_relation + "\n")
-	if(emotional_relation!=null): _message += "\n\n Take into account your current emotional feelings towards your conversation partner, they are as follows: " + emotional_relation
+	if(emotional_relation!=null): _message += "\n\n Take your current emotional state towards your conversation partner into account, they are as follows: " + emotional_relation
 	# ^^^ changed it so it only starts updating emotional relation after a threshold has been reached (4 atm). We get more reliable output this way, they hallucinate less. (is changed in Mind.update_or_decide_relation)
 	RequestHandlerManager.chat_request(self, mind.dialogue_context, _on_request_completed)
 
@@ -124,7 +124,7 @@ func request_activity(): #used for asking for current activity
 	if(!mind.activity_context.is_empty()):
 		_message += "These are the things you were doing previously today:\n"
 		_message += "\n" + "\n".join(mind.activity_context)+"\n\n"
-	_message += "It's "+str(GameManager.hour)+GameManager.time_of_day+". What are you doing right now? Are you sleeping, working or doing something else? (Answer as monologue)"
+	_message += "It's "+str(GameManager.hour)+GameManager.time_of_day+". What are you doing right now based on your Charactertraits? Are you sleeping, working or doing something else? (Answer as monologue)"
 	RequestHandlerManager.generate_request(self, _message, _on_request_completed)
 
 func request_choice(): #used for getting a name for who they want to call on the phone (npc2npc)
@@ -137,6 +137,7 @@ func request_choice(): #used for getting a name for who they want to call on the
 
 func _chat_with(_message: String, _npc: NPC):
 	#print(_message)
+	mind.last_received_Message = _message
 	_npc.request_answer(_message)
 
 func _on_conversation_over(_json: Dictionary): #is called in the initiator, handles all cleanup after conversation

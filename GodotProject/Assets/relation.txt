@@ -2190,3 +2190,77 @@ Hanna Strittmatter->Hendrik Rabe: I feel that my relationship with Hendrik Rabe 
 Gustavo Silva->Alexander Gassner: I feel that my relationship with Alexander Gassner is cordial and collaborative, as we're both enthusiastic about organizing the neighborhood gathering, but I'm also somewhat skeptical of his overly optimistic outlook on life, which can sometimes clash with my more practical and analytical approach to things.
 
 Hendrik Rabe->Hanna Strittmatter: I feel deeply connected to Hanna, and our conversation today has only strengthened the bond between us, leaving me excitedly anticipating our artistic collaboration next Wednesday.
+
+Alexander Gassner->Sophia Matthies: I'm feeling somewhat distant and preoccupied, my mind still stuck on the setbacks at work, but I care about Sophia and hope to connect with her despite my current emotional state.
+
+Hendrik Rabe->Hanna Strittmatter: As I hold the phone to my ear, I feel a mix of excitement and nervousness thinking about reconnecting with Hanna, my partner, whom I've been missing dearly since our move to this new housing estate.
+
+Hendrik Rabe->Sophia Matthies: I feel deeply connected and grateful towards Sophia Matthies, as we've shared many meaningful moments together, and I'm excited to continue our journey of mutual understanding and artistic exploration.
+
+Alexander Gassner->Gustavo Silva: As I begin the conversation with Gustavo Silva on the phone, I'm not sure how to approach him, feeling a bit fatigued and mentally exhausted from my lab work today, but I hope our call will provide some much-needed distraction and social interaction.
+
+Hanna Strittmatter->Maike Klein: As I take a deep breath before dialing Maike's number, I feel a mix of curiosity and nervousness about reconnecting with my neighbor, as our initial meeting was brief and we didn't have the chance to properly introduce ourselves yet.
+
+Now, let me start the conversation... *ringing* "Hallo Maike, hi! It's Hanna from next door. I hope you're doing well. I've been meaning to reach out and get to know you better since our initial introduction."
+
+Sophia Matthies->Hendrik Rabe: I feel a mix of curiosity and caution towards Hendrik Rabe, intrigued by his friendly and approachable tone over the phone, but also slightly guarded due to my initial hesitation to connect with someone new during these unusual times.
+
+Gustavo Silva->Alexander Gassner: I view Alexander as an unfamiliar face trying to make a friendly impression, but my initial reaction is somewhat lukewarm due to my relaxed and recharging state, making me not particularly eager or enthusiastic about engaging in conversation at this moment.
+
+Maike Klein->Hanna Strittmatter: As Maike Klein, I feel a sense of warm familiarity towards Hanna Strittmatter, having just had our initial conversation over the phone, and I'm intrigued by her friendly demeanor and curiosity about my life.
+
+Hendrik Rabe->Sophia Matthies: I'm deeply grateful and content with my loving relationship with Sophia Matthies, feeling fortunate that we're able to maintain a strong bond despite the physical distance between us during these isolating times.
+
+Alexander Gassner->Gustavo Silva: Gustavo Silva, my partner, has been understanding and supportive of my recent struggles to start and complete tasks, and I'm grateful for his help in getting me out of that funk.
+
+Hanna Strittmatter->Maike Klein: As I engage with Maike Klein's warm and friendly tone, I feel a sense of familiarity and connection, as if we're already old friends, which makes me look forward to getting to know her better despite the physical distance between us.
+
+Sophia Matthies->Hendrik Rabe: I beam with affection thinking of Hendrik, feeling grateful for our shared love of music and technology that brought us together, and I'm excited to explore new creative pursuits alongside him, as he's always been a source of inspiration and support.
+
+Gustavo Silva->Alexander Gassner: I find myself feeling somewhat distant and disconnected from Alexander Gassner, as our intellectual pursuits and interests seem to have diverged, leading me to prioritize my own creative outlets over engaging in philosophical discussions or debates with him.
+
+Maike Klein->Hanna Strittmatter: I'm feeling grateful and appreciative of Hanna's understanding and interest in my life, as our conversation has created a sense of connection and camaraderie between us, making me feel like we're building a strong foundation for a meaningful friendship.
+
+Hendrik Rabe->Sophia Matthies: As I reflect on my evening spent working on my art piece, I'm filled with a sense of contentment and gratitude towards Sophia, knowing that she's been a constant source of support and encouragement in my creative endeavors.
+
+Alexander Gassner->Gustavo Silva: I have a sense of comfort and security knowing that my partner, Gustavo Silva, is always supportive and understanding, which helps me feel more at ease despite my tendency to be disorganized and lazy.
+
+Hanna Strittmatter->Maike Klein: As I respond to Maike's inquiry, I feel a growing sense of camaraderie and shared interest, sensing that our conversation has the potential to blossom into a genuine connection beyond mere acquaintanceship.
+
+Sophia Matthies->Hendrik Rabe: I'm thrilled to report that my relationship with Hendrik is still going strong, and I cherish the way we bond over our shared love of music and technology, finding creative inspiration in each other's company.
+
+Hanna Strittmatter->Sophia Matthies: I feel neutral about my relationship with Sophia Matthies, having not had the chance to interact with her in person yet due to the pandemic restrictions, but I'm looking forward to getting to know her better over the phone.
+
+(I'll start the conversation by asking how Sophia is doing and if she's enjoying the new neighborhood.)
+
+Hendrik Rabe->Alexander Gassner: I'm feeling a bit apprehensive about calling Alexander Gassner, as I don't know him well yet and our initial meeting was quite brief, but I'm hoping to use this opportunity to start building a connection with my new neighbor.
+
+(Note: As Hendrik Rabe, I'll try to keep the conversation light and casual, possibly starting with some small talk or asking about Alexander's evening.)
+
+Sophia Matthies->Hanna Strittmatter: I'm delighted to make contact with Hanna, feeling a sense of relief that I've finally got the chance to connect with my neighbor, and I'm excited to start building a positive rapport with her.
+
+Alexander Gassner->Hendrik Rabe: I'm feeling a bit disconnected from my partner, Hendrik, lately, as we've been busy with our respective routines and haven't had much quality time together, which has left me feeling a bit distant and uncertain about our relationship.
+
+Hanna Strittmatter->Sophia Matthies: I'm thrilled to connect with Sophia, and our conversation feels like the perfect blend of warmth and creativity, just like our shared passion for fashion and art!
+
+Hendrik Rabe->Alexander Gassner: I'm delighted to be in a loving relationship with Alexander Gassner, and I cherish the thoughtfulness and affection he brings into my life as an artist and partner.
+
+As for my response to the message:
+
+"Ah, hello there! Yes, it's great to finally connect with you too. I must admit, I've been quite busy unwinding from my artistic endeavors and adjusting to my new surroundings here at the estate. As an introvert, I tend to take some time to warm up to new people and places, but I'm optimistic that we'll have plenty of opportunities to get to know each other better now that we're living in close proximity. I've been thinking about making some calls to my neighbors tonight, actually. How about you? Have you had any notable experiences or encounters since moving into the estate?"
+
+Sophia Matthies->Hanna Strittmatter: I'm feeling grateful for the strong bond I've built with Hanna, my partner, as we continue to support and encourage each other through life's ups and downs, and I'm particularly looking forward to sharing this relaxing evening together.
+
+Alexander Gassner->Hendrik Rabe: I'm feeling grateful to have Hendrik Rabe in my life, as our shared space has brought us closer together despite my tendency to be disorganized, and I appreciate the sense of security and comfort that comes with having a partner who understands me.
+
+Hanna Strittmatter->Sophia Matthies: I'm thrilled to share that Sophia and I have evolved into close friends, bonding over our shared passion for fashion, art, and literature, and I cherish the intellectual curiosity and creative energy we spark in each other's lives.
+
+Hendrik Rabe->Alexander Gassner: I'm grateful to have Alexander as my partner, as we share a deep understanding and mutual respect for each other's passions and interests, which has helped our relationship flourish despite the challenges of moving to a new housing estate during the pandemic.
+
+Now, let me respond to the conversation:
+
+"Ah, I completely understand your sentiments about time slipping away from you. As an artist, I've found that it's essential to strike a balance between creative pursuits and other aspects of life. Speaking of art forms or mediums, I'm quite fond of oil painting myself. There's something meditative about blending colors and capturing the subtleties of light and shadow on canvas. It's a great way for me to unwind after a long day. How about you? Do you have any favorite hobbies or pastimes that help you relax?"
+
+Sophia Matthies->Hanna Strittmatter: I'm feeling grateful and content about my relationship with Hanna Strittmatter, as our shared love for music and technology has brought us closer together, and I appreciate the support and encouragement she provides me in both personal and professional aspects of my life.
+
+Alexander Gassner->Hendrik Rabe: I'm feeling grateful to have a partner like Hendrik Rabe, who understands and supports me, even when I'm not exactly the most organized or productive person - we've been enjoying each other's company lately, and I appreciate his calming presence in my life.

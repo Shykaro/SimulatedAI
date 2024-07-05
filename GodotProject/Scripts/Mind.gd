@@ -16,17 +16,23 @@ var associated_npc: NPC
 var long_term_storage: Array[String]
 var emotional_relations: Dictionary = {} # possibility (String) saved under emotional_relations[npcname]
 var pic_scale_values: Dictionary
-var pic_scale_possibilities: Array[String] = ["distant","neither close nor distant","a little bit close","moderately close","very close","fully close"]
+const pic_scale_possibilities: Array[String] = ["distant","neither close nor distant","a little bit close","moderately close","very close","fully close"]
 var pic_scale_values_history: Dictionary # npcname->day->index example: pic_scale_values_history["Alexander Gassner"][2][10] (The tenth update to Alexander Gassners relation value on the second day )
 var number_of_pic_scale_values_on_day: int = 0
+
+var last_received_Message: String = "MISSED TIMING FOR MESSAGE"
+var last_outgoing_Message: String
 
 #var Json_data = ["a", "b", "c"]
 #var json_string = JSON.stringify(Json_data)
 #var json = JSON.new()
 var path = "res://Jsons/data_"
 var json_data: Dictionary = {}
+var json_data_Pic_Value: Dictionary = {}
 var index_json_data: int
 var combined_json_data: String
+var combined_json_data_Pic_Value: String
+
 
 
 #func update_conversation_partner(ConversationpartnerNPC): #last or current
@@ -133,6 +139,7 @@ func get_emotional_relation(conversation_partner_npc_name: String): #1.1 get lin
 func update_relation_during_conversation(npc: NPC, message: String): #1 von NPC
 	var start_checking_threshold = 1
 	if(dialogue_context.size()<start_checking_threshold): return
+	#last_received_Message = message
 	update_or_decide_relation(npc, message)
 
 func update_or_decide_relation(npc: NPC, message: String, context: String = ""): #2 von update_relation_during_conversation !!! -> npc parameter kann vlt neglected werden, wurde durch associated_npc.conversation_partner.name ersetzt
@@ -155,8 +162,8 @@ func update_pic_scale_value(_npc_name: String, _relation: String):
 	if(emotional_relations[_npc_name]==null): return
 	var _message: String = ""
 	_message += "This is your current relation to "+ _npc_name+": "+emotional_relations[_npc_name]
-	_message += "\n\n"+"Feeling close refers to being listened to, understood by, able to share feelings and to talk openly with another person. Rate the persons after each talk into one of the listed categories down below. Imagine it like an Onion or multiple circles lying inside each other. You are in the middle, represented by “yourself”, then follows “fully close”, “very close” and so on, the furthest layer is “distant”. The “distant” category includes people with whom you have never interacted or from whom you have not received additional information from a third party."
-	_message += "\n\n"+"ONLY answer with one of the following words depending on your relationship (and nothing else):"
+	_message += "\n\n"+"Feeling close refers to being listened to, understood by, able to share feelings and to talk openly with another person. Rate your conversation partner based on their response into one of the listed categories down below. Your conversation partner is categorized in a tier of closeness based on your rating. The tiers are represented by “yourself”, then follows “fully close”, “very close”, ”moderately close”, ”a little bit close”, ”neither close nor distant” and the furthest layer is “distant”. The “distant” category includes people with whom you have never interacted or from whom you have not received additional information from a third party." #OLD MESSAGE: 	_message += "\n\n"+"Feeling close refers to being listened to, understood by, able to share feelings and to talk openly with another person. Rate the persons after each talk into one of the listed categories down below. Imagine it like an Onion or multiple circles lying inside each other. You are in the middle, represented by “yourself”, then follows “fully close”, “very close” and so on, the furthest layer is “distant”. The “distant” category includes people with whom you have never interacted or from whom you have not received additional information from a third party."
+	_message += "\n\n"+"ONLY answer with one of the following words/possibilities depending on your relationship towards that person (and nothing else!!!):"
 	_message += "\n".join(pic_scale_possibilities)
 	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_update_pic_scale_value_completed)
 
@@ -184,7 +191,7 @@ func _set_pic_scale_values_history(_answer:String):
 		personal_dict[GameManager.day_number][number_of_pic_scale_values_on_day] = _answer
 	print_current_pic_scale()
 	print(_answer)
-	json_data[index_json_data] = str(index_json_data) + ": " + "Pic_scale from view of " + associated_npc.name + " towards " + associated_npc.last_conversation_partner.name + ": " + _answer
+	json_data[index_json_data] = str(index_json_data) + ": " + "Pic_scale from view of " + associated_npc.name + " towards " + associated_npc.last_conversation_partner.name + ": " + _answer + "\n Based on the following Message from " + associated_npc.last_conversation_partner.name + ": " + last_received_Message
 	var file = FileAccess.open(path + associated_npc.name + ".txt", FileAccess.WRITE)
 	#for i in range(json_data.length):
 	combined_json_data = combined_json_data + "\n" + json_data[index_json_data]
@@ -192,6 +199,27 @@ func _set_pic_scale_values_history(_answer:String):
 	file.close()
 	file = null
 	index_json_data += 1
+	json_data_Pic_Value[index_json_data] = _answer
+	var PicValue_Converter
+	match json_data_Pic_Value[index_json_data]:
+		pic_scale_possibilities[0]:
+			PicValue_Converter = 0
+		pic_scale_possibilities[1]:
+			PicValue_Converter = 1
+		pic_scale_possibilities[2]:
+			PicValue_Converter = 2
+		pic_scale_possibilities[3]:
+			PicValue_Converter = 3
+		pic_scale_possibilities[4]:
+			PicValue_Converter = 4
+		pic_scale_possibilities[5]:
+			PicValue_Converter = 5
+	var filePic = FileAccess.open(path + associated_npc.name + "_PicValues.txt", FileAccess.WRITE)
+	combined_json_data_Pic_Value = combined_json_data_Pic_Value + "\n" + str(PicValue_Converter)
+	filePic.store_string(combined_json_data_Pic_Value)
+	filePic.close()
+	filePic = null
+	
 
 func print_current_pic_scale():
 	print("---------SYSTEM-------- Current PIC Scale Values of "+associated_npc.name+":")
