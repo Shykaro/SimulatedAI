@@ -11,7 +11,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="MessageBox" type="HBoxContainer"]
+[node name="MessageBox2" type="HBoxContainer"]
 offset_top = 25.0
 offset_right = 320.0
 offset_bottom = 68.0

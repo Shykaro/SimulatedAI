@@ -7,10 +7,11 @@ var conversation_partner = " " #this is conversation_partner.name from NPC!! upd
 func _ready():
 	AssociatedNPC = get_parent().get_parent()
 	get_child(0).get_child(1).text = AssociatedNPC.name + " and " + conversation_partner
+	#print(get_child(0).get_child(0).get_children())
 	
 func updateChat(NewPartner):
 	conversation_partner = NewPartner
-	get_child(0).get_child(0).text = AssociatedNPC.name + " and " + conversation_partner
+	get_child(0).get_child(1).text = AssociatedNPC.name + " and " + conversation_partner
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

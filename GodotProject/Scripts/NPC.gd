@@ -36,8 +36,8 @@ func start():
 	#chatbox.visible = false
 	#emotionalbox.visible = false
 	#print(get_children()) #check NPC Structure
-	associatedChatBox = get_child(1).get_child(0).get_child(0).get_child(2) #Sets reference for future message updates
-	#print(associatedChatBox)
+	associatedChatBox = get_child(1).get_child(0).get_child(0).get_child(3) #Sets reference for future message updates to Scrollcontainer (Which includes chatbox.gd)
+	print(associatedChatBox)
 	#print(get_parent())
 	
 
