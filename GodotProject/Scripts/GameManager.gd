@@ -8,12 +8,12 @@ static var time_of_day: String = " pm"
 static var day_number: int = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(500,200))
-	NPCManager.create_npc("Hanna Strittmatter", "02_Hanna", Vector2(500,800))
-	NPCManager.create_npc("Gustavo Silva", "03_Gustavo", Vector2(200,350))
-	NPCManager.create_npc("Maike Klein", "04_Maike", Vector2(200,650))
-	NPCManager.create_npc("Alexander Gassner", "05_Alexander", Vector2(800,350))
-	NPCManager.create_npc("Sophia Matthies", "06_Sophia", Vector2(800,650))
+	NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(488,167))
+	NPCManager.create_npc("Hanna Strittmatter", "02_Hanna", Vector2(547,868))
+	NPCManager.create_npc("Gustavo Silva", "03_Gustavo", Vector2(150,342))
+	NPCManager.create_npc("Maike Klein", "04_Maike", Vector2(160,700))
+	NPCManager.create_npc("Alexander Gassner", "05_Alexander", Vector2(857,360))
+	NPCManager.create_npc("Sophia Matthies", "06_Sophia", Vector2(890,767))
 	
 	#NPCManager.create_npc("Hendrik Rabe", "01_Hendrik", Vector2(200,350))
 	#NPCManager.create_npc("Hanna Strittmatter", "02_Hanna", Vector2(200,650))
