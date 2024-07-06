@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwloqkca0ev0k"]
+[gd_scene load_steps=7 format=3 uid="uid://bwloqkca0ev0k"]
 
 [ext_resource type="Script" path="res://HUD/Chatbox.gd" id="1_yagq3"]
 [ext_resource type="PackedScene" uid="uid://imhollc6lpir" path="res://HUD/Scenes/MessageBoxOG.tscn" id="2_fuu3m"]
 [ext_resource type="Script" path="res://HUD/MessageManager.gd" id="2_jhs8f"]
+[ext_resource type="PackedScene" uid="uid://ckhrarilohf7r" path="res://HUD/Scenes/MessageBoxCP.tscn" id="4_hjnpi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lqx5i"]
 bg_color = Color(0.145098, 0.137255, 0.192157, 1)
@@ -86,5 +87,22 @@ size_flags_vertical = 3
 alignment = 2
 
 [node name="MessageBox" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("2_fuu3m")]
-visible = false
+layout_mode = 2
+
+[node name="MessageBox2" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("4_hjnpi")]
+layout_mode = 2
+
+[node name="MessageBox3" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("2_fuu3m")]
+layout_mode = 2
+
+[node name="MessageBox4" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("4_hjnpi")]
+layout_mode = 2
+
+[node name="MessageBox5" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("2_fuu3m")]
+layout_mode = 2
+
+[node name="MessageBox6" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("4_hjnpi")]
+layout_mode = 2
+
+[node name="MessageBox7" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("2_fuu3m")]
 layout_mode = 2
