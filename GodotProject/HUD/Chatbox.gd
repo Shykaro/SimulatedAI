@@ -6,7 +6,7 @@ var conversation_partner = " " #this is conversation_partner.name from NPC!! upd
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	AssociatedNPC = get_parent().get_parent()
-	get_child(0).get_child(0).text = AssociatedNPC.name + " and " + conversation_partner
+	get_child(0).get_child(1).text = AssociatedNPC.name + " and " + conversation_partner
 	
 func updateChat(NewPartner):
 	conversation_partner = NewPartner
