@@ -33,8 +33,8 @@ func start():
 	#instance.add_child(_npc)
 	add_child(chatbox)
 	add_child(emotionalbox)
-	chatbox.visible = false
-	emotionalbox.visible = false
+	#chatbox.visible = false
+	#emotionalbox.visible = false
 	#print(get_children()) #check NPC Structure
 	associatedChatBox = get_child(1).get_child(0).get_child(0).get_child(2) #Sets reference for future message updates
 	#print(associatedChatBox)

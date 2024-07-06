@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsb40wo6ef5rh"]
+[gd_scene load_steps=4 format=3 uid="uid://bsb40wo6ef5rh"]
 
 [ext_resource type="Script" path="res://HUD/EmotionalBox.gd" id="1_uxmfl"]
 [ext_resource type="Script" path="res://HUD/MemoryManager.gd" id="2_l55ir"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s11oe"]
+bg_color = Color(0.145098, 0.137255, 0.192157, 1)
+border_width_left = 2
+border_width_right = 2
+border_color = Color(0.360784, 0.337255, 0.466667, 1)
+
 [node name="EmotionalBox" type="Node2D"]
+metadata/_edit_vertical_guides_ = [1887.0, 1887.0]
 
 [node name="Control" type="Control" parent="."]
 layout_direction = 1
@@ -17,20 +24,21 @@ script = ExtResource("1_uxmfl")
 [node name="Panel" type="Panel" parent="Control"]
 layout_mode = 0
 offset_left = 1490.0
-offset_top = 5.0
-offset_right = 1904.0
+offset_right = 1920.0
 offset_bottom = 1081.0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_s11oe")
 
 [node name="SelectedPerson" type="RichTextLabel" parent="Control/Panel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.076
-offset_left = 119.0
-offset_top = 9.0
-offset_right = -29.0
-offset_bottom = -46.776
+offset_left = 151.0
+offset_top = 18.0
+offset_right = -33.0
+offset_bottom = -25.156
+theme_override_font_sizes/normal_font_size = 25
 text = "Placeholder"
 
 [node name="MemoryText" type="RichTextLabel" parent="Control/Panel"]
@@ -38,10 +46,11 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.076
-offset_left = 40.0
-offset_top = 9.0
-offset_right = -300.0
-offset_bottom = -41.776
+offset_left = 28.0
+offset_top = 18.0
+offset_right = -280.0
+offset_bottom = -29.156
+theme_override_font_sizes/normal_font_size = 25
 text = "Memory: "
 fit_content = true
 
@@ -68,10 +77,11 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.076
-offset_left = 43.0
-offset_top = 43.0
-offset_right = -113.0
-offset_bottom = 1.224
+offset_left = 28.0
+offset_top = 70.0
+offset_right = -128.0
+offset_bottom = 19.844
+theme_override_font_sizes/normal_font_size = 20
 text = "Character Traits:"
 fit_content = true
 
@@ -80,9 +90,9 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.076
-offset_left = 46.0
-offset_top = 71.0
-offset_right = -110.0
-offset_bottom = 29.224
+offset_left = 28.0
+offset_top = 102.0
+offset_right = -33.0
+offset_bottom = 59.844
 text = "Character Traits Here"
 fit_content = true
