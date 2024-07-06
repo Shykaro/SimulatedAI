@@ -29,7 +29,7 @@ script = ExtResource("1_yagq3")
 [node name="Panel" type="Panel" parent="Control"]
 layout_mode = 0
 offset_left = 1068.0
-offset_right = 1482.0
+offset_right = 1492.0
 offset_bottom = 1080.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lqx5i")
@@ -37,7 +37,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_lqx5i")
 [node name="BackgroundTitle" type="Panel" parent="Control/Panel"]
 layout_mode = 0
 offset_left = 2.0
-offset_right = 412.0
+offset_right = 422.0
 offset_bottom = 104.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_r2jkv")
 

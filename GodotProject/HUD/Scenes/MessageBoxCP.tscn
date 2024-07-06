@@ -1,16 +1,33 @@
-[gd_scene format=3 uid="uid://ckhrarilohf7r"]
+[gd_scene load_steps=2 format=3 uid="uid://ckhrarilohf7r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nuvpe"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.207843, 0.192157, 0.278431, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="MessageBox" type="HBoxContainer"]
 offset_top = 25.0
 offset_right = 320.0
-offset_bottom = 74.0
+offset_bottom = 68.0
 
-[node name="Background" type="PanelContainer" parent="."]
-self_modulate = Color(4.33177e-07, 0.776148, 0.327543, 1)
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
 
-[node name="Label" type="Label" parent="Background"]
-custom_minimum_size = Vector2(320, 0)
+[node name="Background" type="PanelContainer" parent="MarginContainer"]
 layout_mode = 2
-text = "PlaceholderMessager ahhhhhhhhhhh ahhhhhhhhhhh ahhhhhhhhh"
+theme_override_styles/panel = SubResource("StyleBoxFlat_nuvpe")
+
+[node name="Label" type="Label" parent="MarginContainer/Background"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+size_flags_vertical = 1
+text = "woiweiofjawoifj awoiejf awioejf waoiej fweoaif "
 autowrap_mode = 2
