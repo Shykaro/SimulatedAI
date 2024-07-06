@@ -5,8 +5,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4diq8"]
 shader = ExtResource("1_vb1f6")
-shader_parameter/line_color = Color(0, 1, 0, 1)
-shader_parameter/line_thickness = 0.0
+shader_parameter/line_color = Color(0, 1, 0, 0)
+shader_parameter/line_thickness = 8.0
 
 [node name="Houses" type="Node2D"]
 texture_filter = 1

@@ -17,10 +17,10 @@ func _input(event):
 			if (get_parent().get_parent().emotionalbox.visible):
 				get_parent().get_parent().hide_emotionalbox()
 				NPCManagerRef.isNPCselected = false
-				material.set_shader_parameter("line_thickness", 0)
+				material.set_shader_parameter("line_color", Vector4(0, 1, 0, 0))
 			else:
 				if !NPCManagerRef.isNPCselected:
 					NPCManagerRef.isNPCselected = true
-					material.set_shader_parameter("line_thickness", 8)
+					material.set_shader_parameter("line_color", Vector4(0, 1, 0, 1))
 					get_parent().get_parent().show_emotionalbox()
 			#print("This is the House of " + AssociatedNPC.name)
