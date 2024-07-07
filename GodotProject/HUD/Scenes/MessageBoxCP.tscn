@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckhrarilohf7r"]
+[gd_scene load_steps=3 format=3 uid="uid://ckhrarilohf7r"]
+
+[ext_resource type="Script" path="res://HUD/SetAssociatedEntityCP.gd" id="1_hg41f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nuvpe"]
 content_margin_left = 10.0
@@ -25,9 +27,19 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_nuvpe")
 
-[node name="Label" type="Label" parent="MarginContainer/Background"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Background"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Background/GridContainer"]
 custom_minimum_size = Vector2(300, 2.08165e-12)
 layout_mode = 2
 size_flags_vertical = 1
 text = "woiweiofjawoifj awoiejf awioejf waoiej fweoaif "
 autowrap_mode = 2
+
+[node name="AssociatedEntity" type="Label" parent="MarginContainer/Background/GridContainer"]
+layout_mode = 2
+text = "Placeholder AssociatedEntity"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("1_hg41f")

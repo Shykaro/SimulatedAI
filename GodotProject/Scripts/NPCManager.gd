@@ -8,6 +8,7 @@ static var npc_scene: PackedScene
 var isNPCselected = false
 var isConversationSelected = false
 
+
 func _ready():
 	instance = self
 	print("DEBUG: instantiating NPCs...")
@@ -49,4 +50,5 @@ static func get_npc_list_as_string_without_self(_npc):
 			if(list_as_string==""): list_as_string+=_npc_in_list.name
 			else: list_as_string+=", "+_npc_in_list.name
 	return list_as_string
+
 

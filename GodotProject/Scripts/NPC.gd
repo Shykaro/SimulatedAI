@@ -18,6 +18,9 @@ var emotionalbox
 #var timeout_interval: int = 10
 # Called when the node enters the scene tree for the first time.
 
+func _ready():
+	pass
+
 func start():
 	#assert(id != null, "WARNING: NPC instance has no id!") this can be used to debug (basically, if then print)
 	id = NPCManager.npc_list.size()
@@ -37,10 +40,15 @@ func start():
 	#emotionalbox.visible = false
 	#print(get_children()) #check NPC Structure
 	associatedChatBox = get_child(1).get_child(0).get_child(0).get_child(3) #Sets reference for future message updates to Scrollcontainer (Which includes chatbox.gd)
-	print(associatedChatBox)
+	#print(associatedChatBox)
 	#print(get_parent())
+	#await get_tree().create_timer(0.1)
+	mind.get_character_traits()
 	
 
+func set_character_traits(CharacterTraits):
+	#print(emotionalbox.get_child(0))
+	emotionalbox.get_child(0).updateTraits(CharacterTraits)
 
 func show_chatbox():
 	chatbox.visible = true
@@ -185,3 +193,4 @@ func _add_arrow():
 func _remove_arrow():
 	var _arrow = self.get_node("Communication Arrow from "+self.name+" to "+conversation_partner.name)
 	self.remove_child(_arrow)
+

@@ -8,9 +8,9 @@ func _ready():
 	AssociatedNPC = get_parent().get_parent()
 	get_child(0).get_child(0).text = AssociatedNPC.name
 	
-func updateChat(NewPartner):
+func updateTraits(CharacterTraits):
 	#conversation_partner = NewPartner
-	get_child(0).get_child(0).text = AssociatedNPC.name
+	get_child(0).get_child(4).text = CharacterTraits
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

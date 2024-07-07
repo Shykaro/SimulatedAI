@@ -5157,14 +5157,14 @@ sources/9 = SubResource("TileSetAtlasSource_qhlam")
 
 [node name="Game" type="Node2D"]
 
-[node name="RequestHandlerManager" type="Node" parent="."]
-script = ExtResource("3_px0po")
-
 [node name="NPCManager" type="Node" parent="."]
 script = ExtResource("4_5a08b")
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("2_eeqxv")
+
+[node name="RequestHandlerManager" type="Node" parent="."]
+script = ExtResource("3_px0po")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

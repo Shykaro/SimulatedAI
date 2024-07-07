@@ -10,12 +10,24 @@ offset_right = -1570.0
 offset_bottom = 49.0
 grow_horizontal = 0
 
-[node name="Background" type="PanelContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="Background" type="PanelContainer" parent="MarginContainer"]
 self_modulate = Color(0.00392157, 0.576471, 1, 1)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Background"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Background"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Background/GridContainer"]
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 text = "PlaceholderMessager ahhhhhhhhhhh ahhhhhhhhhhh ahhhhhhhhh"
 autowrap_mode = 3
+
+[node name="CondensedChatting" type="Label" parent="MarginContainer/Background/GridContainer"]
+layout_mode = 2
+text = "Condensed Chatting"
+horizontal_alignment = 1
+vertical_alignment = 2

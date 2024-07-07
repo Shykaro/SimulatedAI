@@ -13,11 +13,11 @@ func createMemory(MemoryType: int, MemoryText: String):
 	if MemoryType == 1:
 		var _memory = MemoryActivity.instantiate()
 		get_child(0).add_child(_memory)
-		_memory.get_child(0).get_child(0).text = MemoryText
+		_memory.get_child(0).get_child(0).get_child(0).get_child(0).text = MemoryText
 	else: #if not memory type 1 (activity) must be CondensedChat
 		var _memory = MemoryChatting.instantiate()
 		get_child(0).add_child(_memory)
-		_memory.get_child(0).get_child(0).text = MemoryText
+		_memory.get_child(0).get_child(0).get_child(0).get_child(0).text = MemoryText
 	
 
 

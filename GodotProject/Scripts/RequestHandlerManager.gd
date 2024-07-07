@@ -8,9 +8,11 @@ static var request_handler_list: Array = []
 func _ready():
 	instance = self
 
+
 static func generate_request(_npc: NPC, _message: String, _callable: Callable):
 	var associated_llm = _npc.associated_llm
 	var _request_handler: RequestHandler = RequestHandler.new()
+	#await instance._ready()
 	instance.add_child(_request_handler)
 	_request_handler.request_processed.connect(_callable)
 	_request_handler.request_processed.connect(instance._delete_request_handler)

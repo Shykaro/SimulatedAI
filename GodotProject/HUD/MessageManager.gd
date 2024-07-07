@@ -12,11 +12,11 @@ func createMessage(_npc: NPC, MessageText: String):
 	if _npc == get_parent_control().get_parent_control().get_parent().get_parent(): #checks with NPC node, if sent NPC is self
 		var _message = MessageBoxOG.instantiate()
 		get_child(0).add_child(_message)
-		_message.get_child(0).get_child(0).get_child(0).text = MessageText
+		_message.get_child(0).get_child(0).get_child(0).get_child(0).text = MessageText
 	else: #if not, must be conversationpartner
 		var _message = MessageBoxCP.instantiate()
 		get_child(0).add_child(_message)
-		_message.get_child(0).get_child(0).get_child(0).text = MessageText
+		_message.get_child(0).get_child(0).get_child(0).get_child(0).text = MessageText
 	
 
 

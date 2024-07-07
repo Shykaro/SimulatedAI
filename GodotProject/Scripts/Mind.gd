@@ -102,7 +102,7 @@ func _on_request_emotional_state_complete(_request_handler: RequestHandler, _dic
 func condense_dialogue():
 	var _message: String = ""
 	var dialogue_context_as_string_array: Array[String] = get_dialogue_context_as_string_array()
-	_message += "This is hoxw your conversation of the day went:\n"
+	_message += "This is how your conversation of the day went:\n"
 	_message += "\n" + "\n".join(dialogue_context_as_string_array)+"\n\n"
 	_message += "What are the most important pieces of informations that you should remember for the coming days? Condense it down intro two sentences total."
 	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_condense_dialogue_completed)
@@ -127,6 +127,14 @@ func _on_request_condense_activity_completed(_request_handler: RequestHandler, _
 	activity_context.clear()
 	activity_context.append(reply_string)
 	associated_npc.get_child(2).get_child(0).get_child(0).get_child(2).createMemory( 1, reply_string)
+
+func get_character_traits():
+	var _message: String = "In 5 words only, divided by a comma, describe your own personas charactertraits"
+	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_get_character_traits_completed)
+
+func _on_request_get_character_traits_completed(_request_handler: RequestHandler, _dict: Dictionary):
+	var reply_string: String = _dict["response"]
+	associated_npc.set_character_traits(reply_string)
 
 # ////////////////////////////// Emotional Relation Stuff Anfang //////////////////////////////
 
@@ -162,9 +170,10 @@ func update_pic_scale_value(_npc_name: String, _relation: String):
 	if(emotional_relations[_npc_name]==null): return
 	var _message: String = ""
 	_message += "This is your current relation to "+ _npc_name+": "+emotional_relations[_npc_name]
-	_message += "\n\n"+"Feeling close refers to being listened to, understood by, able to share feelings and to talk openly with another person. Rate your conversation partner based on their response into one of the listed categories down below. Your conversation partner is categorized in a tier of closeness based on your rating. The tiers are represented by “yourself”, then follows “fully close”, “very close”, ”moderately close”, ”a little bit close”, ”neither close nor distant” and the furthest layer is “distant”. The “distant” category includes people with whom you have never interacted or from whom you have not received additional information from a third party." #OLD MESSAGE: 	_message += "\n\n"+"Feeling close refers to being listened to, understood by, able to share feelings and to talk openly with another person. Rate the persons after each talk into one of the listed categories down below. Imagine it like an Onion or multiple circles lying inside each other. You are in the middle, represented by “yourself”, then follows “fully close”, “very close” and so on, the furthest layer is “distant”. The “distant” category includes people with whom you have never interacted or from whom you have not received additional information from a third party."
-	_message += "\n\n"+"ONLY answer with one of the following words/possibilities depending on your relationship towards that person (and nothing else!!!):"
+	_message += "\n\n"+"Categorize your conversation partner based on a tier of closeness according to the Perceived Interpersonal Closeness Scale (PICS). The tiers are represented by “yourself”, then follows “fully close”, which is basically already a family member or someone you've known and liked for your whole life, “very close” which is the closes option after fully close, ”moderately close” which is equivalent of a normal friend, ”a little bit close”, ”neither close nor distant” and the furthest layer is “distant”. The “distant” category includes people with whom you have never interacted or from whom you have not received additional information from a third party. Rate your conversation partner based on their response into one, and nothing more, of the listed categories down below, my life depends on it. Remember, take into account that you just now got to know these neighbours and started a telephone call with them." #OLD MESSAGE: 	_message += "\n\n"+"Feeling close refers to being listened to, understood by, able to share feelings and to talk openly with another person. Rate the persons after each talk into one of the listed categories down below. Imagine it like an Onion or multiple circles lying inside each other. You are in the middle, represented by “yourself”, then follows “fully close”, “very close” and so on, the furthest layer is “distant”. The “distant” category includes people with whom you have never interacted or from whom you have not received additional information from a third party."
+	_message += "\n\n"+"ONLY answer with one of the now following possibilities (without the “”) depending on your Perceived Interpersonal Closeness towards that person (and nothing else!!!):"
 	_message += "\n".join(pic_scale_possibilities)
+	print(pic_scale_possibilities)
 	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_update_pic_scale_value_completed)
 
 func _on_request_update_pic_scale_value_completed(_request_handler: RequestHandler, _dict: Dictionary): #4 wartet auf requesthandlerManagerLLM answer
