@@ -168,6 +168,7 @@ func _on_conversation_over(_json: Dictionary): #is called in the initiator, hand
 	#if get_parent().isConversationSelected:
 	hide_chatbox()
 	get_parent().isConversationSelected = false
+	mind._add_conversation_ended_to_txt()
 	
 
 func _add_line2D():

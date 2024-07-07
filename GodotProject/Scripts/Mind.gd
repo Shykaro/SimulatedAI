@@ -188,6 +188,13 @@ func _on_request_update_pic_scale_value_completed(_request_handler: RequestHandl
 	else: print("---------WARNING-------- "+ associated_npc.name+" gave no valid pic scale answer for "+associated_npc.last_conversation_partner.name)
 	#print("\n" + "\n" + "Updated relation with " + associated_npc.conversation_partner.name + ": " + reply_string )
 
+func _add_conversation_ended_to_txt():
+	var filePic = FileAccess.open(path + associated_npc.name + "_PicValues.txt", FileAccess.WRITE)
+	combined_json_data_Pic_Value = combined_json_data_Pic_Value + "\n Conversation ended with " + associated_npc.last_conversation_partner.name
+	filePic.store_string(combined_json_data_Pic_Value)
+	filePic.close()
+	filePic = null
+
 func _set_pic_scale_values_history(_answer:String):
 	#var my_dict = {
 	#	"Alex": {1:{1:"distant",2:"close"},2:{1:"close",2:"relatively close"}},
