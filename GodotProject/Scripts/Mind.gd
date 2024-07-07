@@ -111,7 +111,7 @@ func _on_request_condense_dialogue_completed(_request_handler: RequestHandler, _
 	var reply_string: String = _dict["response"]
 	dialogue_context.clear()
 	dialogue_context.append(reply_string)
-	associated_npc.get_child(2).get_child(0).get_child(0).get_child(2).createMemory( 2, reply_string)
+	associated_npc.get_child(2).get_child(0).get_child(0).get_child(3).createMemory( 2, reply_string)
 	print("---------SYSTEM-------- Condensed conversation for someone!") #lol
 
 func condense_activity():
@@ -126,7 +126,7 @@ func _on_request_condense_activity_completed(_request_handler: RequestHandler, _
 	var reply_string: String = _dict["response"]
 	activity_context.clear()
 	activity_context.append(reply_string)
-	associated_npc.get_child(2).get_child(0).get_child(0).get_child(2).createMemory( 1, reply_string)
+	associated_npc.get_child(2).get_child(0).get_child(0).get_child(3).createMemory( 1, reply_string)
 
 func get_character_traits():
 	var _message: String = "In 5 words only, divided by a comma, describe your own personas charactertraits"

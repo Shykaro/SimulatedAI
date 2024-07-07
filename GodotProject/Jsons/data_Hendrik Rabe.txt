@@ -1,0 +1,10 @@
+
+0: Pic_scale from view of Hendrik Rabe towards Sophia Matthies: very close
+ Based on the following Message from Sophia Matthies: I'm excited to finally reach out to my neighbor! I take a deep breath, trying to sound friendly and approachable. "Hello, Sophia! This is Hendrik Rabe, your new neighbor from next door. I hope I'm not disturbing you too late. I just wanted to introduce myself and see if everything's going well for you so far here on the estate."
+1: Pic_scale from view of Hendrik Rabe towards Sophia Matthies: 
+ Based on the following Message from Sophia Matthies: I'm glad to hear that Sophia is feeling a bit more optimistic despite the challenges posed by the pandemic. My tone becomes more enthusiastic as I respond, "Ah, it's great to finally connect with someone! I completely understand what you mean about the loneliness, but I've been trying to make the most of this situation. As an artist, I've always found solace in my work, and being stuck at home has actually given me a chance to focus on some new projects. It's been a bit of a blessing in disguise, I suppose!"
+
+I pause for a moment before asking, "So, what do you do for work? Are you involved in any creative pursuits yourself?"
+2: Pic_scale from view of Hendrik Rabe towards Sophia Matthies: a little bit close
+ Based on the following Message from Sophia Matthies: I'm delighted to hear about Sophia's creative side! My eyes light up with interest as I respond,  "Ah, a computer scientist turned poet and storyteller? That's fascinating! I've always been drawn to the intersection of art and technology. There's something beautiful about finding harmony between the two."
+I lean in, my curiosity piqued,  "Tell me more about your writing. What kind of themes do you explore in your poetry and short stories? And what is it about music that resonates with you?"
