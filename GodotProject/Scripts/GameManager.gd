@@ -3,7 +3,7 @@ extends Node
 class_name GameManager
 
 var count: int = 0
-static var hour: int = 7
+static var hour: int = 8
 static var time_of_day: String = " pm"
 static var day_number: int = 1
 # Called when the node enters the scene tree for the first time.
@@ -50,6 +50,7 @@ func _hourly_event(): #checks and increments time, starts event fitting time
 			condense_dialogue_contexts()
 		if(hour==12&&time_of_day==" am"):
 			update_npc_minds() #will be used for reflecting on the day
+			print("---------SYSTEM-------- This was day "+str(day_number))
 	else:
 		request_npc_activities() #well, requests npc activities
 	increment_time() #basically hour = hour + 1
@@ -69,8 +70,7 @@ func update_npc_minds():
 		_npc.mind.reflect_on_day()
 
 func request_npc_choices():
-	for _npc: NPC in NPCManager.npc_list:
-		_npc.request_choice() #starts process of choosing, calling and talking to another npc
+	NPCManager.npc_list.pick_random().request_choice() #starts process of choosing, calling and talking to another npc
 func request_npc_activities():
 	for _npc: NPC in NPCManager.npc_list:
 			_npc.request_activity()

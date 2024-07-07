@@ -7,7 +7,7 @@ static var npc_list: Array = []
 static var npc_scene: PackedScene
 var isNPCselected = false
 var isConversationSelected = false
-
+static var chosen_npcs: Array = []
 
 func _ready():
 	instance = self
@@ -51,4 +51,24 @@ static func get_npc_list_as_string_without_self(_npc):
 			else: list_as_string+=", "+_npc_in_list.name
 	return list_as_string
 
+static func get_npc_list_as_string_without_self_and_chosen(_npc):
+	var list_as_string: String = ""
+	var shuffled_npc_list: Array = npc_list.duplicate()
+	shuffled_npc_list.shuffle()
+	for _npc_in_list: NPC in shuffled_npc_list:
+		if(_npc_in_list!=_npc && !chosen_npcs.has(_npc_in_list)):
+			if(list_as_string==""): list_as_string+=_npc_in_list.name
+			else: list_as_string+=", "+_npc_in_list.name
+	return list_as_string
 
+static func add_choices(_npc):
+	chosen_npcs.append(_npc)
+	chosen_npcs.append(_npc.conversation_partner)
+
+static func request_next_choice():
+	for _npc_in_list: NPC in npc_list:
+		if(!chosen_npcs.has(_npc_in_list)):
+			_npc_in_list.request_choice()
+			return
+	chosen_npcs.clear()
+	print("---------SYSTEM-------- "+"All have been chosen")

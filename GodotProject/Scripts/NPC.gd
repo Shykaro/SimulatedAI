@@ -109,6 +109,8 @@ func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary):
 		for _npc: NPC in NPCManager.npc_list:
 			if(_npc.name == reply_string or (_npc.name.split(" ")[0] == reply_string.split(" ")[0])): 
 				_establish_communication(_npc)
+				if(conversation_partner!=null): NPCManager.add_choices(self)
+				NPCManager.request_next_choice()
 		if(conversation_partner==null): 
 			print("---------SYSTEM-------- "+"No NPC was chosen")
 		is_choosing = false
@@ -138,7 +140,14 @@ func request_activity(): #used for asking for current activity
 func request_choice(): #used for getting a name for who they want to call on the phone (npc2npc)
 	is_thinking = true
 	is_choosing = true
-	var _message: String = "It's "+str(GameManager.hour)+GameManager.time_of_day+". You may call one of your neighbors. You know "+NPCManager.get_npc_list_as_string_without_self(self)+". Who would you like to call? You may not call youself. Answer with just the name of the person you would like to call or just no if you want to call nobody. Example:<Their Name> <Their Surname> (without the brackets)"
+	var all_are_in_conversation: bool = true
+	for _npc_in_list in NPCManager.npc_list:
+		if(_npc_in_list.conversation_partner==null):
+			all_are_in_conversation = false
+	if(all_are_in_conversation): 
+		print("---------SYSTEM-------- "+"All are in converstaion")
+		return
+	var _message: String = "It's "+str(GameManager.hour)+GameManager.time_of_day+". You may call one of your neighbors. You know "+NPCManager.get_npc_list_as_string_without_self_and_chosen(self)+". Who would you like to call? You may not call youself. Answer with just the name of the person you would like to call or just no if you want to call nobody. Example:<Their Name> <Their Surname> (without the brackets)"
 	#print(_message)
 	RequestHandlerManager.generate_request(self, _message, _on_request_completed)
 	#choice_attempts+=1
