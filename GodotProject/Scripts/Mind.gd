@@ -64,6 +64,7 @@ func reflect_on_day(): #this is where the long term memories are stored (Happens
 	activity_context.clear()
 	dialogue_context.clear()
 	number_of_pic_scale_values_on_day = 0
+	_add_conversation_ended_to_txt()
 
 func _on_request_reflect_on_day(_request_handler: RequestHandler, _dict: Dictionary):
 	var reply_string: String = _dict["response"]
@@ -190,7 +191,7 @@ func _on_request_update_pic_scale_value_completed(_request_handler: RequestHandl
 
 func _add_conversation_ended_to_txt():
 	var filePic = FileAccess.open(path + associated_npc.name + "_PicValues.txt", FileAccess.WRITE)
-	combined_json_data_Pic_Value = combined_json_data_Pic_Value + "\n Conversation ended with " + associated_npc.last_conversation_partner.name
+	combined_json_data_Pic_Value = combined_json_data_Pic_Value + "\n Day ended, had a Conversation with " + associated_npc.last_conversation_partner.name
 	filePic.store_string(combined_json_data_Pic_Value)
 	filePic.close()
 	filePic = null

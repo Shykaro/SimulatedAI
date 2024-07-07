@@ -3,7 +3,7 @@ extends Node
 class_name GameManager
 
 var count: int = 0
-static var hour: int = 8
+static var hour: int = 7
 static var time_of_day: String = " pm"
 static var day_number: int = 1
 # Called when the node enters the scene tree for the first time.
