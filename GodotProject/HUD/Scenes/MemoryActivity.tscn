@@ -1,16 +1,30 @@
-[gd_scene format=3 uid="uid://b4e2ylwok0un4"]
+[gd_scene load_steps=2 format=3 uid="uid://b4e2ylwok0un4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_um5p8"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.138282, 0.419017, 0.74362, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="MessageBox" type="HBoxContainer"]
 offset_top = 10.0
 offset_right = 320.0
 offset_bottom = 59.0
+metadata/_edit_horizontal_guides_ = [74.0]
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
 
 [node name="Background" type="PanelContainer" parent="MarginContainer"]
-self_modulate = Color(4.33177e-07, 0.776148, 0.327543, 1)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_um5p8")
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/Background"]
 layout_mode = 2
@@ -23,6 +37,7 @@ autowrap_mode = 2
 
 [node name="CondensedActivity" type="Label" parent="MarginContainer/Background/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
 text = "Condensed Activity"
-horizontal_alignment = 1
+horizontal_alignment = 2
 vertical_alignment = 2

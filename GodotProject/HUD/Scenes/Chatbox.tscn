@@ -13,6 +13,8 @@ border_color = Color(0.361789, 0.338704, 0.46778, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2jkv"]
 bg_color = Color(0.207843, 0.192157, 0.278431, 1)
+border_width_bottom = 2
+border_color = Color(0.360784, 0.337255, 0.466667, 1)
 shadow_color = Color(0.0901961, 0.0901961, 0.0901961, 0.596078)
 
 [node name="Chatbox" type="Node2D"]
@@ -70,13 +72,13 @@ fit_content = true
 [node name="ScrollContainer" type="ScrollContainer" parent="ControlScript/Panel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.065
-anchor_top = 0.115
+anchor_left = 0.066
+anchor_top = 0.096
 anchor_right = 0.981
 anchor_bottom = 1.0
-offset_left = 0.0899979
-offset_top = -0.200002
-offset_right = -0.134027
+offset_left = 0.0160002
+offset_top = 0.319999
+offset_right = 0.0559974
 vertical_scroll_mode = 2
 script = ExtResource("2_jhs8f")
 

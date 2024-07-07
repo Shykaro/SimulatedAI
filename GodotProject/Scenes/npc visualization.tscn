@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ce8bkw7m5yo5k"]
+[gd_scene load_steps=18 format=3 uid="uid://ce8bkw7m5yo5k"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="2_eeqxv"]
 [ext_resource type="Script" path="res://Scripts/RequestHandlerManager.gd" id="3_px0po"]
@@ -5155,6 +5155,24 @@ sources/6 = SubResource("TileSetAtlasSource_gs5gu")
 sources/8 = SubResource("TileSetAtlasSource_02c5m")
 sources/9 = SubResource("TileSetAtlasSource_qhlam")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5hst0"]
+bg_color = Color(0.545098, 0.870588, 0.631373, 0.901961)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.73792, 0.976582, 0.749536, 0.901961)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 20.0
+expand_margin_top = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 20.0
+shadow_color = Color(0.623529, 1, 0.592157, 0.0862745)
+shadow_size = 50
+
 [node name="Game" type="Node2D"]
 
 [node name="RequestHandlerManager" type="Node" parent="."]
@@ -5211,9 +5229,17 @@ anchor_mode = 0
 position = Vector2(517, 512)
 
 [node name="Label" type="Label" parent="Control2/Time"]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_right = 116.0
+offset_bottom = 75.0
 theme = ExtResource("4_d0tik")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.666667)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_5hst0")
+text = "Time"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("4_vqs3l")

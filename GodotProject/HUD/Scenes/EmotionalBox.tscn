@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsb40wo6ef5rh"]
+[gd_scene load_steps=7 format=3 uid="uid://bsb40wo6ef5rh"]
 
 [ext_resource type="Script" path="res://HUD/EmotionalBox.gd" id="1_uxmfl"]
 [ext_resource type="Script" path="res://HUD/MemoryManager.gd" id="2_l55ir"]
@@ -11,8 +11,14 @@ border_width_left = 2
 border_width_right = 2
 border_color = Color(0.360784, 0.337255, 0.466667, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhfo7"]
+bg_color = Color(0.207843, 0.192157, 0.278431, 1)
+border_width_bottom = 2
+border_color = Color(0.360784, 0.337255, 0.466667, 1)
+shadow_color = Color(0.0901961, 0.0901961, 0.0901961, 0.596078)
+
 [node name="EmotionalBox" type="Node2D"]
-metadata/_edit_vertical_guides_ = [1887.0, 1887.0]
+metadata/_edit_vertical_guides_ = [1892.0, 1518.0]
 
 [node name="Control" type="Control" parent="."]
 layout_direction = 1
@@ -27,9 +33,16 @@ script = ExtResource("1_uxmfl")
 layout_mode = 0
 offset_left = 1490.0
 offset_right = 1920.0
-offset_bottom = 1081.0
+offset_bottom = 1080.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_s11oe")
+
+[node name="BackgroundTitle" type="Panel" parent="Control/Panel"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 428.0
+offset_bottom = 68.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uhfo7")
 
 [node name="SelectedPerson" type="RichTextLabel" parent="Control/Panel"]
 layout_mode = 1
@@ -59,14 +72,13 @@ fit_content = true
 [node name="ScrollContainer" type="ScrollContainer" parent="Control/Panel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.068
-anchor_top = 0.103
-anchor_right = 0.94
-anchor_bottom = 0.97
-offset_left = -0.152002
-offset_top = 0.171989
-offset_right = -0.160034
-offset_bottom = 0.280029
+anchor_left = 0.065
+anchor_top = 0.156
+anchor_right = 0.935
+anchor_bottom = 1.0
+offset_left = 0.0499978
+offset_top = -0.480003
+offset_right = -0.0500267
 script = ExtResource("2_l55ir")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/ScrollContainer"]
@@ -92,18 +104,27 @@ layout_mode = 2
 [node name="MessageBox6" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("4_nxbc6")]
 layout_mode = 2
 
+[node name="BackgroundTitleCharacterTraits" type="Panel" parent="Control/Panel"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 68.0
+offset_right = 428.0
+offset_bottom = 168.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uhfo7")
+
 [node name="CharacterTraitsText" type="RichTextLabel" parent="Control/Panel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.076
 offset_left = 28.0
-offset_top = 70.0
-offset_right = -128.0
-offset_bottom = 19.844
+offset_top = 76.0
+offset_right = -28.0
+offset_bottom = 25.844
 theme_override_font_sizes/normal_font_size = 20
 text = "Character Traits:"
 fit_content = true
+scroll_active = false
 
 [node name="CharacterTraitsList" type="RichTextLabel" parent="Control/Panel"]
 layout_mode = 1
@@ -111,8 +132,8 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.076
 offset_left = 28.0
-offset_top = 102.0
-offset_right = -33.0
-offset_bottom = 59.844
+offset_top = 107.0
+offset_right = -28.0
+offset_bottom = 67.844
 text = "Character Traits Here"
 fit_content = true

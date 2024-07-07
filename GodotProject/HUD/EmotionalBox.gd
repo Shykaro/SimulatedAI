@@ -6,11 +6,11 @@ var AssociatedNPC
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	AssociatedNPC = get_parent().get_parent()
-	get_child(0).get_child(0).text = AssociatedNPC.name
+	get_child(0).get_child(1).text = AssociatedNPC.name
 	
 func updateTraits(CharacterTraits):
 	#conversation_partner = NewPartner
-	get_child(0).get_child(4).text = CharacterTraits
+	get_child(0).get_child(6).text = CharacterTraits
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
