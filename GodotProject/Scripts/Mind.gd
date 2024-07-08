@@ -162,9 +162,9 @@ func update_or_decide_relation(npc: NPC, message: String, context: String = ""):
 
 func _on_request_update_relation_completed(_request_handler: RequestHandler, _dict: Dictionary): #4 wartet auf requesthandlerManagerLLM answer
 	var reply_string: String = _dict["response"]
-	set_emotional_relation(associated_npc.conversation_partner.name, reply_string)
-	update_pic_scale_value(associated_npc.conversation_partner.name, reply_string)
-	update_relation_file(associated_npc.name+"->"+associated_npc.conversation_partner.name+": "+reply_string)
+	set_emotional_relation(associated_npc.last_conversation_partner.name, reply_string)
+	update_pic_scale_value(associated_npc.last_conversation_partner.name, reply_string)
+	update_relation_file(associated_npc.name+"->"+associated_npc.last_conversation_partner.name+": "+reply_string)
 	#print("\n" + "\n" + "Updated relation with " + associated_npc.conversation_partner.name + ": " + reply_string )
 
 func update_pic_scale_value(_npc_name: String, _relation: String):
