@@ -158,12 +158,12 @@ func update_or_decide_relation(npc: NPC, message: String, context: String = ""):
 	var _message: String
 	if context == "":
 		_message = "Based on the following message:\n" + message
-		print( "TEST " + "Based on the following message:\n" + message)
+		#print( "TEST " + "Based on the following message:\n" + message)
 	else:
 		_message = "Based on the following conversation:\n" + context + "\n" + message
-		print( "TEST " + "Based on the following conversation:\n" + context + "\n" + message)
+		#print( "TEST " + "Based on the following conversation:\n" + context + "\n" + message)
 	_message += "\n\n How do you (" + associated_npc.name + ") feel about your relationship with " + npc.name + " now? Please describe it in one sentence."
-	#print("TEST " + _message)
+	print("TEST " + _message)
 	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_update_relation_completed) #changed to associated, because if npc is passed, the relation will be written in the storage of the conversation partner
 
 func _on_request_update_relation_completed(_request_handler: RequestHandler, _dict: Dictionary): #4 wartet auf requesthandlerManagerLLM answer
