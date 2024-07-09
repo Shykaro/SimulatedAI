@@ -89,22 +89,29 @@ size_flags_vertical = 3
 alignment = 2
 
 [node name="MessageBox" parent="ControlScript/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("2_fuu3m")]
+visible = false
 layout_mode = 2
 
 [node name="MessageBox2" parent="ControlScript/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("4_hjnpi")]
+visible = false
 layout_mode = 2
 
 [node name="MessageBox3" parent="ControlScript/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("2_fuu3m")]
+visible = false
 layout_mode = 2
 
 [node name="MessageBox4" parent="ControlScript/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("4_hjnpi")]
+visible = false
 layout_mode = 2
 
 [node name="MessageBox5" parent="ControlScript/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("2_fuu3m")]
+visible = false
 layout_mode = 2
 
 [node name="MessageBox6" parent="ControlScript/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("4_hjnpi")]
+visible = false
 layout_mode = 2
 
 [node name="MessageBox7" parent="ControlScript/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("2_fuu3m")]
+visible = false
 layout_mode = 2

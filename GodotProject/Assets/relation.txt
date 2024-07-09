@@ -2875,3 +2875,33 @@ Sophia Matthies->Hendrik Rabe: I must say that I'm feeling quite optimistic abou
 Gustavo Silva->Maike Klein: I'm pleased to have had a positive initial interaction with Maike Klein over the phone, as it seems we share similar enthusiasm for building connections and creating memories within our community, which has left me feeling optimistic about the potential for a friendly and collaborative relationship.
 
 Hendrik Rabe->Sophia Matthies: As I sit here surrounded by the vibrant colors and textures of my artistic endeavors, I'm filled with a deep sense of gratitude and affection for Sophia Matthies, my partner, who brings a spark of creativity and joy to every moment we share together.
+
+Hanna Strittmatter->Sophia Matthies: I have mixed feelings about Sophia Matthies; I'm curious to reconnect with her, yet I'm also a bit apprehensive about the uncertainty of our conversation after so much time has passed since we last spoke.
+
+Sophia Matthies->Hanna Strittmatter: I'm still getting to know Hanna Strittmatter, but her friendly introduction and curiosity about the estate's quirks make me feel a sense of warmth and openness towards her, as if we might develop a nice rapport despite our initial stranger status.
+
+Hendrik Rabe->Maike Klein: I'm feeling grateful and appreciative towards Maike Klein, as she's been a constant source of support and inspiration in my life, and I value our connection deeply.
+
+Now, let me start the conversation on the phone:
+
+"Hi Maike, it's so great to finally connect with you over the phone. I hope you're doing well. I've been thinking about you all day, actually, as I was working on a new art piece in my living room. The evening light and the creative process got me lost in thought, and I couldn't help but think of our lovely moments together. How have you been?"
+
+Hanna Strittmatter->Sophia Matthies: I must admit that I don't have any feelings or thoughts about my relationship with Sophia Matthies because, according to the Persona description, my Relationship status is Single, which means there is no such relationship. However, I do appreciate Sophia's interest in getting to know me better and her suggestion to grab coffee and explore the neighborhood together - it sounds like a lovely idea!
+
+As for your questions about the estate, I find the strange symbols etched into the walls quite intriguing. As someone who appreciates art and beauty, I'm curious to learn more about their significance. And yes, I've noticed that the central courtyard has an unusual acoustic property; it's as if the architecture is trying to create some kind of immersive experience. Perhaps we could explore this further together?
+
+Gustavo Silva->Alexander Gassner: I'm not really sure how to approach this conversation with Alexander Gassner, considering our professional rivalry, but I suppose I'll start by being friendly and asking how he's doing, trying to break the ice.
+
+Maike Klein->Hendrik Rabe: I perceive my relationship with Hendrik Rabe as friendly and approachable, as he has taken the initiative to introduce himself properly and show genuine interest in getting to know me better.
+
+Sophia Matthies->Hanna Strittmatter: I'm feeling grateful and content in my relationship with Hanna, as our shared love for music and technology continues to bond us together, making me feel secure and comfortable with myself.
+
+Alexander Gassner->Gustavo Silva: I'm still getting used to the idea of having a new neighbor, Gustavo Silva, and his attempt to introduce himself and get to know me better feels like an intrusion into my usual solitary routine, but I appreciate his effort to be friendly and am willing to engage in conversation with him.
+
+Hendrik Rabe->Maike Klein: I'm delighted to report that my relationship with Maike is strong and loving, as we've been making an effort to connect and understand each other's needs, despite the challenges posed by the pandemic restrictions.
+
+Hanna Strittmatter->Sophia Matthies: I'm a bit quiet and introverted, but I have to admit that my friendship with Sophia is quite special - we share a deep appreciation for art, music, and literature, which creates a strong bond between us, even though we don't always vocalize our feelings explicitly.
+
+Gustavo Silva->Alexander Gassner: Alexander Gassner, that guy's a real character - we've been going back and forth on some coding projects, and I'd say our working relationship is cordial, but nothing more; I mean, we get the job done, no drama, no fuss, just good old-fashioned problem-solving.
+
+Maike Klein->Hendrik Rabe: I'm grateful for the support and understanding from Hendrik, feeling more connected to him after sharing our common experiences of adjusting to a new place, which has strengthened my appreciation for our relationship.

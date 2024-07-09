@@ -87,21 +87,27 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MessageBox" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("3_ukpmb")]
+visible = false
 layout_mode = 2
 
 [node name="MessageBox2" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("4_nxbc6")]
+visible = false
 layout_mode = 2
 
 [node name="MessageBox3" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("3_ukpmb")]
+visible = false
 layout_mode = 2
 
 [node name="MessageBox4" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("4_nxbc6")]
+visible = false
 layout_mode = 2
 
 [node name="MessageBox5" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("3_ukpmb")]
+visible = false
 layout_mode = 2
 
 [node name="MessageBox6" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("4_nxbc6")]
+visible = false
 layout_mode = 2
 
 [node name="BackgroundTitleCharacterTraits" type="Panel" parent="Control/Panel"]
