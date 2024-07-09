@@ -68,6 +68,7 @@ func reflect_on_day(): #this is where the long term memories are stored (Happens
 
 func _on_request_reflect_on_day(_request_handler: RequestHandler, _dict: Dictionary):
 	var reply_string: String = _dict["response"]
+	long_term_storage.append(reply_string)
 	print("---------SYSTEM-------- STORED LONG TERM MEMORY "+associated_npc.name+": "+reply_string)
 
 
