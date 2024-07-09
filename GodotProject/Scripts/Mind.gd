@@ -149,15 +149,20 @@ func update_relation_during_conversation(npc: NPC, message: String): #1 von NPC
 	var start_checking_threshold = 1
 	if(dialogue_context.size()<start_checking_threshold): return
 	#last_received_Message = message
+	#var joinedContext
+	#joinedContext += "\n".join(dialogue_context)
 	update_or_decide_relation(npc, message)
 
 func update_or_decide_relation(npc: NPC, message: String, context: String = ""): #2 von update_relation_during_conversation !!! -> npc parameter kann vlt neglected werden, wurde durch associated_npc.conversation_partner.name ersetzt
 	var _message: String
 	if context == "":
 		_message = "Based on the following message:\n" + message
+		print( "TEST " + "Based on the following message:\n" + message)
 	else:
 		_message = "Based on the following conversation:\n" + context + "\n" + message
+		print( "TEST " + "Based on the following conversation:\n" + context + "\n" + message)
 	_message += "\n\n How do you (" + associated_npc.name + ") feel about your relationship with " + npc.name + " now? Please describe it in one sentence."
+	#print("TEST " + _message)
 	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_update_relation_completed) #changed to associated, because if npc is passed, the relation will be written in the storage of the conversation partner
 
 func _on_request_update_relation_completed(_request_handler: RequestHandler, _dict: Dictionary): #4 wartet auf requesthandlerManagerLLM answer
@@ -174,7 +179,7 @@ func update_pic_scale_value(_npc_name: String, _relation: String):
 	_message += "\n\n"+"Categorize your conversation partner based on a tier of closeness according to the Perceived Interpersonal Closeness Scale (PICS). The tiers are represented by “yourself”, then follows “fully close”, which is basically already a family member or someone you've known and liked for your whole life, “very close” which is the closes option after fully close, ”moderately close” which is equivalent of a normal friend, ”a little bit close”, ”neither close nor distant” and the furthest layer is “distant”. The “distant” category includes people with whom you have never interacted or from whom you have not received additional information from a third party. Rate your conversation partner based on their response into one, and nothing more, of the listed categories down below, my life depends on it. Remember, take into account that you just now got to know these neighbours and started a telephone call with them." #OLD MESSAGE: 	_message += "\n\n"+"Feeling close refers to being listened to, understood by, able to share feelings and to talk openly with another person. Rate the persons after each talk into one of the listed categories down below. Imagine it like an Onion or multiple circles lying inside each other. You are in the middle, represented by “yourself”, then follows “fully close”, “very close” and so on, the furthest layer is “distant”. The “distant” category includes people with whom you have never interacted or from whom you have not received additional information from a third party."
 	_message += "\n\n"+"ONLY answer with one of the now following possibilities (without the “”) depending on your Perceived Interpersonal Closeness towards that person (and nothing else!!!):"
 	_message += "\n".join(pic_scale_possibilities)
-	print(pic_scale_possibilities)
+	#print(pic_scale_possibilities)
 	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_update_pic_scale_value_completed)
 
 func _on_request_update_pic_scale_value_completed(_request_handler: RequestHandler, _dict: Dictionary): #4 wartet auf requesthandlerManagerLLM answer
