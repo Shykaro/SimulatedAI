@@ -51,8 +51,8 @@ anchor_right = 1.0
 anchor_bottom = 0.076
 offset_left = 151.0
 offset_top = 18.0
-offset_right = -33.0
-offset_bottom = -25.156
+offset_right = -10.0
+offset_bottom = -25.08
 theme_override_font_sizes/normal_font_size = 25
 text = "Placeholder"
 

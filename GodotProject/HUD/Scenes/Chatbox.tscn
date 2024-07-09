@@ -49,10 +49,10 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.076
 offset_left = 28.0
-offset_top = 59.0
-offset_right = -53.0
-offset_bottom = 4.92
-theme_override_font_sizes/normal_font_size = 20
+offset_top = 56.0
+offset_right = -12.0
+offset_bottom = 17.92
+theme_override_font_sizes/normal_font_size = 15
 text = "Placeholder"
 fit_content = true
 
