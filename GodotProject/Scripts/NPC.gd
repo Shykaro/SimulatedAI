@@ -83,50 +83,61 @@ func _establish_communication(_npc: NPC): #Initiates npc to npc conversation
 				var init_message = "You have chosen to call "+conversation_partner.name+". You are now on the phone. What do you say to start the conversation?"
 				request_answer(init_message)
 
+##this is a really ugly remnant of the time before the RequestHandler rework. Should be split up into its seperate use cases as can be seen in other functions and in Mind
 func _on_request_completed(_request_handler: RequestHandler, _dict: Dictionary): #is called every time a ollama request "comes back"
 	is_thinking = false
 	if(conversation_partner!=null && is_choosing==false): #If talking to someone
-		if(is_initiator): 
-			mind.check_conversation_over()
-			if(is_conversation_over): 
-				_on_conversation_over(_dict) #stops and cleans up conversation
-				return
-		var reply_string: String = _dict["message"]["content"]
-		print("\n"+self.name+":")
-		print(reply_string+"\n")
-		associatedChatBox.createMessage(self, reply_string)
-		_chat_with(reply_string, conversation_partner) #respond to other
-		mind.dialogue_context.append(_dict["message"])
+		_talking(_dict)
 	else: if(is_choosing==false): 
-		var reply_string: String = _dict["response"]
-		print("\n"+self.name+":")
-		print(reply_string+"\n")
-		mind.activity_context.append(_dict["response"])
-		mind.update_emotional_state(reply_string)
+		_activity(_dict)
 	if(is_choosing): #while choosing who to call
-		var reply_string: String = _dict["response"]
-		print("---------SYSTEM-------- "+self.name+" chose to call "+reply_string+"\n")
-		for _npc: NPC in NPCManager.npc_list:
-			if(_npc.name == reply_string or (_npc.name.split(" ")[0] == reply_string.split(" ")[0])): 
-				_establish_communication(_npc)
-				if(conversation_partner!=null): NPCManager.add_choices(self)
-				NPCManager.request_next_choice()
-		if(conversation_partner==null): 
-			print("---------SYSTEM-------- "+"No NPC was chosen")
-		is_choosing = false
+		_choosing(_dict)
+
+func _talking(_dict: Dictionary):
+	if(is_initiator): 
+		mind.check_conversation_over()
+		if(is_conversation_over): 
+			_on_conversation_over(_dict) #stops and cleans up conversation
+			return
+	var reply_string: String = _dict["message"]["content"]
+	print("\n"+self.name+":")
+	print(reply_string+"\n")
+	associatedChatBox.createMessage(self, reply_string)
+	_chat_with(reply_string, conversation_partner) #respond to other
+	mind.dialogue_context.append(_dict["message"])
+
+func _activity(_dict: Dictionary):
+	var reply_string: String = _dict["response"]
+	print("\n"+self.name+":")
+	print(reply_string+"\n")
+	mind.activity_context.append(_dict["response"])
+	mind.update_emotional_state(reply_string)
+
+func _choosing(_dict: Dictionary):
+	var reply_string: String = _dict["response"]
+	print("---------SYSTEM-------- "+self.name+" chose to call "+reply_string+"\n")
+	for _npc: NPC in NPCManager.npc_list:
+		if(_npc.name == reply_string or (_npc.name.split(" ")[0] == reply_string.split(" ")[0])): 
+			_establish_communication(_npc)
+			if(conversation_partner!=null): NPCManager.add_choices(self)
+			NPCManager.request_next_choice()
+	if(conversation_partner==null): 
+		print("---------SYSTEM-------- "+"No NPC was chosen")
+	is_choosing = false
 
 func request_answer(_message: String):
 	mind.last_received_Message = _message
 	is_thinking = true
 	associatedChatBox.createMessage(conversation_partner, _message)
 	mind.update_relation_during_conversation(conversation_partner, _message) #0 updated emotional relation MIGHT HAVE TO BE MOVED TO END OF MESSAGE OF OPPOSING NPC?  !!! -> Bug might be in this logic?
-	if (conversation_partner != null):
+	if(conversation_partner!= null):
 		mind.dialogue_context.append({"role": "user", "content": _message})
 	if(mind.activity_context!=[]): _message += "\n\n REMEMBER, you may use information from your day for the conversation, this is what you did today: " + mind.activity_context[0]
 	var emotional_relation = mind.get_emotional_relation(conversation_partner.name) #0.1 getted emotional relation
 	#print("---------SYSTEM-------- "+"\n" + "\n" + "Current emotional relation with " + conversation_partner.name + ": " + emotional_relation + "\n")
 	if(emotional_relation!=null): _message += "\n\n Take your current emotional state towards your conversation partner into account, they are as follows: " + emotional_relation
 	# ^^^ changed it so it only starts updating emotional relation after a threshold has been reached (4 atm). We get more reliable output this way, they hallucinate less. (is changed in Mind.update_or_decide_relation)
+	if(mind.long_term_storage!=null&&!mind.long_term_storage.is_empty()): _message += "\n\n Take your long term memories into account as well (though only apply if relevant): "+ "\n".join(mind.long_term_storage)+"\n\n"
 	RequestHandlerManager.chat_request(self, mind.dialogue_context, _on_request_completed)
 
 func request_activity(): #used for asking for current activity
@@ -135,7 +146,8 @@ func request_activity(): #used for asking for current activity
 	if(!mind.activity_context.is_empty()):
 		_message += "These are the things you were doing previously today:\n"
 		_message += "\n" + "\n".join(mind.activity_context)+"\n\n"
-	_message += "It's "+str(GameManager.hour)+GameManager.time_of_day+". What are you doing right now based on your Charactertraits? Are you sleeping, working or doing something else? (Answer as monologue)"
+	_message += "It's "+str(GameManager.hour)+GameManager.time_of_day+". What are you doing right now based on your Character traits? Are you sleeping, working or doing something else? (Answer as monologue)"
+	if(mind.long_term_storage!=null&&!mind.long_term_storage.is_empty()): _message += "\n\n Take your long term memories into account as well (though only apply if relevant): "+ "\n".join(mind.long_term_storage)+"\n\n"
 	RequestHandlerManager.generate_request(self, _message, _on_request_completed)
 
 func request_choice(): #used for getting a name for who they want to call on the phone (npc2npc)

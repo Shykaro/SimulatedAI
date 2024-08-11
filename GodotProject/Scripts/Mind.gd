@@ -69,8 +69,15 @@ func reflect_on_day(): #this is where the long term memories are stored (Happens
 func _on_request_reflect_on_day(_request_handler: RequestHandler, _dict: Dictionary):
 	var reply_string: String = _dict["response"]
 	long_term_storage.append(reply_string)
+	#if(long_term_storage.size()>10): _condense_long_term_storage() #see comment below
 	print("---------SYSTEM-------- STORED LONG TERM MEMORY "+associated_npc.name+": "+reply_string)
 
+#func _condense_long_term_storage():
+	#var _message: String
+	#_message = "This is your long term memory: \n"
+	#_message += "\n".join(activity_context)+"\n\n"
+	#_message += "Condense it down into ten bullet points. Reflect on what you would forget and what is important to remember before choosing. Answer with the list ONLY.\n"
+	##Doesnt work, as it requires the output to be an array as well. Therefore postponed
 
 func check_conversation_over():
 	var cutoff_threshold = 20
@@ -131,7 +138,7 @@ func _on_request_condense_activity_completed(_request_handler: RequestHandler, _
 	associated_npc.get_child(2).get_child(0).get_child(0).get_child(3).createMemory( 1, reply_string)
 
 func get_character_traits():
-	var _message: String = "In 5 words only, divided by a comma, describe your own personas charactertraits"
+	var _message: String = "In 5 words only, divided by a comma, describe your own personas character traits"
 	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_get_character_traits_completed)
 
 func _on_request_get_character_traits_completed(_request_handler: RequestHandler, _dict: Dictionary):
