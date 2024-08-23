@@ -31,8 +31,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta): #If noone is generating anymore, increment time and start event
 	count += 1
-	if(count==150000000): count = 0 #so that int doesnt overflow
+	if(count==150000): count = 0 #so that int doesnt overflow
 	if(count%100==0):
+		if(day_number>28): 
+			print("---------SYSTEM-------- "+"Day 28 is over. The simulation ends.")
+			OS.kill(OS.get_process_id())
 		if(check_npcs_thinking()):
 			count -=5
 		else:
