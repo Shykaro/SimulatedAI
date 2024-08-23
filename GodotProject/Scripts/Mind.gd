@@ -59,7 +59,7 @@ func reflect_on_day(): #this is where the long term memories are stored (Happens
 	_message += emotional_state+"\n\n"
 	_message += "This is how youre feeling about every other neighbor: \n"
 	_message += "\n".join(get_labled_emotional_relations_string_array())+"\n\n"
-	_message += "Out of all these experiences, choose the ones that were the most memorable and important. Make a bullet list with a couple entries."
+	_message += "Out of all these experiences, choose the ones that were the most memorable and important. Make a short bullet list with a two or three of short entries. Answer with the bullet list ONLY."
 	RequestHandlerManager.generate_request(associated_npc, _message, _on_request_reflect_on_day)
 	activity_context.clear()
 	dialogue_context.clear()
@@ -292,6 +292,7 @@ func save_to_relation_file(content: String):
 
 func get_from_relation_file() -> String:
 	var file = FileAccess.open("res://Assets/relation.txt", FileAccess.READ)
+	
 	var content: String = file.get_as_text()
 	return content
 
